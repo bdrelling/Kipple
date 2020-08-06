@@ -5,14 +5,14 @@ import SwiftUI
 // reference: https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-dynamic-type-with-a-custom-font
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-struct CustomFont: ViewModifier {
+public struct CustomFont: ViewModifier {
     @Environment(\.sizeCategory) var sizeCategory
 
-    var name: String
-    var style: UIFont.TextStyle
-    var weight: Font.Weight = .regular
+    public var name: String
+    public var style: UIFont.TextStyle
+    public var weight: Font.Weight = .regular
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content.font(
             Font.custom(self.name, size: UIFont.preferredFont(forTextStyle: self.style).pointSize)
                 .weight(self.weight)
@@ -21,7 +21,7 @@ struct CustomFont: ViewModifier {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension View {
+public extension View {
     func customFont(name: String,
                     style: UIFont.TextStyle,
                     weight: Font.Weight = .regular) -> some View
@@ -33,23 +33,23 @@ extension View {
 // MARK: Convenience
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-struct AppFont: RawRepresentable {
-    let rawValue: String
+public struct AppFont: RawRepresentable {
+    public let rawValue: String
 
-    init(rawValue: String) {
+    public init(rawValue: String) {
         self.rawValue = rawValue
     }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension AppFont: ExpressibleByStringLiteral {
-    init(stringLiteral: String) {
+    public init(stringLiteral: String) {
         self = AppFont(rawValue: stringLiteral)
     }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension View {
+public extension View {
     func customFont(_ appFont: AppFont,
                     style: UIFont.TextStyle,
                     weight: Font.Weight = .regular) -> some View
