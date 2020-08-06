@@ -88,3 +88,11 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Custom Rules
+
+## Exclude OS X folder attributes
+.DS_Store
+
+# A .env.local file contains keys that should never be checked into the repository
+.env.local

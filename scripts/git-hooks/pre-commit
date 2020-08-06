@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# If there are any files with the .swift extension, run swiftformat on them and add to the commit
+git diff --diff-filter=d --staged --name-only | grep -e '\.swift$' | while read filename; do
+  # Format the file with SwiftFormat
+  mint run swiftformat "$filename" --quiet;
+  
+  # Lint the file with SwiftLint
+  # TODO: Update it to fail with any violations, commented it out for now
+  # mint run swiftlint lint --path "$filename";
+  
+  # Add the file back into your commit in the event it was edited
+  git add "$filename";
+done

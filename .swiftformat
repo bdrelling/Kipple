@@ -1,0 +1,35 @@
+# Updated for v0.44.9
+
+#---------------------#
+# SwiftFormat Options #
+#---------------------#
+
+--swiftversion 5.2
+
+#--------------------#
+# Rule Configuration #
+#--------------------#
+
+# makes sure the self. prefix is added where appropriate
+--self insert 
+
+# sets the header block to supplied text
+--header "Copyright © {year} Brian Drelling. All rights reserved."
+
+#----------------#
+# Disabled Rules #
+#----------------#
+
+# None
+
+#-----------------#
+# File Exclusions #
+#-----------------#
+
+--exclude .build
+--exclude .swiftpm
+--exclude Package.swift
+--exclude */Package.swift
+--exclude Tests/LinuxMain.swift
+--exclude "Tests/*/XCTestManifests.swift"
+--exclude "**/*/*+CoreDataProperties.swift"
