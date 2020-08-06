@@ -3,7 +3,7 @@
 import SwiftUI
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-struct GridStack<Data, ID, Content>: View, DynamicViewContent where Data: RandomAccessCollection, ID: Hashable, Content: View {
+public struct GridStack<Data, ID, Content>: View, DynamicViewContent where Data: RandomAccessCollection, ID: Hashable, Content: View {
     /// The collection of underlying identified data.
     public let data: Data
 
@@ -31,7 +31,7 @@ struct GridStack<Data, ID, Content>: View, DynamicViewContent where Data: Random
     /// element with a new identity. If the ID of a data element changes, then
     /// the content view generated from that data element will lose any current
     /// state and animations.
-    init(_ data: Data, id: KeyPath<Data.Element, ID>, columns: Int, spacing: CGFloat = 0, content: @escaping (Data.Element) -> Content) {
+    public init(_ data: Data, id: KeyPath<Data.Element, ID>, columns: Int, spacing: CGFloat = 0, content: @escaping (Data.Element) -> Content) {
         self.data = data
         self.id = id
         self.content = content
@@ -41,7 +41,7 @@ struct GridStack<Data, ID, Content>: View, DynamicViewContent where Data: Random
         self.rows = Int(ceil(Double(self.data.count) / Double(self.columns)))
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: self.spacing) {
             ForEach(0 ..< self.rows) { row in
                 HStack(spacing: self.spacing) {
@@ -105,7 +105,7 @@ extension GridStack where ID == Data.Element.ID, Data.Element: Identifiable {
     /// element with a new identity. If the ID of a data element changes, then
     /// the content view generated from that data element will lose any current
     /// state and animations.
-    init(_ data: Data, columns: Int, spacing: CGFloat = 0, @ViewBuilder content: @escaping (Data.Element) -> Content) {
+    public init(_ data: Data, columns: Int, spacing: CGFloat = 0, @ViewBuilder content: @escaping (Data.Element) -> Content) {
         self.init(data, id: \.id, columns: columns, spacing: spacing, content: content)
     }
 }
@@ -120,7 +120,7 @@ extension GridStack where Data == Range<Int>, ID == Int {
     ///
     /// To compute views on demand over a dynamic range use
     /// `ForEach(_:id:content:)`.
-    init(_ data: Range<Int>, columns: Int, spacing: CGFloat = 0, @ViewBuilder content: @escaping (Int) -> Content) {
+    public init(_ data: Range<Int>, columns: Int, spacing: CGFloat = 0, @ViewBuilder content: @escaping (Int) -> Content) {
         self.init(data, id: \.self, columns: columns, spacing: spacing, content: content)
     }
 }

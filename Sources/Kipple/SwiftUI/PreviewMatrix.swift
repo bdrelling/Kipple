@@ -4,23 +4,23 @@ import Foundation
 import SwiftUI
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-struct PreviewMatrix: ViewModifier {
-    enum Layout {
+public struct PreviewMatrix: ViewModifier {
+    public enum Layout {
         case currentDevice
         case device(PreviewDevice)
         case fixedSize(width: CGFloat, height: CGFloat)
         case sizeThatFits
     }
 
-    let layouts: [Layout]
-    let colorSchemes: [ColorScheme]
+    public let layouts: [Layout]
+    public let colorSchemes: [ColorScheme]
 
-    init(layouts: [Layout], colorSchemes: [ColorScheme] = ColorScheme.allCases) {
+    public init(layouts: [Layout], colorSchemes: [ColorScheme] = ColorScheme.allCases) {
         self.layouts = layouts
         self.colorSchemes = colorSchemes
     }
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         ForEach(self.layouts, id: \.id) { layout in
             ForEach(self.colorSchemes, id: \.self) { colorScheme in
                 content
@@ -148,7 +148,7 @@ extension PreviewMatrix.Layout: Identifiable {
 // MARK: - Convenience Extensions
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension PreviewMatrix {
+public extension PreviewMatrix {
     private static let modernTabletsList: [Layout] = [
         .iPadPro9Point7Inch,
         .iPadPro11Inch,
@@ -174,7 +174,7 @@ extension PreviewMatrix {
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension PreviewMatrix.Layout {
+public extension PreviewMatrix.Layout {
     static let iPhoneSE: PreviewMatrix.Layout = .device("iPhone SE (2nd generation)")
     static let iPhone11Pro: PreviewMatrix.Layout = .device("iPhone 11 Pro")
     static let iPhone11ProMax: PreviewMatrix.Layout = .device("iPhone 11 Pro Max")
@@ -185,7 +185,7 @@ extension PreviewMatrix.Layout {
 // MARK: - ViewModifier Extensions
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-extension View {
+public extension View {
     func previewMatrix(_ matrix: PreviewMatrix) -> some View {
         self.modifier(matrix)
     }
