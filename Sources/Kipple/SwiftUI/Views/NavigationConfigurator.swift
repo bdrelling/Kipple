@@ -6,7 +6,6 @@ import SwiftUI
 
 public typealias NavigationConfiguratorCompletion = (UINavigationController) -> Void
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct NavigationConfigurator: UIViewControllerRepresentable {
     public var configure: NavigationConfiguratorCompletion = { _ in }
 
@@ -23,7 +22,6 @@ public struct NavigationConfigurator: UIViewControllerRepresentable {
     }
 }
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public extension NavigationConfigurator {
     static func transparent(configure: @escaping NavigationConfiguratorCompletion = { _ in }) -> NavigationConfigurator {
         NavigationConfigurator { nc in
@@ -42,7 +40,6 @@ public extension NavigationConfigurator {
     }
 }
 
-@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public extension View {
     func configureNavigation(_ configurator: NavigationConfigurator) -> some View {
         self.background(configurator)

@@ -4,6 +4,12 @@ import PackageDescription
 
 let package = Package(
     name: "Kipple",
+    platforms: [
+        .iOS(.v13),         // SwiftUI support
+        .macOS(.v10_15),    // SwiftUI support
+        .tvOS(.v13),        // SwiftUI support
+        .watchOS(.v6),      // SwiftUI support
+    ],
     products: [
         .library(name: "Kipple", targets: ["Kipple"]),
     ],

@@ -1,217 +1,204 @@
 // Copyright © 2020 Brian Drelling. All rights reserved.
 
-#if canImport(SwiftUI)
+import Foundation
+import SwiftUI
 
-    import Foundation
-    import SwiftUI
+public struct PreviewMatrix: ViewModifier {
+    public enum Layout {
+        case currentDevice
+        case device(PreviewDevice)
+        case fixedSize(width: CGFloat, height: CGFloat)
+        case sizeThatFits
+    }
 
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public struct PreviewMatrix: ViewModifier {
-        public enum Layout {
-            case currentDevice
-            case device(PreviewDevice)
-            case fixedSize(width: CGFloat, height: CGFloat)
-            case sizeThatFits
+    public let layouts: [Layout]
+    public let colorSchemes: [ColorScheme]
+
+    public init(layouts: [Layout], colorSchemes: [ColorScheme] = ColorScheme.allCases) {
+        self.layouts = layouts
+        self.colorSchemes = colorSchemes
+    }
+
+    public func body(content: Content) -> some View {
+        ForEach(self.layouts, id: \.id) { layout in
+            ForEach(self.colorSchemes, id: \.self) { colorScheme in
+                content
+                    // Add a preview background behind the entire view
+                    .modifier(PreviewMatrixBackground(layout: layout))
+                    // Set up the preview configuration
+                    .previewLayout(layout.previewLayout)
+                    .previewDevice(layout.previewDevice)
+                    .previewDisplayName("\(layout.name) (\(colorScheme.name))")
+                    // Apply color schemes to the modified preview
+                    .colorScheme(colorScheme)
+            }
         }
+    }
+}
 
-        public let layouts: [Layout]
-        public let colorSchemes: [ColorScheme]
+private struct PreviewMatrixBackground: ViewModifier {
+    let layout: PreviewMatrix.Layout
 
-        public init(layouts: [Layout], colorSchemes: [ColorScheme] = ColorScheme.allCases) {
-            self.layouts = layouts
-            self.colorSchemes = colorSchemes
-        }
+    func body(content: Content) -> some View {
+        switch self.layout {
+        case .currentDevice,
+             .device,
+             .fixedSize:
+            return AnyView(
+                ZStack {
+                    Color(.systemBackground)
+                        .edgesIgnoringSafeArea(.all)
 
-        public func body(content: Content) -> some View {
-            ForEach(self.layouts, id: \.id) { layout in
-                ForEach(self.colorSchemes, id: \.self) { colorScheme in
                     content
-                        // Add a preview background behind the entire view
-                        .modifier(PreviewMatrixBackground(layout: layout))
-                        // Set up the preview configuration
-                        .previewLayout(layout.previewLayout)
-                        .previewDevice(layout.previewDevice)
-                        .previewDisplayName("\(layout.name) (\(colorScheme.name))")
-                        // Apply color schemes to the modified preview
-                        .colorScheme(colorScheme)
                 }
-            }
+            )
+        default:
+            return AnyView(
+                content
+                    .background(Color(.systemBackground)).edgesIgnoringSafeArea(.all)
+            )
+        }
+    }
+}
+
+// MARK: - Private Extensions
+
+private extension PreviewMatrix.Layout {
+    var name: String {
+        switch self {
+        case .currentDevice:
+            return "Current Device"
+        case let .device(previewDevice):
+            return previewDevice.rawValue
+        case .sizeThatFits:
+            return "Size That Fits"
+        case let .fixedSize(width, height):
+            // Shortcut format for removing trailing zeroes
+            return String(format: "%g x %g", width, height)
         }
     }
 
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    private struct PreviewMatrixBackground: ViewModifier {
-        let layout: PreviewMatrix.Layout
-
-        func body(content: Content) -> some View {
-            switch self.layout {
-            case .currentDevice,
-                 .device,
-                 .fixedSize:
-                return AnyView(
-                    ZStack {
-                        Color(.systemBackground)
-                            .edgesIgnoringSafeArea(.all)
-
-                        content
-                    }
-                )
-            default:
-                return AnyView(
-                    content
-                        .background(Color(.systemBackground)).edgesIgnoringSafeArea(.all)
-                )
-            }
+    var previewDevice: PreviewDevice? {
+        switch self {
+        case let .device(previewDevice):
+            return previewDevice
+        default:
+            return nil
         }
     }
 
-    // MARK: - Private Extensions
-
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    private extension PreviewMatrix.Layout {
-        var name: String {
-            switch self {
-            case .currentDevice:
-                return "Current Device"
-            case let .device(previewDevice):
-                return previewDevice.rawValue
-            case .sizeThatFits:
-                return "Size That Fits"
-            case let .fixedSize(width, height):
-                // Shortcut format for removing trailing zeroes
-                return String(format: "%g x %g", width, height)
-            }
-        }
-
-        var previewDevice: PreviewDevice? {
-            switch self {
-            case let .device(previewDevice):
-                return previewDevice
-            default:
-                return nil
-            }
-        }
-
-        var previewLayout: PreviewLayout {
-            switch self {
-            case .currentDevice,
-                 .device:
-                return .device
-            case let .fixedSize(width, height):
-                return .fixed(width: width, height: height)
-            case .sizeThatFits:
-                return .sizeThatFits
-            }
+    var previewLayout: PreviewLayout {
+        switch self {
+        case .currentDevice,
+             .device:
+            return .device
+        case let .fixedSize(width, height):
+            return .fixed(width: width, height: height)
+        case .sizeThatFits:
+            return .sizeThatFits
         }
     }
+}
 
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    private extension ColorScheme {
-        var abbreviation: String {
-            switch self {
-            case .dark:
-                return "D"
-            case .light:
-                return "L"
+private extension ColorScheme {
+    var abbreviation: String {
+        switch self {
+        case .dark:
+            return "D"
+        case .light:
+            return "L"
         @unknown default:
-                return "Unknown"
-            }
+            return "Unknown"
         }
+    }
 
-        var name: String {
-            switch self {
-            case .dark:
-                return "Dark"
-            case .light:
-                return "Light"
+    var name: String {
+        switch self {
+        case .dark:
+            return "Dark"
+        case .light:
+            return "Light"
         @unknown default:
-                return "Unknown"
-            }
+            return "Unknown"
         }
     }
+}
 
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    extension PreviewMatrix.Layout: Identifiable {
-        // swiftlint:disable:next identifier_name
-        public var id: String {
-            switch self {
-            case .currentDevice:
-                return "currentDevice"
-            case let .device(previewDevice):
-                return "device[\(previewDevice)]"
-            case .sizeThatFits:
-                return "sizeThatFits"
-            case let .fixedSize(width, height):
-                return "fixedSize[\(width)x\(height)]"
-            }
+extension PreviewMatrix.Layout: Identifiable {
+    // swiftlint:disable:next identifier_name
+    public var id: String {
+        switch self {
+        case .currentDevice:
+            return "currentDevice"
+        case let .device(previewDevice):
+            return "device[\(previewDevice)]"
+        case .sizeThatFits:
+            return "sizeThatFits"
+        case let .fixedSize(width, height):
+            return "fixedSize[\(width)x\(height)]"
         }
     }
+}
 
-    // MARK: - Convenience Extensions
+// MARK: - Convenience Extensions
 
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public extension PreviewMatrix {
-        private static let modernTabletsList: [Layout] = [
-            .iPadPro9Point7Inch,
-            .iPadPro11Inch,
-        ]
+public extension PreviewMatrix {
+    private static let modernTabletsList: [Layout] = [
+        .iPadPro9Point7Inch,
+        .iPadPro11Inch,
+    ]
 
-        private static let modernPhonesList: [Layout] = [
-            .iPhone11Pro,
-            .iPhone11ProMax,
-            .iPhoneSE,
-        ]
+    private static let modernPhonesList: [Layout] = [
+        .iPhone11Pro,
+        .iPhone11ProMax,
+        .iPhoneSE,
+    ]
 
-        static let `default` = PreviewMatrix(layouts: [.currentDevice])
-        static let modernTablets = PreviewMatrix(layouts: Self.modernTabletsList)
-        static let modernPhones = PreviewMatrix(layouts: Self.modernPhonesList)
-        static let modernDevices = PreviewMatrix(layouts: Self.modernPhonesList + Self.modernTabletsList)
+    static let `default` = PreviewMatrix(layouts: [.currentDevice])
+    static let modernTablets = PreviewMatrix(layouts: Self.modernTabletsList)
+    static let modernPhones = PreviewMatrix(layouts: Self.modernPhonesList)
+    static let modernDevices = PreviewMatrix(layouts: Self.modernPhonesList + Self.modernTabletsList)
 
-        /// The standard array of devices for Goblintown.
-        static let standard = PreviewMatrix(layouts: [
-            .iPhone11Pro,
-            .iPhoneSE,
-            .sizeThatFits,
-        ])
+    /// The standard array of devices for Goblintown.
+    static let standard = PreviewMatrix(layouts: [
+        .iPhone11Pro,
+        .iPhoneSE,
+        .sizeThatFits,
+    ])
+}
+
+public extension PreviewMatrix.Layout {
+    static let iPhoneSE: PreviewMatrix.Layout = .device("iPhone SE (2nd generation)")
+    static let iPhone11Pro: PreviewMatrix.Layout = .device("iPhone 11 Pro")
+    static let iPhone11ProMax: PreviewMatrix.Layout = .device("iPhone 11 Pro Max")
+    static let iPadPro9Point7Inch: PreviewMatrix.Layout = .device("iPad Pro (9.7-inch)")
+    static let iPadPro11Inch: PreviewMatrix.Layout = .device("iPad Pro (11-inch) (2nd generation)")
+}
+
+// MARK: - ViewModifier Extensions
+
+public extension View {
+    func previewMatrix(_ matrix: PreviewMatrix) -> some View {
+        self.modifier(matrix)
     }
 
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public extension PreviewMatrix.Layout {
-        static let iPhoneSE: PreviewMatrix.Layout = .device("iPhone SE (2nd generation)")
-        static let iPhone11Pro: PreviewMatrix.Layout = .device("iPhone 11 Pro")
-        static let iPhone11ProMax: PreviewMatrix.Layout = .device("iPhone 11 Pro Max")
-        static let iPadPro9Point7Inch: PreviewMatrix.Layout = .device("iPad Pro (9.7-inch)")
-        static let iPadPro11Inch: PreviewMatrix.Layout = .device("iPad Pro (11-inch) (2nd generation)")
+    func previewMatrix(_ layouts: PreviewMatrix.Layout...) -> some View {
+        self.modifier(PreviewMatrix(layouts: layouts))
     }
 
-    // MARK: - ViewModifier Extensions
-
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    public extension View {
-        func previewMatrix(_ matrix: PreviewMatrix) -> some View {
-            self.modifier(matrix)
-        }
-
-        func previewMatrix(_ layouts: PreviewMatrix.Layout...) -> some View {
-            self.modifier(PreviewMatrix(layouts: layouts))
-        }
-
-        func previewMatrix(layouts: [PreviewMatrix.Layout] = [.currentDevice]) -> some View {
-            self.modifier(PreviewMatrix(layouts: layouts))
-        }
+    func previewMatrix(layouts: [PreviewMatrix.Layout] = [.currentDevice]) -> some View {
+        self.modifier(PreviewMatrix(layouts: layouts))
     }
+}
 
-    // MARK: - Previews
+// MARK: - Previews
 
-    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
-    struct PreviewMatrix_Previews: PreviewProvider {
-        static var previews: some View {
-            Text("Testing!")
-                .previewMatrix(.currentDevice,
-                               .iPhone11Pro,
-                               .fixedSize(width: 200, height: 80),
-                               .sizeThatFits)
-        }
+struct PreviewMatrix_Previews: PreviewProvider {
+    static var previews: some View {
+        Text("Testing!")
+            .previewMatrix(.currentDevice,
+                           .iPhone11Pro,
+                           .fixedSize(width: 200, height: 80),
+                           .sizeThatFits)
     }
-
-#endif
+}
