@@ -1,4 +1,4 @@
-// Copyright © 2020 Brian Drelling. All rights reserved.
+// Copyright © 2021 Brian Drelling. All rights reserved.
 
 import Foundation
 import SwiftUI
@@ -23,40 +23,13 @@ public struct PreviewMatrix: ViewModifier {
         ForEach(self.layouts, id: \.id) { layout in
             ForEach(self.colorSchemes, id: \.self) { colorScheme in
                 content
-                    // Add a preview background behind the entire view
-                    .modifier(PreviewMatrixBackground(layout: layout))
                     // Set up the preview configuration
                     .previewLayout(layout.previewLayout)
                     .previewDevice(layout.previewDevice)
                     .previewDisplayName("\(layout.name) (\(colorScheme.name))")
                     // Apply color schemes to the modified preview
-                    .colorScheme(colorScheme)
+                    .preferredColorScheme(colorScheme)
             }
-        }
-    }
-}
-
-private struct PreviewMatrixBackground: ViewModifier {
-    let layout: PreviewMatrix.Layout
-
-    func body(content: Content) -> some View {
-        switch self.layout {
-        case .currentDevice,
-             .device,
-             .fixedSize:
-            return AnyView(
-                ZStack {
-                    Color(.systemBackground)
-                        .edgesIgnoringSafeArea(.all)
-
-                    content
-                }
-            )
-        default:
-            return AnyView(
-                content
-                    .background(Color(.systemBackground)).edgesIgnoringSafeArea(.all)
-            )
         }
     }
 }
