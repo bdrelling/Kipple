@@ -1,4 +1,4 @@
-// Copyright © 2020 Brian Drelling. All rights reserved.
+// Copyright © 2021 Brian Drelling. All rights reserved.
 
 import SwiftUI
 
@@ -42,14 +42,14 @@ public struct GridStack<Data, ID, Content>: View, DynamicViewContent where Data:
 
     public var body: some View {
         VStack(alignment: .leading, spacing: self.spacing) {
-            ForEach(0 ..< self.rows) { row in
+            ForEach(0 ..< self.rows, id: \.self) { row in
                 HStack(spacing: self.spacing) {
-                    ForEach(0 ..< self.columns(for: row)) { column in
+                    ForEach(0 ..< self.columns(for: row), id: \.self) { column in
                         self.content(row: row, column: column)
                             .frame(minWidth: 0, maxWidth: .infinity)
                     }
 
-                    ForEach(0 ..< self.emptySpaces(for: row)) { _ in
+                    ForEach(0 ..< self.emptySpaces(for: row), id: \.self) { _ in
                         Spacer()
                             .frame(minWidth: 0, maxWidth: .infinity)
                     }
