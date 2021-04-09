@@ -1,4 +1,4 @@
-// Copyright © 2020 Brian Drelling. All rights reserved.
+// Copyright © 2021 Brian Drelling. All rights reserved.
 
 import SwiftUI
 
@@ -56,8 +56,7 @@ public struct CustomStaticFont: ViewModifier {
 public extension View {
     func customFont(name: String,
                     style: UIFont.TextStyle,
-                    weight: Font.Weight = .regular) -> some View
-    {
+                    weight: Font.Weight = .regular) -> some View {
         self.modifier(CustomRelativeFont(name: name, style: style, weight: weight))
     }
 
@@ -91,15 +90,13 @@ extension AppFont: ExpressibleByStringLiteral {
 public extension View {
     func customFont(_ appFont: AppFont,
                     style: UIFont.TextStyle,
-                    weight: Font.Weight = .regular) -> some View
-    {
+                    weight: Font.Weight = .regular) -> some View {
         self.customFont(name: appFont.rawValue, style: style, weight: weight)
     }
 
     func customFont(_ appFont: AppFont,
                     size: CGFloat,
-                    weight: Font.Weight = .regular) -> some View
-    {
+                    weight: Font.Weight = .regular) -> some View {
         self.customFont(name: appFont.rawValue, size: size, weight: weight)
     }
 }
@@ -107,8 +104,7 @@ public extension View {
 public extension View {
     func scaledFont(_ appFont: AppFont,
                     size: CGFloat,
-                    weight: Font.Weight = .regular) -> some View
-    {
+                    weight: Font.Weight = .regular) -> some View {
         self.scaledFont(name: appFont.rawValue, size: size, weight: weight)
     }
 }

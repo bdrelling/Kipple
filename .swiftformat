@@ -13,14 +13,27 @@
 # makes sure the self. prefix is added where appropriate
 --self insert 
 
+# only strips unused arguments (replacing with _) in closures, not methods
+--stripunusedargs closure-only 
+
 # sets the header block to supplied text
 --header "Copyright © {year} Brian Drelling. All rights reserved."
+
+# this removes the underscore (_) separation in large numbers
+--binarygrouping none
+--decimalgrouping none
+--hexgrouping none
+--octalgrouping none
+--exponentgrouping disabled
+--fractiongrouping disabled
 
 #----------------#
 # Disabled Rules #
 #----------------#
 
-# None
+# Wrap the opening brace of multiline statements.
+# Disabled because this rule is non-configurable.
+--disable wrapMultilineStatementBraces
 
 #-----------------#
 # File Exclusions #

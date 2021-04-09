@@ -1,4 +1,4 @@
-// Copyright © 2020 Brian Drelling. All rights reserved.
+// Copyright © 2021 Brian Drelling. All rights reserved.
 
 import SwiftUI
 
@@ -14,8 +14,7 @@ public struct NavigationConfigurator: UIViewControllerRepresentable {
     }
 
     public func updateUIViewController(_ uiViewController: UIViewController,
-                                       context _: UIViewControllerRepresentableContext<NavigationConfigurator>)
-    {
+                                       context _: UIViewControllerRepresentableContext<NavigationConfigurator>) {
         if let navigationController = uiViewController.navigationController {
             self.configure(navigationController)
         }
