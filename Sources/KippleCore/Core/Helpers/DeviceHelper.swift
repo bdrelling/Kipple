@@ -32,6 +32,21 @@ public enum DeviceHelper {
     public static var systemVersionString: String {
         self.device.systemVersion
     }
+    
+    public static var systemVersion: SemanticVersion {
+        .from(self.systemVersionString)
+    }
+
+    public static var deviceInfo: DeviceInfo {
+        .init(
+            appVersion: BundleHelper.appVersion,
+            appBuildNumber: BundleHelper.appBuildNumber,
+            deviceFamily: self.deviceFamily,
+            deviceModel: self.deviceModel,
+            systemName: self.systemName,
+            systemVersion: self.systemVersion
+        )
+    }
 }
 
 // MARK: - Extensions
