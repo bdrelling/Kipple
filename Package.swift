@@ -43,5 +43,12 @@ let package = Package(
             name: "KippleUI",
             dependencies: []
         ),
+        // Test Targets
+        .testTarget(
+            name: "KippleFirebaseTests",
+            dependencies: [
+                .target(name: "KippleFirebase"),
+            ]
+        )
     ]
 )
