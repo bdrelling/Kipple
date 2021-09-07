@@ -2,6 +2,7 @@
 
 import SwiftUI
 
+@available(iOS 14.0, *)
 public extension Color {
     func lighter(byPercentage percentage: CGFloat) -> Color {
         self.adjusted(byPercentage: abs(percentage))
@@ -13,6 +14,7 @@ public extension Color {
 
     func adjusted(byPercentage percentage: CGFloat) -> Color {
         let currentUIColor = UIColor(self)
+
         let adjustedUIColor = currentUIColor.adjusted(byPercentage: percentage)
         return Color(adjustedUIColor)
     }

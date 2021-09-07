@@ -1,8 +1,10 @@
+// Copyright © 2021 Brian Drelling. All rights reserved.
+
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 public enum FirestoreSizeCalculator {
-    func calculateDocumentSize(of object: Any) -> Int {
+    static func calculateDocumentSize(of object: Any) -> Int {
         let properties = properties(of: object)
         return properties
             .compactMap { property in
@@ -13,7 +15,7 @@ public enum FirestoreSizeCalculator {
             .reduce(0, +)
     }
 
-    func calculateSize(of value: Any) -> Int {
+    static func calculateSize(of value: Any) -> Int {
         switch value {
         case is DocumentID<String>:
             // FIXME: This isn't true! https://firebase.google.com/docs/firestore/storage-size#document-name-size
@@ -34,8 +36,8 @@ public enum FirestoreSizeCalculator {
         case let value as String:
             // Number of UTF-8 encoded bytes + 1
             return value.lengthOfBytes(using: .utf8) + 1
-    //    case is Array<Any>:
-    //        break
+        //    case is Array<Any>:
+        //        break
         case nil:
             // Nil values are not sent to Firestore by default.
             // If they are sent, the field size only 1 byte, plus the Firestore size of the field name.
@@ -45,7 +47,7 @@ public enum FirestoreSizeCalculator {
         }
     }
 
-    func calculateReflectedSize(of value: Any) -> Int {
+    static func calculateReflectedSize(of value: Any) -> Int {
         let mirror = Mirror(reflecting: value)
 
         switch mirror.displayStyle {
@@ -80,7 +82,7 @@ public enum FirestoreSizeCalculator {
         }
     }
 
-    func properties(of object: Any) -> [Property] {
+    static func properties(of object: Any) -> [Property] {
         Mirror(reflecting: object)
             .children
             .compactMap { child in
@@ -95,9 +97,7 @@ public enum FirestoreSizeCalculator {
             }
             .sorted { $0.name < $1.name }
     }
-
 }
-
 
 struct Property {
     let name: String

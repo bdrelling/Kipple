@@ -1,6 +1,5 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
-@testable import ColorfulSDK
 import XCTest
 
 final class FirestoreSizeCalculatorTests: XCTestCase {
