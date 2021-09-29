@@ -2,8 +2,7 @@
 
 import Combine
 
-// TODO: Migrate to Kipple
-public extension Publisher {
+public extension Publisher where Failure == Error {
     func sinkResult(receiveValue: @escaping (Result<Output, Failure>) -> Void) -> AnyCancellable {
         self.map(Result.success)
             .catch { Just(.failure($0)) }

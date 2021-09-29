@@ -33,11 +33,7 @@ public enum BundleHelper {
         if self.appBuildNumber > 0 {
             return "v\(version)b\(self.appBuildNumber)" // indicates a hosted build
         } else {
-            #if DEBUG
-                return "v\(version)L" // indicates a local build
-            #else
-                return Self.errorVersionString
-            #endif
+            return "v\(version)L" // indicates a local build
         }
     }
 }

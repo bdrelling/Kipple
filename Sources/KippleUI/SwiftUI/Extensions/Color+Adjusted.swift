@@ -1,5 +1,6 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+import KippleCore
 import SwiftUI
 
 @available(iOS 14.0, *)

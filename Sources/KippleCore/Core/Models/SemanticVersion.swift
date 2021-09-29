@@ -23,8 +23,8 @@ extension SemanticVersion: ExpressibleByStringLiteral {
         switch versionParts.count {
         case 3:
             guard let major = Int(versionParts[0]),
-                let minor = Int(versionParts[1]),
-                let patch = Int(versionParts[2]) else {
+                  let minor = Int(versionParts[1]),
+                  let patch = Int(versionParts[2]) else {
                 self = .zero
                 return
             }
@@ -34,7 +34,7 @@ extension SemanticVersion: ExpressibleByStringLiteral {
             self.patch = patch
         case 2:
             guard let major = Int(versionParts[0]),
-                let minor = Int(versionParts[1]) else {
+                  let minor = Int(versionParts[1]) else {
                 self = .zero
                 return
             }
@@ -48,10 +48,10 @@ extension SemanticVersion: ExpressibleByStringLiteral {
     }
 }
 
-extension SemanticVersion {
-    public static let zero: Self = .init(major: 0, minor: 0, patch: 0)
+public extension SemanticVersion {
+    static let zero: Self = .init(major: 0, minor: 0, patch: 0)
 
-    public static func from(_ versionString: String) -> Self {
+    static func from(_ versionString: String) -> Self {
         .init(stringLiteral: versionString)
     }
 }

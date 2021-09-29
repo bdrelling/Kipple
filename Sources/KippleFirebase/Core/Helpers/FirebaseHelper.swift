@@ -5,6 +5,10 @@ import FirebaseCore
 import FirebaseFirestore
 
 public enum FirebaseHelper {
+    // MARK: Constants
+
+    private static let localHostname = "bribook.local"
+
     // MARK: Enums
 
     public enum Mode {
@@ -17,22 +21,12 @@ public enum FirebaseHelper {
 
     public static func initialize(options: FirebaseOptions, mode: Mode) {
 //        FirebaseConfiguration.shared.setLoggerLevel(.debug)
+
         FirebaseApp.configure(options: options)
 
-        guard mode == .local else {
-            return
+        if mode == .local {
+            self.initializeForLocalDevelopment()
         }
-
-        Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-
-        let settings = Firestore.firestore().settings
-        settings.host = "localhost:8080"
-        settings.isPersistenceEnabled = false
-        settings.isSSLEnabled = false
-
-        Firestore.firestore().settings = settings
-
-        print("Firebase initialized.")
     }
 
     public static func initialize(filePath: String, mode: Mode) {
@@ -41,5 +35,20 @@ public enum FirebaseHelper {
         } else {
             assertionFailure("Firebase failed to intialize!")
         }
+    }
+
+    private static func initializeForLocalDevelopment() {
+        // Signs out the locally authenticated user.
+
+        // Auth
+        Auth.auth().useEmulator(withHost: self.localHostname, port: 9099)
+
+        // Firestore
+        let settings = Firestore.firestore().settings
+        settings.host = "\(self.localHostname):8080"
+        settings.isPersistenceEnabled = false
+        settings.isSSLEnabled = false
+
+        Firestore.firestore().settings = settings
     }
 }

@@ -12,11 +12,11 @@ public enum DeviceHelper {
         // TODO: This won't work for macOS, tvOS, etc. etc.
         self.device.dc.deviceFamily.rawValue
     }
-    
+
     public static var deviceIdiom: UIUserInterfaceIdiom {
         self.device.userInterfaceIdiom
     }
-    
+
     public static var deviceInfo: DeviceInfo {
         .init(
             appVersion: BundleHelper.appVersion,
@@ -43,7 +43,7 @@ public enum DeviceHelper {
     public static var systemVersionString: String {
         self.device.systemVersion
     }
-    
+
     public static var systemVersion: SemanticVersion {
         .from(self.systemVersionString)
     }

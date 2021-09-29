@@ -2,14 +2,14 @@
 
 public struct DeviceInfo: Codable {
     // MARK: Properties
-    
+
     public let appVersion: SemanticVersion
     public let appBuildNumber: Int
     public let deviceFamily: String
     public let deviceModel: String
     public let systemName: String
     public let systemVersion: SemanticVersion
-    
+
     // MARK: Initializers
 
     public init(

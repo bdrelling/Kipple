@@ -2,13 +2,13 @@
 
 import SwiftUI
 
-extension Font.TextStyle {
+public extension Font.TextStyle {
     var defaultSystemSize: CGFloat {
         Font.preferredUIFont(forTextStyle: self).pointSize
     }
 }
 
-extension Font {
+public extension Font {
     static func preferredUIFont(forTextStyle textStyle: Font.TextStyle) -> UIFont {
         switch textStyle {
         case .largeTitle:

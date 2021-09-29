@@ -1,25 +1,26 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.3
 
 import PackageDescription
 
 let package = Package(
     name: "Kipple",
     platforms: [
-        .iOS(.v13),         // SwiftUI support
-        .macOS(.v10_15),    // SwiftUI support
-        .tvOS(.v13),        // SwiftUI support
-        .watchOS(.v6),      // SwiftUI support
+        .iOS(.v14),
+        .macOS(.v10_15),
+        .tvOS(.v13),
+        .watchOS(.v6),
     ],
     products: [
         .library(name: "Kipple", targets: ["KippleCore", "KippleUI"]),
         .library(name: "KippleCore", targets: ["KippleCore"]),
+        .library(name: "KippleTesting", targets: ["KippleTesting"]),
         .library(name: "KippleUI", targets: ["KippleUI"]),
-        // KippleFirebase is excluded from the Kipple umbrella library.
+        .library(name: "KippleAuth", targets: ["KippleAuth"]),
         .library(name: "KippleFirebase", targets: ["KippleFirebase"]),
     ],
     dependencies: [
-        .package(name: "BetterCodable", url: "https://github.com/marksands/BetterCodable", .upToNextMinor(from: "0.3.0")),
-        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk", .upToNextMajor(from: "8.0.0")),
+        .package(name: "BetterCodable", url: "https://github.com/marksands/BetterCodable", .upToNextMinor(from: "0.4.0")),
+        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk", .upToNextMajor(from: "8.7.0")),
         .package(name: "UIDeviceComplete", url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.7.6"))
     ],
     targets: [
@@ -28,6 +29,12 @@ let package = Package(
             name: "KippleCore",
             dependencies: [
                 .product(name: "UIDeviceComplete", package: "UIDeviceComplete"),
+            ]
+        ),
+        .target(
+            name: "KippleAuth",
+            dependencies: [
+                .target(name: "KippleFirebase")
             ]
         ),
         .target(
@@ -40,10 +47,30 @@ let package = Package(
             ]
         ),
         .target(
+            name: "KippleTesting",
+            dependencies: [
+                .target(name: "KippleAuth"),
+                .target(name: "KippleFirebase"),
+                .product(name: "FirebaseFirestore", package: "Firebase"),
+            ]
+        ),
+        .target(
             name: "KippleUI",
-            dependencies: []
+            dependencies: [
+                .target(name: "KippleCore"),
+            ]
         ),
         // Test Targets
+        .testTarget(
+            name: "KippleAuthTests",
+            dependencies: [
+                .target(name: "KippleAuth"),
+                .target(name: "KippleTesting"),
+            ],
+            resources: [
+                .process("Resources"),
+            ]
+        ),
         .testTarget(
             name: "KippleFirebaseTests",
             dependencies: [
