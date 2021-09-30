@@ -117,13 +117,11 @@ extension PreviewMatrix.Layout: Identifiable {
 
 public extension PreviewMatrix {
     private static let modernTabletsList: [Layout] = [
-        .iPadPro9Point7Inch,
         .iPadPro11Inch,
     ]
 
     private static let modernPhonesList: [Layout] = [
-        .iPhone11Pro,
-        .iPhone11ProMax,
+        .iPhone13,
         .iPhoneSE,
     ]
 
@@ -134,7 +132,7 @@ public extension PreviewMatrix {
 
     /// The standard array of devices for Goblintown.
     static let standard = PreviewMatrix(layouts: [
-        .iPhone11Pro,
+        .iPhone13Pro,
         .iPhoneSE,
         .sizeThatFits,
     ])
@@ -142,10 +140,11 @@ public extension PreviewMatrix {
 
 public extension PreviewMatrix.Layout {
     static let iPhoneSE: PreviewMatrix.Layout = .device("iPhone SE (2nd generation)")
-    static let iPhone11Pro: PreviewMatrix.Layout = .device("iPhone 11 Pro")
-    static let iPhone11ProMax: PreviewMatrix.Layout = .device("iPhone 11 Pro Max")
-    static let iPadPro9Point7Inch: PreviewMatrix.Layout = .device("iPad Pro (9.7-inch)")
-    static let iPadPro11Inch: PreviewMatrix.Layout = .device("iPad Pro (11-inch) (2nd generation)")
+    static let iPhone13: PreviewMatrix.Layout = .device("iPhone 13")
+    static let iPhone13Mini: PreviewMatrix.Layout = .device("iPhone 13 mini")
+    static let iPhone13Pro: PreviewMatrix.Layout = .device("iPhone 13 Pro")
+    static let iPhone13ProMax: PreviewMatrix.Layout = .device("iPhone 13 Pro Max")
+    static let iPadPro11Inch: PreviewMatrix.Layout = .device("iPad Pro (11-inch) (3rd generation)")
 }
 
 // MARK: - ViewModifier Extensions
@@ -170,7 +169,7 @@ struct PreviewMatrix_Previews: PreviewProvider {
     static var previews: some View {
         Text("Testing!")
             .previewMatrix(.currentDevice,
-                           .iPhone11Pro,
+                           .iPhone13Pro,
                            .fixedSize(width: 200, height: 80),
                            .sizeThatFits)
     }

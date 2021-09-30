@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/marksands/BetterCodable",
         "state": {
           "branch": null,
-          "revision": "99133960f4b07bedf16034ae47555905aaa40b9c",
-          "version": "0.3.0"
+          "revision": "61153170668db7a46a20a87e35e70f80b24d4eb5",
+          "version": "0.4.0"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk",
         "state": {
           "branch": null,
-          "revision": "805863da97d733e4507a07d6fd113d9dd2e4ec7a",
-          "version": "8.2.0"
+          "revision": "bb8965c3ce61634ad15ab82cb36e4ad3a9962d77",
+          "version": "8.8.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "8f2945122bef809c963a619a598c3ac390c2163a",
-          "version": "8.1.1"
+          "revision": "06add56b27b88ae5180e92d4ee21a1199ee888a1",
+          "version": "8.8.0"
         }
       },
       {
