@@ -3,6 +3,7 @@
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import KippleErrorHandling
 
 public typealias DocumentMapper<D> = (DocumentSnapshot) throws -> D?
 
@@ -11,7 +12,7 @@ public extension DocumentReference {
     var cacheFirstGetDocument: AnyPublisher<DocumentSnapshot, Error> {
         self.getDocument(source: .cache)
             .catch { error -> AnyPublisher<DocumentSnapshot, Error> in
-                print("error loading from cache for path \(self.path): \(error)")
+                ErrorHandler.report(error, message: "Error loading from cache for path '\(self.path)'.")
                 return self.getDocument(source: .server)
             }.eraseToAnyPublisher()
     }
@@ -108,7 +109,7 @@ public extension DocumentReference {
                 do {
                     return try documentSnapshotMapper($0)
                 } catch {
-                    print("Document snapshot mapper error for \(self.path): \(error)")
+                    ErrorHandler.report(error, message: "Document snapshot mapper error.")
                     return nil
                 }
             }
@@ -134,7 +135,7 @@ public extension DocumentReference {
             do {
                 return try documentSnapshotMapper($0)
             } catch {
-                print("error for \(self.path): \(error)")
+                ErrorHandler.report(error, message: "Error for path '\(self.path)'.")
                 return nil
             }
         }
@@ -146,7 +147,7 @@ public extension DocumentReference {
             do {
                 return try documentSnapshotMapper($0)
             } catch {
-                print("error for \(self.path): \(error)")
+                ErrorHandler.report(error, message: "Error for path '\(self.path)'.")
                 return nil
             }
         }
@@ -206,7 +207,7 @@ extension DocumentSnapshot {
             do {
                 return try $0.data(as: D.self)
             } catch let decodingError as DecodingError {
-                print("Error decoding Firestore Document into '\(String(describing: D.self))'. \(decodingError.cleanedDescription)")
+                ErrorHandler.report(decodingError, message: "Error decoding Firestore Document into '\(String(describing: D.self))'. \(decodingError.cleanedDescription)")
                 throw decodingError
             }
         }

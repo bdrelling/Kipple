@@ -2,14 +2,8 @@
 
 import SwiftUI
 
-public extension Font.TextStyle {
-    var defaultSystemSize: CGFloat {
-        Font.preferredUIFont(forTextStyle: self).pointSize
-    }
-}
-
 public extension Font {
-    static func preferredUIFont(forTextStyle textStyle: Font.TextStyle) -> UIFont {
+    static func preferredFont(forTextStyle textStyle: Font.TextStyle) -> UIFont {
         switch textStyle {
         case .largeTitle:
             return UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -35,7 +29,7 @@ public extension Font {
             return UIFont.preferredFont(forTextStyle: .body)
         // Any unknown values will use the body font.
         @unknown default:
-            return self.preferredUIFont(forTextStyle: .body)
+            return self.preferredFont(forTextStyle: .body)
         }
     }
 }

@@ -19,19 +19,19 @@ public enum FirebaseHelper {
 
     // MARK: Initializers
 
-    public static func initialize(options: FirebaseOptions, mode: Mode) {
+    public static func initialize(options: FirebaseOptions, isLocal: Bool) {
 //        FirebaseConfiguration.shared.setLoggerLevel(.debug)
 
         FirebaseApp.configure(options: options)
 
-        if mode == .local {
+        if isLocal {
             self.initializeForLocalDevelopment()
         }
     }
 
-    public static func initialize(filePath: String, mode: Mode) {
+    public static func initialize(filePath: String, isLocal: Bool) {
         if let options = FirebaseOptions(contentsOfFile: filePath) {
-            self.initialize(options: options, mode: mode)
+            self.initialize(options: options, isLocal: isLocal)
         } else {
             assertionFailure("Firebase failed to intialize!")
         }

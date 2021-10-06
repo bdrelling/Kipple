@@ -91,20 +91,4 @@ extension QuerySnapshot {
             try snapshot.documents.compactMap { try documentSnapshotMapper($0) }
         }
     }
-
-//    public static func defaultMapper<D: Decodable>() -> QueryMapper<D> {
-//        { snapshot, documentSnapshotMapper in
-//            var dArray: [D] = []
-//            snapshot.documents.forEach {
-//                do {
-//                    if let d = try documentSnapshotMapper($0) {
-//                        dArray.append(d)
-//                    }
-//                } catch {
-//                    print("Document snapshot mapper error for \($0.reference.path): \(error)")
-//                }
-//            }
-//            return dArray
-//        }
-//    }
 }

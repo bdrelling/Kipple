@@ -12,10 +12,17 @@ public struct CustomRelativeFont: ViewModifier {
     public var weight: Font.Weight = .regular
 
     public func body(content: Content) -> some View {
-        content.font(
-            Font.custom(self.name, size: UIFont.preferredFont(forTextStyle: self.style).pointSize)
-                .weight(self.weight)
-        )
+        if #available(iOS 14.0, *) {
+            return content.font(
+                Font.custom(self.name, size: UIFont.preferredFont(forTextStyle: self.style).pointSize)
+                    .weight(self.weight)
+            )
+        } else {
+            return content.font(
+                Font.custom(self.name, size: UIFont.preferredFont(forTextStyle: self.style).pointSize)
+                    .weight(self.weight)
+            )
+        }
     }
 }
 
@@ -51,7 +58,7 @@ public struct CustomStaticFont: ViewModifier {
     }
 }
 
-// MARK: Extensions
+// MARK: - Extensions
 
 public extension View {
     func customFont(name: String,
@@ -71,7 +78,7 @@ public extension View {
     }
 }
 
-// MARK: Convenience
+// MARK: - Convenience
 
 public struct AppFont: RawRepresentable {
     public let rawValue: String

@@ -34,7 +34,7 @@ public extension FirebaseInitializing {
 
     static func initializeFirebase() {
         if let filePath = Self.plistFilePath {
-            FirebaseHelper.initialize(filePath: filePath, mode: .beta)
+            FirebaseHelper.initialize(filePath: filePath, isLocal: true)
         }
     }
 }

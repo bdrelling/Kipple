@@ -12,15 +12,17 @@ let package = Package(
     ],
     products: [
         .library(name: "Kipple", targets: ["KippleCore", "KippleUI"]),
+        .library(name: "KippleAuth", targets: ["KippleAuth"]),
         .library(name: "KippleCore", targets: ["KippleCore"]),
+        .library(name: "KippleErrorHandling", targets: ["KippleErrorHandling"]),
+        .library(name: "KippleFirebase", targets: ["KippleFirebase"]),
         .library(name: "KippleTesting", targets: ["KippleTesting"]),
         .library(name: "KippleUI", targets: ["KippleUI"]),
-        .library(name: "KippleAuth", targets: ["KippleAuth"]),
-        .library(name: "KippleFirebase", targets: ["KippleFirebase"]),
     ],
     dependencies: [
         .package(name: "BetterCodable", url: "https://github.com/marksands/BetterCodable", .upToNextMinor(from: "0.4.0")),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk", .upToNextMajor(from: "8.7.0")),
+        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", .upToNextMajor(from: "7.4.2")),
         .package(name: "UIDeviceComplete", url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.7.6"))
     ],
     targets: [
@@ -34,7 +36,14 @@ let package = Package(
         .target(
             name: "KippleAuth",
             dependencies: [
-                .target(name: "KippleFirebase")
+                .target(name: "KippleErrorHandling"),
+                .target(name: "KippleFirebase"),
+            ]
+        ),
+        .target(
+            name: "KippleErrorHandling",
+            dependencies: [
+                .product(name: "Sentry", package: "Sentry"),
             ]
         ),
         .target(
@@ -44,6 +53,7 @@ let package = Package(
                 .product(name: "FirebaseAuth", package: "Firebase"),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
                 .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase"),
+                .target(name: "KippleErrorHandling"),
             ]
         ),
         .target(
@@ -66,9 +76,6 @@ let package = Package(
             dependencies: [
                 .target(name: "KippleAuth"),
                 .target(name: "KippleTesting"),
-            ],
-            resources: [
-                .process("Resources"),
             ]
         ),
         .testTarget(
