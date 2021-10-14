@@ -3,6 +3,7 @@
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import KippleDiagnostics
 
 public enum FirebaseHelper {
     // MARK: Constants
@@ -23,6 +24,7 @@ public enum FirebaseHelper {
 //        FirebaseConfiguration.shared.setLoggerLevel(.debug)
 
         FirebaseApp.configure(options: options)
+        KippleLogger.debug("Firebase has been configured.")
 
         if isLocal {
             self.initializeForLocalDevelopment()
@@ -33,7 +35,7 @@ public enum FirebaseHelper {
         if let options = FirebaseOptions(contentsOfFile: filePath) {
             self.initialize(options: options, isLocal: isLocal)
         } else {
-            assertionFailure("Firebase failed to intialize!")
+            KippleLogger.report("Firebase failed to initialize! Unable to find GoogleServices file at '\(filePath)'.")
         }
     }
 

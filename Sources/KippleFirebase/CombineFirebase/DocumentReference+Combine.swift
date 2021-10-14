@@ -3,7 +3,7 @@
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import KippleErrorHandling
+import KippleDiagnostics
 
 public typealias DocumentMapper<D> = (DocumentSnapshot) throws -> D?
 
@@ -12,7 +12,7 @@ public extension DocumentReference {
     var cacheFirstGetDocument: AnyPublisher<DocumentSnapshot, Error> {
         self.getDocument(source: .cache)
             .catch { error -> AnyPublisher<DocumentSnapshot, Error> in
-                ErrorHandler.report(error, message: "Error loading from cache for path '\(self.path)'.")
+                KippleLogger.report(error, message: "Error loading from cache for path '\(self.path)'.")
                 return self.getDocument(source: .server)
             }.eraseToAnyPublisher()
     }
@@ -109,7 +109,7 @@ public extension DocumentReference {
                 do {
                     return try documentSnapshotMapper($0)
                 } catch {
-                    ErrorHandler.report(error, message: "Document snapshot mapper error.")
+                    KippleLogger.report(error, message: "Document snapshot mapper error.")
                     return nil
                 }
             }
@@ -135,7 +135,7 @@ public extension DocumentReference {
             do {
                 return try documentSnapshotMapper($0)
             } catch {
-                ErrorHandler.report(error, message: "Error for path '\(self.path)'.")
+                KippleLogger.report(error, message: "Error for path '\(self.path)'.")
                 return nil
             }
         }
@@ -147,7 +147,7 @@ public extension DocumentReference {
             do {
                 return try documentSnapshotMapper($0)
             } catch {
-                ErrorHandler.report(error, message: "Error for path '\(self.path)'.")
+                KippleLogger.report(error, message: "Error for path '\(self.path)'.")
                 return nil
             }
         }
@@ -207,7 +207,7 @@ extension DocumentSnapshot {
             do {
                 return try $0.data(as: D.self)
             } catch let decodingError as DecodingError {
-                ErrorHandler.report(decodingError, message: "Error decoding Firestore Document into '\(String(describing: D.self))'. \(decodingError.cleanedDescription)")
+                KippleLogger.report(decodingError, message: "Error decoding Firestore Document into '\(String(describing: D.self))'. \(decodingError.cleanedDescription)")
                 throw decodingError
             }
         }

@@ -4,7 +4,7 @@ import Combine
 import FirebaseAuth
 import Foundation
 import KippleCore
-import KippleErrorHandling
+import KippleDiagnostics
 
 open class Authenticator: ObservableObject {
     // MARK: Enums
@@ -46,16 +46,16 @@ open class Authenticator: ObservableObject {
         // Register a listener for Firebse Auth state changes.
         self.auth.addStateDidChangeListener { _, user in
             if let user = user, user == self.currentUser {
-                ErrorHandler.debug("User \(user.uid) signed in automatically.")
+                KippleLogger.debug("User \(user.uid) signed in automatically.")
             } else if let user = user {
                 self.currentUser = user
 
-                ErrorHandler.debug("User \(user.uid) signed in.")
+                KippleLogger.debug("User \(user.uid) signed in.")
             } else {
                 self.currentUser = nil
 
                 if self.currentUser != nil {
-                    ErrorHandler.debug("User signed out.")
+                    KippleLogger.debug("User signed out.")
                 }
             }
         }

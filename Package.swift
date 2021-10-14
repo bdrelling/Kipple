@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "Kipple", targets: ["KippleCore", "KippleUI"]),
         .library(name: "KippleAuth", targets: ["KippleAuth"]),
         .library(name: "KippleCore", targets: ["KippleCore"]),
-        .library(name: "KippleErrorHandling", targets: ["KippleErrorHandling"]),
+        .library(name: "KippleDiagnostics", targets: ["KippleDiagnostics"]),
         .library(name: "KippleFirebase", targets: ["KippleFirebase"]),
         .library(name: "KippleTesting", targets: ["KippleTesting"]),
         .library(name: "KippleUI", targets: ["KippleUI"]),
@@ -22,8 +22,9 @@ let package = Package(
     dependencies: [
         .package(name: "BetterCodable", url: "https://github.com/marksands/BetterCodable", .upToNextMinor(from: "0.4.0")),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk", .upToNextMajor(from: "8.7.0")),
+        .package(name: "Pulse", url: "https://github.com/kean/Pulse", .upToNextMinor(from: "0.18.0")),
         .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", .upToNextMajor(from: "7.4.2")),
-        .package(name: "UIDeviceComplete", url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.7.6"))
+        .package(name: "UIDeviceComplete", url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.7.6")),
     ],
     targets: [
         // Product Targets
@@ -36,13 +37,14 @@ let package = Package(
         .target(
             name: "KippleAuth",
             dependencies: [
-                .target(name: "KippleErrorHandling"),
+                .target(name: "KippleDiagnostics"),
                 .target(name: "KippleFirebase"),
             ]
         ),
         .target(
-            name: "KippleErrorHandling",
+            name: "KippleDiagnostics",
             dependencies: [
+                .product(name: "Pulse", package: "Pulse"),
                 .product(name: "Sentry", package: "Sentry"),
             ]
         ),
@@ -53,7 +55,7 @@ let package = Package(
                 .product(name: "FirebaseAuth", package: "Firebase"),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
                 .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase"),
-                .target(name: "KippleErrorHandling"),
+                .target(name: "KippleDiagnostics"),
             ]
         ),
         .target(

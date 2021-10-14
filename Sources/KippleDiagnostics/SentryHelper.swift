@@ -44,10 +44,12 @@ public enum SentryHelper {
         user.username = username
 
         SentrySDK.setUser(user)
+        KippleLogger.debug("Sentry user has been set.")
     }
 
     public static func clearUser() {
         SentrySDK.setUser(nil)
+        KippleLogger.debug("Sentry user has been cleared.")
     }
 
     public static func simulateCrash() {
