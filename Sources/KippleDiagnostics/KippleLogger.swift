@@ -54,7 +54,7 @@ public enum KippleLogger {
     }
 
     // MARK: Message Logging
-
+    
     public static func log(
         _ message: String,
         level: Logger.Level,
@@ -64,6 +64,26 @@ public enum KippleLogger {
         line: UInt = #line
     ) {
         self.logger.log(level: level, "\(message)", metadata: metadata, file: file, function: function, line: line)
+    }
+    
+    public static func log(
+        _ error: Error,
+        message: String? = nil,
+        level: Logger.Level = .error,
+        metadata: Logger.Metadata? = nil,
+        file: String = #file,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        let formattedMessage: String = {
+            if let message = message {
+                return "\(message) \(error.localizedDescription)"
+            } else {
+                return error.localizedDescription
+            }
+        }()
+        
+        self.log(formattedMessage, level: level, metadata: metadata, file: file, function: function, line: line)
     }
 
     public static func debug(
@@ -106,15 +126,7 @@ public enum KippleLogger {
         function: String = #function,
         line: UInt = #line
     ) {
-        let formattedMessage: String = {
-            if let message = message {
-                return "\(message) \(error.localizedDescription)"
-            } else {
-                return error.localizedDescription
-            }
-        }()
-
-        self.log(formattedMessage, level: .error, metadata: metadata, file: file, function: function, line: line)
+        self.log(error, message: message, level: .error, metadata: metadata, file: file, function: function, line: line)
 
         // TODO: Figure out how to abstract this from KippleLogger?
         SentryLogHandler.report(error: error, message: message, file: file, function: function, line: line)
