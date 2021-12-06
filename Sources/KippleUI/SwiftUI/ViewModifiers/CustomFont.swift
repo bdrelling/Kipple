@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+#if canImport(UIKit)
+
 import SwiftUI
 
 // source: https://stackoverflow.com/questions/56726869/is-it-possible-to-use-dynamic-type-sizes-with-a-custom-font-in-swiftui
@@ -115,3 +117,5 @@ public extension View {
         self.scaledFont(name: appFont.rawValue, size: size, weight: weight)
     }
 }
+
+#endif

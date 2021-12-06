@@ -20,20 +20,20 @@ public enum FirebaseHelper {
 
     // MARK: Initializers
 
-    public static func initialize(options: FirebaseOptions, isLocal: Bool) {
-//        FirebaseConfiguration.shared.setLoggerLevel(.debug)
-
+    public static func initialize(options: FirebaseOptions, isLocal: Bool, isPersistent: Bool = true) {
         FirebaseApp.configure(options: options)
         KippleLogger.debug("Firebase has been configured.")
 
         if isLocal {
             self.initializeForLocalDevelopment()
         }
+        
+        Firestore.firestore().settings.isPersistenceEnabled = isPersistent
     }
 
-    public static func initialize(filePath: String, isLocal: Bool) {
+    public static func initialize(filePath: String, isLocal: Bool, isPersistent: Bool = true) {
         if let options = FirebaseOptions(contentsOfFile: filePath) {
-            self.initialize(options: options, isLocal: isLocal)
+            self.initialize(options: options, isLocal: isLocal, isPersistent: isPersistent)
         } else {
             KippleLogger.report("Firebase failed to initialize! Unable to find GoogleServices file at '\(filePath)'.")
         }

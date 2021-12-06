@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+#if canImport(UIKit)
+
 import SwiftUI
 
 public extension Font.TextStyle {
@@ -7,3 +9,5 @@ public extension Font.TextStyle {
         Font.preferredFont(forTextStyle: self).pointSize
     }
 }
+
+#endif

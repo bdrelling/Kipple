@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+#if canImport(UIKit)
+
 import KippleCore
 import SwiftUI
 
@@ -20,3 +22,5 @@ public extension Color {
         return Color(adjustedUIColor)
     }
 }
+
+#endif

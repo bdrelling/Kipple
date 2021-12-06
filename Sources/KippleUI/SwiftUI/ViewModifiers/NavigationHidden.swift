@@ -3,6 +3,7 @@
 import Foundation
 import SwiftUI
 
+@available(macOS, unavailable)
 public struct NavigationHidden: ViewModifier {
     public func body(content: Content) -> some View {
         content
@@ -12,6 +13,7 @@ public struct NavigationHidden: ViewModifier {
     }
 }
 
+@available(macOS, unavailable)
 public extension View {
     func navigationHidden() -> some View {
         self.modifier(NavigationHidden())

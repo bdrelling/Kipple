@@ -1,6 +1,6 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
-#if DEBUG
+#if DEBUG && canImport(UIKit)
 
     import UIKit
 

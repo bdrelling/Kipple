@@ -6,7 +6,7 @@ let package = Package(
     name: "Kipple",
     platforms: [
         .iOS(.v14),
-        .macOS(.v10_15),
+        .macOS(.v11),
         .tvOS(.v13),
         .watchOS(.v6),
     ],
@@ -31,7 +31,7 @@ let package = Package(
         .target(
             name: "KippleCore",
             dependencies: [
-                .product(name: "UIDeviceComplete", package: "UIDeviceComplete"),
+                .product(name: "UIDeviceComplete", package: "UIDeviceComplete", condition: .when(platforms: [.iOS])),
             ]
         ),
         .target(

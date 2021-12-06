@@ -31,11 +31,13 @@ open class Authenticator: ObservableObject {
     @Published public private(set) var currentUser: User?
     @Published public private(set) var isAuthenticated: Bool = false
 
-    private var auth = Auth.auth()
+    private lazy var auth = Auth.auth()
 
     // MARK: Initializers
+    
+    public init() {}
 
-    public init() {
+    open func initialize() {
         // Register a publisher to update isAuthenticated every time currentUser is updated.
         self.$currentUser
             .map { $0 != nil }

@@ -3,10 +3,34 @@
 import Combine
 import FirebaseAuth
 import GameKit
-import UIKit
 
 extension Authenticator {
-    func signInWithGameCenter(from hostController: UIViewController? = nil) -> AnyPublisher<GKLocalPlayer, Error> {
+    #if canImport(UIKit)
+    
+    func signInWithGameCenter(from hostController: UIViewController) -> AnyPublisher<GKLocalPlayer, Error> {
+        self.signInWithGameCenter()
+//        Future { promise in
+//            let localPlayer = GKLocalPlayer.local
+//
+//            // NOTE: GameCenter will only allow login 1 time on launch and cannot be re-presented if canceled. It also only allows 3 attempts in sandbox.
+//            localPlayer.authenticateHandler = { authController, error in
+//                if localPlayer.isAuthenticated {
+//                    // Successfully authenticated local Game Center player.
+//                    promise(.success(localPlayer))
+//                } else if let authController = authController, let hostController = hostController {
+//                    // Authenticating local Game Center player...
+//                    hostController.present(authController, animated: true)
+//                } else if let error = error {
+//                    // Unable to authenticate local Game Center player.
+//                    promise(.failure(error))
+//                }
+//            }
+//        }.eraseToAnyPublisher()
+    }
+    
+    #endif
+    
+    func signInWithGameCenter() -> AnyPublisher<GKLocalPlayer, Error> {
         Future { promise in
             let localPlayer = GKLocalPlayer.local
 
@@ -15,9 +39,6 @@ extension Authenticator {
                 if localPlayer.isAuthenticated {
                     // Successfully authenticated local Game Center player.
                     promise(.success(localPlayer))
-                } else if let authController = authController, let hostController = hostController {
-                    // Authenticating local Game Center player...
-                    hostController.present(authController, animated: true)
                 } else if let error = error {
                     // Unable to authenticate local Game Center player.
                     promise(.failure(error))

@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+#if canImport(UIKit)
+
 import SwiftUI
 
 // source: https://stackoverflow.com/questions/56505528/swiftui-update-navigation-bar-title-color
@@ -48,3 +50,5 @@ public extension View {
         self.background(NavigationConfigurator(configure: completion))
     }
 }
+
+#endif

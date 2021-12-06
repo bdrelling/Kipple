@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+#if canImport(UIKit)
+
 import UIKit
 
 public extension UIImage {
@@ -31,3 +33,5 @@ public extension UIImage {
         return scaledImage
     }
 }
+
+#endif

@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+#if canImport(UIKit)
+
 import Foundation
 import SwiftUI
 
@@ -32,3 +34,5 @@ public extension View {
         })
     }
 }
+
+#endif

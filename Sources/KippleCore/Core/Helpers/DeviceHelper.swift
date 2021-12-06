@@ -1,9 +1,20 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+protocol DeviceHelping {
+    static var deviceFamily: String { get }
+    static var deviceInfo: DeviceInfo { get }
+    static var deviceModel: String { get }
+    static var systemName: String { get }
+    static var systemVersionString: String { get }
+    static var systemVersion: SemanticVersion { get }
+}
+
+#if canImport(UIDeviceComplete) && canImport(UIKit)
+
 import UIDeviceComplete
 import UIKit
 
-public enum DeviceHelper {
+public final class DeviceHelper: DeviceHelping {
     private static var device: UIDevice {
         UIDevice.current
     }
@@ -47,6 +58,8 @@ public enum DeviceHelper {
     public static var systemVersion: SemanticVersion {
         .from(self.systemVersionString)
     }
+    
+    private init() {}
 }
 
 // MARK: - Extensions
@@ -71,3 +84,46 @@ private extension UIUserInterfaceIdiom {
         }
     }
 }
+
+#else
+
+public final class DeviceHelper: DeviceHelping {
+//    private static var device: UIDevice {
+//        UIDevice.current
+//    }
+
+    public static var deviceFamily: String {
+        ""
+    }
+
+    public static var deviceInfo: DeviceInfo {
+        .init(
+            appVersion: BundleHelper.appVersion,
+            appBuildNumber: BundleHelper.appBuildNumber,
+            deviceFamily: self.deviceFamily,
+            deviceModel: self.deviceModel,
+            systemName: self.systemName,
+            systemVersion: self.systemVersion
+        )
+    }
+
+    public static var deviceModel: String {
+        ""
+    }
+
+    public static var systemName: String {
+        ""
+    }
+
+    public static var systemVersionString: String {
+        ""
+    }
+
+    public static var systemVersion: SemanticVersion {
+        .from("0.1.0")
+    }
+    
+    private init() {}
+}
+
+#endif

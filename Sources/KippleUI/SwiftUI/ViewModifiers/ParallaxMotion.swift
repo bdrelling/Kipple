@@ -3,6 +3,7 @@
 import CoreMotion
 import SwiftUI
 
+@available(macOS, unavailable)
 public struct ParallaxMotionModifier: ViewModifier {
     @ObservedObject public var manager: MotionManager
 
@@ -22,6 +23,7 @@ public struct ParallaxMotionModifier: ViewModifier {
     }
 }
 
+@available(macOS, unavailable)
 public class MotionManager: ObservableObject {
     @Published public var pitch: Double = 0.0
     @Published public var roll: Double = 0.0
@@ -84,6 +86,6 @@ public class MotionManager: ObservableObject {
     }
 }
 
-func deg2rad(_ number: Double) -> Double {
+fileprivate func deg2rad(_ number: Double) -> Double {
     number * .pi / 180
 }
