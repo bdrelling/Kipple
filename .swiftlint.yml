@@ -30,5 +30,6 @@ trailing_comma:
 excluded:
   - .build
   - .swiftpm
-  - Tests/LinuxMain.swift
-  - "Tests/*/XCTestManifests.swift"
+  - Package.swift
+  - '*/Package.swift'
+  - '**/*/*+CoreDataProperties.swift'

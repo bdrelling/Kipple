@@ -1,23 +1,24 @@
 # Updated for v0.44.9
 
-#---------------------#
-# SwiftFormat Options #
-#---------------------#
-
---swiftversion 5.2
-
 #--------------------#
 # Rule Configuration #
 #--------------------#
 
-# makes sure the self. prefix is added where appropriate
---self insert 
-
-# only strips unused arguments (replacing with _) in closures, not methods
---stripunusedargs closure-only 
-
 # sets the header block to supplied text
 --header "Copyright © {year} Brian Drelling. All rights reserved."
+
+# makes sure the self. prefix is added where appropriate
+--self insert
+
+# only strips unused arguments (replacing with _) in closures, not methods
+--stripunusedargs closure-only
+
+# DO NOT wrap function or type @attributes onto a separate line
+--funcattributes prev-line
+--typeattributes prev-line
+
+# DO include var @attributes in the same line
+--varattributes same-line
 
 # this removes the underscore (_) separation in large numbers
 --binarygrouping none
@@ -43,6 +44,4 @@
 --exclude .swiftpm
 --exclude Package.swift
 --exclude */Package.swift
---exclude Tests/LinuxMain.swift
---exclude "Tests/*/XCTestManifests.swift"
 --exclude "**/*/*+CoreDataProperties.swift"
