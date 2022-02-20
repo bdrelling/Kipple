@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Test Kipple",
+            "program": "/Applications/Xcode 13.2.1.app/Contents/Developer/usr/bin/xctest",
+            "args": [
+                ".build/debug/KipplePackageTests.xctest"
+            ],
+            "cwd": "${workspaceFolder:Kipple}",
+            "preLaunchTask": "swift: Build All"
+        }
+    ]
+}
