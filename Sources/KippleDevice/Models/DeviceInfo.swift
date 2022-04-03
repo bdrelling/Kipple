@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+import KippleCore
+
 public struct DeviceInfo: Codable {
     // MARK: Properties
 

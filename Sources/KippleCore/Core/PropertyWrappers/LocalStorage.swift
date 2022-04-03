@@ -3,18 +3,18 @@
 import Foundation
 
 @propertyWrapper
-public struct LocalStorage<T: Codable> {
+public struct LocalStorage<Value: Codable> {
     private let key: String
-    private let defaultValue: T
+    private let defaultValue: Value
 
-    private let userDefaults = UserDefaults.standard
+    private let userDefaults: UserDefaults = .standard
 
-    public init(key: String, defaultValue: T) {
+    public init(_ key: String, defaultValue: Value) {
         self.key = key
         self.defaultValue = defaultValue
     }
 
-    public var wrappedValue: T {
+    public var wrappedValue: Value {
         get {
             // Read value from UserDefaults.
             guard let data = self.userDefaults.object(forKey: key) as? Data else {
@@ -23,7 +23,7 @@ public struct LocalStorage<T: Codable> {
             }
 
             // Convert data to the desire data type.
-            let value = try? JSONDecoder().decode(T.self, from: data)
+            let value = try? JSONDecoder().decode(Value.self, from: data)
             return value ?? self.defaultValue
         }
         set {

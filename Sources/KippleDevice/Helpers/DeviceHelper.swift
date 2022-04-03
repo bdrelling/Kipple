@@ -1,5 +1,7 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
+import KippleCore
+
 protocol DeviceHelping {
     static var deviceFamily: String { get }
     static var deviceInfo: DeviceInfo { get }
@@ -9,7 +11,7 @@ protocol DeviceHelping {
     static var systemVersion: SemanticVersion { get }
 }
 
-#if canImport(UIDeviceComplete) && canImport(UIKit)
+#if canImport(UIKit) && canImport(UIDeviceComplete)
 
 import UIDeviceComplete
 import UIKit
