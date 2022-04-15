@@ -1,27 +1,31 @@
 // Copyright © 2021 Brian Drelling. All rights reserved.
 
 #if canImport(UIKit)
-
 import UIKit
 
-public extension UIColor {
-    func lighter(byPercentage percentage: CGFloat) -> UIColor {
+public typealias NativeColor = UIColor
+#elseif canImport(AppKit)
+import AppKit
+
+public typealias NativeColor = NSColor
+#endif
+
+public extension NativeColor {
+    func lighter(byPercentage percentage: CGFloat) -> Self {
         self.adjusted(byPercentage: abs(percentage))
     }
 
-    func darker(byPercentage percentage: CGFloat) -> UIColor {
-        self.adjusted(byPercentage: -1 * abs(percentage))
+    func darker(byPercentage percentage: CGFloat) -> Self {
+        self.adjusted(byPercentage: abs(percentage) * -1)
     }
 
-    func adjusted(byPercentage percentage: CGFloat) -> UIColor {
+    func adjusted(byPercentage percentage: CGFloat) -> Self {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
-
-        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
-            return .clear
-        }
+        
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
 
         return .init(
             red: min(red + percentage / 100, 1.0),
@@ -31,5 +35,3 @@ public extension UIColor {
         )
     }
 }
-
-#endif

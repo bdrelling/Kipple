@@ -1,98 +1,50 @@
-# Xcode
+# Swift .gitignore
 #
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+# References:
+# - https://raw.githubusercontent.com/github/gitignore/main/Swift.gitignore
+# - https://github.com/vapor/vapor/blob/main/.gitignore
 
-## User settings
-xcuserdata/
+## OS X Folder Attributes
+.DS_Store
 
-## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
-*.xcscmblueprint
-*.xccheckout
-
-## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
-build/
-DerivedData/
-*.moved-aside
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-
-## Obj-C/Swift specific
+## Obj-C/Swift Specific
 *.hmap
 
-## App packaging
+## App Packaging
 *.ipa
 *.dSYM.zip
 *.dSYM
 
-## Playgrounds
+## Xcode
+xcuserdata/
+
+## Xcode Playgrounds
 timeline.xctimeline
 playground.xcworkspace
 
-# Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-# Package.resolved
-# *.xcodeproj
-#
-# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
-# hence it is not needed unless you have added a package configuration file to your project
-# .swiftpm
+# Visual Studio Code
+.vscode
 
+## Swift Package Manager
+Packages
+Package.resolved
 .build/
+.swiftpm/
 
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# Pods/
-#
-# Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
+## CocoaPods
+Pods/
 
-# Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-Carthage/Build/
-
-# Accio dependency management
-Dependencies/
-.accio/
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo.
-# Instead, use fastlane to re-generate the screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
+## fastlane
 fastlane/report.xml
-fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+fastlane/[Pp]rovisioning
+fastlane/[Bb]uild
+fastlane/[Oo]utput
+fastlane/DerivedData
+fastlane/derived_data
+fastlane/screenshots
+fastlane/[Pp]review.html
 
-# Code Injection
-#
-# After new code Injection tools there's a generated folder /iOSInjectionProject
-# https://github.com/johnno1962/injectionforxcode
-
-iOSInjectionProject/
-
-# Custom Rules
-
-## Exclude OS X folder attributes
-.DS_Store
-
-# A .env.local file contains keys that should never be checked into the repository
+## Dotenv
 .env.local
