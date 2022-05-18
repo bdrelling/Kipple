@@ -4,6 +4,7 @@ import Foundation
 
 public enum NetworkingError: Error {
     case invalidContentType(String)
+    case invalidHTTPHeader(String)
     case invalidStatusCode(HTTPStatusCode)
     case invalidURLString(String)
     case invalidURLResponse
@@ -16,6 +17,8 @@ extension NetworkingError: LocalizedError {
         switch self {
         case let .invalidContentType(contentType):
             return "Invalid content type '\(contentType)'."
+        case let .invalidHTTPHeader(rawValue):
+            return "Invalid HTTP Header '\(rawValue)'."
         case let .invalidStatusCode(statusCode):
             return "Invalid status code '\(statusCode.rawValue)'."
         case let .invalidURLString(urlString):
