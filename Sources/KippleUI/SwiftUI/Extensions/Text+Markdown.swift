@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(macOS 12.0, *)
 extension Text {
     init(markdown text: String) {
         do {
@@ -10,3 +11,4 @@ extension Text {
         }
     }
 }
+
