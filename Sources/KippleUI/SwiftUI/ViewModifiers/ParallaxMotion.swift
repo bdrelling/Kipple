@@ -1,4 +1,4 @@
-// Copyright © 2021 Brian Drelling. All rights reserved.
+// Copyright © 2022 Brian Drelling. All rights reserved.
 
 import CoreMotion
 import SwiftUI
@@ -86,6 +86,6 @@ public class MotionManager: ObservableObject {
     }
 }
 
-fileprivate func deg2rad(_ number: Double) -> Double {
+private func deg2rad(_ number: Double) -> Double {
     number * .pi / 180
 }

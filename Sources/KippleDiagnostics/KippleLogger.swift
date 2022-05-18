@@ -1,4 +1,4 @@
-// Copyright © 2021 Brian Drelling. All rights reserved.
+// Copyright © 2022 Brian Drelling. All rights reserved.
 
 import Logging
 import Pulse
@@ -54,7 +54,7 @@ public enum KippleLogger {
     }
 
     // MARK: Message Logging
-    
+
     public static func log(
         _ message: String,
         level: Logger.Level,
@@ -65,7 +65,7 @@ public enum KippleLogger {
     ) {
         self.logger.log(level: level, "\(message)", metadata: metadata, file: file, function: function, line: line)
     }
-    
+
     public static func log(
         _ error: Error,
         message: String? = nil,
@@ -82,7 +82,7 @@ public enum KippleLogger {
                 return error.localizedDescription
             }
         }()
-        
+
         self.log(formattedMessage, level: level, metadata: metadata, file: file, function: function, line: line)
     }
 

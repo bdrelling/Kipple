@@ -1,4 +1,4 @@
-// Copyright © 2021 Brian Drelling. All rights reserved.
+// Copyright © 2022 Brian Drelling. All rights reserved.
 
 import SwiftUI
 
@@ -15,7 +15,8 @@ public protocol StateEnabledButtonStyle: ButtonStyle {
         var previewState: ButtonState? { get }
     #endif
 
-    @ViewBuilder func makeBody(label: ButtonStyleConfiguration.Label, state: ButtonState) -> Self.Content
+    @ViewBuilder
+    func makeBody(label: ButtonStyleConfiguration.Label, state: ButtonState) -> Self.Content
 }
 
 public enum ButtonState {

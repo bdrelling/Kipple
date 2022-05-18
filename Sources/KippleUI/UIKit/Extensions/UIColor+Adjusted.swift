@@ -1,13 +1,13 @@
-// Copyright © 2021 Brian Drelling. All rights reserved.
+// Copyright © 2022 Brian Drelling. All rights reserved.
 
 #if canImport(UIKit)
-import UIKit
+    import UIKit
 
-public typealias NativeColor = UIColor
+    public typealias NativeColor = UIColor
 #elseif canImport(AppKit)
-import AppKit
+    import AppKit
 
-public typealias NativeColor = NSColor
+    public typealias NativeColor = NSColor
 #endif
 
 public extension NativeColor {
@@ -24,7 +24,7 @@ public extension NativeColor {
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
-        
+
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
 
         return .init(
