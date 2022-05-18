@@ -19,7 +19,7 @@ extension String: URLConvertible {
         if let url = URL(string: self) {
             return url
         } else {
-            throw UBNetworkError.invalidURLString(self)
+            throw NetworkingError.invalidURLString(self)
         }
     }
 }

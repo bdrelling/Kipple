@@ -76,7 +76,7 @@
 //             .mapError { error in
 //                 switch error {
 //                 case let error as DecodingError:
-//                     return UBNetworkError.unableToDecode(String(describing: T.self), error)
+//                     return NetworkingError.unableToDecode(String(describing: T.self), error)
 //                 default:
 //                     return error
 //                 }

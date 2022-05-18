@@ -107,16 +107,16 @@
 //                     if let data = data as? T {
 //                         return .success(data)
 //                     } else {
-//                         return .failure(UBNetworkError.unableToDecode(String(describing: T.self), nil))
+//                         return .failure(NetworkingError.unableToDecode(String(describing: T.self), nil))
 //                     }
 //                 case let .success(data):
 //                     do {
 //                         let decodedObject = try decoder.decode(T.self, from: data)
 //                         return .success(decodedObject)
 //                     } catch let error as DecodingError {
-//                         return .failure(UBNetworkError.unableToDecode(String(describing: T.self), error))
+//                         return .failure(NetworkingError.unableToDecode(String(describing: T.self), error))
 //                     } catch {
-//                         return .failure(UBNetworkError.unableToDecode(String(describing: T.self), nil))
+//                         return .failure(NetworkingError.unableToDecode(String(describing: T.self), nil))
 //                     }
 //                 case let .failure(error):
 //                     return .failure(error)

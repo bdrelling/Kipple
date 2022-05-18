@@ -42,34 +42,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "KippleFirebase"
-               BuildableName = "KippleFirebase"
-               BlueprintName = "KippleFirebase"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "KippleErrorHandling"
-               BuildableName = "KippleErrorHandling"
-               BlueprintName = "KippleErrorHandling"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "KippleCore"
                BuildableName = "KippleCore"
                BlueprintName = "KippleCore"
@@ -84,9 +56,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "KippleAuth"
-               BuildableName = "KippleAuth"
-               BlueprintName = "KippleAuth"
+               BlueprintIdentifier = "KippleDevice"
+               BuildableName = "KippleDevice"
+               BlueprintName = "KippleDevice"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "KippleNetworking"
+               BuildableName = "KippleNetworking"
+               BlueprintName = "KippleNetworking"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -112,26 +98,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "KippleAuthTests"
-               BuildableName = "KippleAuthTests"
-               BlueprintName = "KippleAuthTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "KippleFirebaseTests"
-               BuildableName = "KippleFirebaseTests"
-               BlueprintName = "KippleFirebaseTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

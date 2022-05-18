@@ -1,27 +1,28 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 
 import PackageDescription
 
 let package = Package(
     name: "Kipple",
     platforms: [
-        .iOS(.v14),
-        .macOS(.v11),
-        .tvOS(.v13),
-        .watchOS(.v6),
+        .iOS(.v15),
+        .macOS(.v12),
+        .tvOS(.v15),
+        .watchOS(.v8),
     ],
     products: [
         .library(name: "Kipple", targets: ["KippleCore", "KippleUI"]),
         .library(name: "KippleCore", targets: ["KippleCore"]),
         .library(name: "KippleDevice", targets: ["KippleDevice"]),
 //        .library(name: "KippleDiagnostics", targets: ["KippleDiagnostics"]),
+        .library(name: "KippleNetworking", targets: ["KippleNetworking"]),
         .library(name: "KippleTesting", targets: ["KippleTesting"]),
         .library(name: "KippleUI", targets: ["KippleUI"]),
     ],
     dependencies: [
-//        .package(name: "Pulse", url: "https://github.com/kean/Pulse", .upToNextMinor(from: "0.18.0")),
-//        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", .upToNextMajor(from: "7.4.2")),
-        .package(name: "UIDeviceComplete", url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.8.1")),
+//        .package(url: "https://github.com/kean/Pulse", .upToNextMinor(from: "0.18.0")),
+//        .package(url: "https://github.com/getsentry/sentry-cocoa", .upToNextMajor(from: "7.4.2")),
+        .package(url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.8.1")),
     ],
     targets: [
         // Product Targets
@@ -43,6 +44,10 @@ let package = Package(
 //                .product(name: "Sentry", package: "Sentry"),
 //            ]
 //        ),
+        .target(
+            name: "KippleNetworking",
+            dependencies: []
+        ),
         .target(
             name: "KippleTesting",
             dependencies: []
