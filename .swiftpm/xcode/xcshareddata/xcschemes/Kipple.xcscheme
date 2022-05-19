@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1330"
+   LastUpgradeVersion = "1340"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -87,6 +87,20 @@
                BlueprintIdentifier = "KippleTesting"
                BuildableName = "KippleTesting"
                BlueprintName = "KippleTesting"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "SafeNavigationKit"
+               BuildableName = "SafeNavigationKit"
+               BlueprintName = "SafeNavigationKit"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>

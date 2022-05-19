@@ -17,7 +17,8 @@ let package = Package(
 //        .library(name: "KippleDiagnostics", targets: ["KippleDiagnostics"]),
         .library(name: "KippleNetworking", targets: ["KippleNetworking"]),
         .library(name: "KippleTesting", targets: ["KippleTesting"]),
-        .library(name: "KippleUI", targets: ["KippleUI"]),
+        .library(name: "KippleUI", targets: ["KippleUI", "SafeNavigationKit"]),
+        .library(name: "SafeNavigationKit", targets: ["SafeNavigationKit"]),
     ],
     dependencies: [
 //        .package(url: "https://github.com/kean/Pulse", .upToNextMinor(from: "0.18.0")),
@@ -57,6 +58,10 @@ let package = Package(
             dependencies: [
                 .target(name: "KippleCore"),
             ]
+        ),
+        .target(
+            name: "SafeNavigationKit",
+            dependencies: []
         ),
     ]
 )
