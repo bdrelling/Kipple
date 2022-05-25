@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct CodableDefault<Strategy: DefaultCodableStrategy> {
+public struct CodableDefault<Strategy: CodableDefaultStrategy> {
     public typealias Value = Strategy.Value
     
     public var wrappedValue: Value

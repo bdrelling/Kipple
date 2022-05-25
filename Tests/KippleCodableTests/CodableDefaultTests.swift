@@ -52,9 +52,10 @@ final class CodableDefaultTests: XCTestCase {
 private struct Example: Codable {
     let control: Int
     
-    @DefaultEmptyString private(set) var emptyString: String
-    @DefaultTrue private(set) var trueBool: Bool
-    @DefaultFalse private(set) var falseBool: Bool
+    @CodableDefaultEmptyString private(set) var emptyString: String
+    @CodableDefaultTrue private(set) var trueBool: Bool
+    @CodableDefaultFalse private(set) var falseBool: Bool
+    @CodableDefaultNull private(set) var nullableValue: Int?
     
     init(control: Int,
          emptyString: String? = nil,
