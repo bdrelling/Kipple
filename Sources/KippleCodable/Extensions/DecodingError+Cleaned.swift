@@ -2,7 +2,7 @@
 
 import Foundation
 
-extension DecodingError {
+public extension DecodingError {
     var cleanedDescription: String {
         switch self {
         case let .typeMismatch(type, context):

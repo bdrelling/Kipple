@@ -1,6 +1,7 @@
 // Copyright © 2021 SpotHero, Inc. All rights reserved.
 
 import Foundation
+import KippleCodable
 
 public enum NetworkingError: Error {
     case invalidContentType(String)

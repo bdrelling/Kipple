@@ -1,5 +1,4 @@
 import Foundation
-import ShipGameKit
 
 @propertyWrapper
 public struct CodableDefault<Strategy: DefaultCodableStrategy> {
@@ -12,36 +11,15 @@ public struct CodableDefault<Strategy: DefaultCodableStrategy> {
     }
 }
 
-// MARK: - Supporting Types
-
-public protocol DefaultCodableStrategy {
-    associatedtype Value: Equatable
-    
-    /// The fallback value used when decoding fails
-    static var defaultValue: Value { get }
-}
-
-public struct EmptyString: DefaultCodableStrategy {
-    public static var defaultValue: String { return "" }
-}
-
-public struct True: DefaultCodableStrategy {
-    public static var defaultValue: Bool { return true }
-}
-
-public struct False: DefaultCodableStrategy {
-    public static var defaultValue: Bool { return false }
-}
-
 // MARK: - Extensions
 
 extension CodableDefault: Equatable where Value: Equatable {}
 extension CodableDefault: Hashable where Value: Hashable {}
 
 extension CodableDefault: Decodable where Value: Decodable {
-    // This should never be called since KeyedDecodingContainer should skip it due to the extension.
     public init(from decoder: Decoder) throws {
-        throw KippleCodableError.encodingFailure("CodableDefault.init(from:) should never be called!")
+        let container = try decoder.singleValueContainer()
+        self.wrappedValue = try container.decode(Value.self)
     }
 }
 

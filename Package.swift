@@ -22,6 +22,7 @@ let package = Package(
         .library(name: "SafeNavigationKit", targets: ["SafeNavigationKit"]),
     ],
     dependencies: [
+//        .package(url: "https://github.com/marksands/BetterCodable", .upToNextMinor(from: "0.4.0")),
 //        .package(url: "https://github.com/kean/Pulse", .upToNextMinor(from: "0.18.0")),
 //        .package(url: "https://github.com/getsentry/sentry-cocoa", .upToNextMajor(from: "7.4.2")),
         .package(url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.8.1")),
@@ -52,7 +53,9 @@ let package = Package(
 //        ),
         .target(
             name: "KippleNetworking",
-            dependencies: []
+            dependencies: [
+                .target(name: "KippleCodable"),
+            ]
         ),
         .target(
             name: "KippleTesting",
