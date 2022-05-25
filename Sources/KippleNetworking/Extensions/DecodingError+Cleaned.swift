@@ -24,6 +24,8 @@ extension DecodingError {
     }
 }
 
+// MARK: - Extensions
+
 private extension Array where Element == CodingKey {
     var jsonPath: String {
         var path = ""

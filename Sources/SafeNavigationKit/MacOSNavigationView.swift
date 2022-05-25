@@ -35,6 +35,7 @@ public struct MacOSNavigationView<Content>: View where Content: View {
                         Button(action: { self.navigator.navigateBack() }) {
                             Image(systemName: "chevron.backward")
                         }
+                        .disabled(self.navigator.isAnimating)
                     }
                 }
             }
