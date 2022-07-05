@@ -4,13 +4,6 @@ import Foundation
 import SwiftUI
 
 public struct PreviewMatrix: ViewModifier {
-    public enum Layout {
-        case currentDevice
-        case device(PreviewDevice)
-        case fixedSize(width: CGFloat, height: CGFloat)
-        case sizeThatFits
-    }
-
     public let layouts: [Layout]
     public let colorSchemes: [ColorScheme]
 
@@ -31,6 +24,17 @@ public struct PreviewMatrix: ViewModifier {
                     .preferredColorScheme(colorScheme)
             }
         }
+    }
+}
+
+// MARK: - Supporting Types
+
+public extension PreviewMatrix {
+    enum Layout {
+        case currentDevice
+        case device(PreviewDevice)
+        case fixedSize(width: CGFloat, height: CGFloat)
+        case sizeThatFits
     }
 }
 
