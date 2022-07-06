@@ -12,11 +12,9 @@ let package = Package(
     ],
     products: [
         .library(name: "Kipple", targets: ["KippleCore", "KippleUI"]),
-        .library(name: "KippleCodable", targets: ["KippleCodable"]),
         .library(name: "KippleCore", targets: ["KippleCore"]),
         .library(name: "KippleDevice", targets: ["KippleDevice"]),
 //        .library(name: "KippleDiagnostics", targets: ["KippleDiagnostics"]),
-        .library(name: "KippleNetworking", targets: ["KippleNetworking"]),
         .library(name: "KippleTesting", targets: ["KippleTesting"]),
         .library(name: "KippleUI", targets: ["KippleUI", "SafeNavigationKit"]),
         .library(name: "SafeNavigationKit", targets: ["SafeNavigationKit"]),
@@ -29,10 +27,6 @@ let package = Package(
     ],
     targets: [
         // Product Targets
-        .target(
-            name: "KippleCodable",
-            dependencies: []
-        ),
         .target(
             name: "KippleCore",
             dependencies: []
@@ -52,12 +46,6 @@ let package = Package(
 //            ]
 //        ),
         .target(
-            name: "KippleNetworking",
-            dependencies: [
-                .target(name: "KippleCodable"),
-            ]
-        ),
-        .target(
             name: "KippleTesting",
             dependencies: []
         ),
@@ -70,13 +58,6 @@ let package = Package(
         .target(
             name: "SafeNavigationKit",
             dependencies: []
-        ),
-        // Test Targets
-        .testTarget(
-            name: "KippleCodableTests",
-            dependencies: [
-                .target(name: "KippleCodable"),
-            ]
         ),
     ]
 )
