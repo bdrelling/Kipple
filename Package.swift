@@ -18,6 +18,11 @@ let package = Package(
         .library(name: "KippleTesting", targets: ["KippleTesting"]),
         .library(name: "KippleUI", targets: ["KippleUI", "SafeNavigationKit"]),
         .library(name: "SafeNavigationKit", targets: ["SafeNavigationKit"]),
+        .library(name: "KipplePluginCore", targets: ["KipplePluginCore"]),
+        .plugin(name: "KipplPlugins", targets: [
+            "Format",
+//            "Lint",
+        ])
     ],
     dependencies: [
 //        .package(url: "https://github.com/marksands/BetterCodable", .upToNextMinor(from: "0.4.0")),
@@ -26,7 +31,7 @@ let package = Package(
         .package(url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.8.1")),
         // Development
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.49.11"),
-        .package(url: "https://github.com/Realm/SwiftLint", from: "0.47.1"),
+//        .package(url: "https://github.com/Realm/SwiftLint", from: "0.47.1"),
     ],
     targets: [
         // Product Targets
@@ -49,6 +54,10 @@ let package = Package(
 //            ]
 //        ),
         .target(
+            name: "KipplePluginCore",
+            dependencies: []
+        ),
+        .target(
             name: "KippleTesting",
             dependencies: []
         ),
@@ -64,16 +73,30 @@ let package = Package(
         ),
         // Plugins
         .plugin(
-            name: "Reformat",
+            name: "Format",
             capability: .command(
-                intent: .sourceCodeFormatting(),
+                intent: .custom(verb: "format", description: "Format swift files."),
                 permissions: [
-                    .writeToPackageDirectory(reason: "Format source code in Swift files"),
+                    .writeToPackageDirectory(reason: "Format Swift files using SwiftFormat."),
                 ]
             ),
             dependencies: [
+                .target(name: "KipplePluginCore"),
                 .product(name: "swiftformat", package: "SwiftFormat"),
             ]
         ),
+//        .plugin(
+//            name: "Lint",
+//            capability: .command(
+//                intent: .custom(verb: "lint", description: "Lint swift files."),
+//                permissions: [
+//                    .writeToPackageDirectory(reason: "Lint Swift files using SwiftLint."),
+//                ]
+//            ),
+//            dependencies: [
+//                .target(name: "KipplePluginCore"),
+//                .product(name: "swiftlint", package: "SwiftLint"),
+//            ]
+//        ),
     ]
 )
