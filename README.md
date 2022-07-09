@@ -1,4 +1,4 @@
-# Kipple
+# KippleCore
 
 A collection of tools and scripts used across a variety of Swift projects.
 
