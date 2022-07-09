@@ -1,11 +1,15 @@
 // Copyright © 2022 Brian Drelling. All rights reserved.
 
-import Combine
+#if canImport(Combine)
 
-public extension Publisher {
-    func convertToResult() -> AnyPublisher<Result<Output, Failure>, Never> {
-        self.map(Result.success)
-            .catch { Just(.failure($0)) }
-            .eraseToAnyPublisher()
+    import Combine
+
+    public extension Publisher {
+        func convertToResult() -> AnyPublisher<Result<Output, Failure>, Never> {
+            self.map(Result.success)
+                .catch { Just(.failure($0)) }
+                .eraseToAnyPublisher()
+        }
     }
-}
+
+#endif
