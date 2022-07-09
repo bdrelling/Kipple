@@ -10,14 +10,14 @@ struct SwiftLintPlugin {
         defaultSwiftVersion: String,
         arguments: [String],
         targetPaths: ([String]) throws -> [String]
-    ) throws { }
+    ) throws {}
 }
 
 extension SwiftLintPlugin: CommandPlugin {
     func performCommand(context: PluginContext, arguments: [String]) throws {
         let tool = try context.tool(named: "swiftlint")
         let toolUrl = URL(fileURLWithPath: tool.path.string)
-        
+
         for target in context.package.targets {
             guard let target = target as? SourceModuleTarget else { continue }
 
