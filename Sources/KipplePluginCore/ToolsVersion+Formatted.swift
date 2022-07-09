@@ -1,6 +1,0 @@
-
-import PackagePlugin
-
-extension ToolsVersion {
-    
-}
