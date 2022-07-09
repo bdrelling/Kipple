@@ -1,8 +1,10 @@
+// Copyright © 2022 Brian Drelling. All rights reserved.
+
 //// Copyright © 2022 Brian Drelling. All rights reserved.
 //
-//import Foundation
+// import Foundation
 //
-//public final class Request {
+// public final class Request {
 //    // MARK: Properties
 //
 //    /// The session in which the request will be made.
@@ -233,4 +235,4 @@
 //            self.completion?(dataResponse)
 //        }
 //    }
-//}
+// }

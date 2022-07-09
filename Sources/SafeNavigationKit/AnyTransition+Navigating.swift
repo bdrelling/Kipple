@@ -24,7 +24,7 @@ public extension AnyTransition {
 public enum NavigationDirection {
     case forward
     case back
-    
+
     var opposite: Self {
         switch self {
         case .forward:

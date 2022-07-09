@@ -1,10 +1,10 @@
-// // Copyright © 2021 SpotHero, Inc. All rights reserved.
+// Copyright © 2022 Brian Drelling. All rights reserved.
 
 // import Foundation
 
 // public extension HTTPClient {
 //     // MARK: Data Response
-    
+
 //     /// Creates and sends a request which fetches raw data from an endpoint.
 //     /// - Parameter request: An object defining properties to make the request with.
 //     /// - Parameter validators: An array of validators that will be applied to the response.
@@ -21,7 +21,7 @@
 //         completion: DataTaskCompletion? = nil
 //     ) -> Request? {
 //         var convertedRequest: URLRequest
-        
+
 //         do {
 //             convertedRequest = try request.asURLRequest()
 //         } catch {
@@ -30,7 +30,7 @@
 //             }
 //             return nil
 //         }
-        
+
 //         return self.request(
 //             convertedRequest,
 //             validators: validators,
@@ -39,7 +39,7 @@
 //             completion: completion
 //         )
 //     }
-    
+
 //     /// Creates and sends a request which fetches raw data from an endpoint.
 //     /// - Parameter url: The URL for the request. Accepts a URL or a String.
 //     /// - Parameter method: The HTTP method for the request. Defaults to `GET`.
@@ -64,7 +64,7 @@
 //         completion: DataTaskCompletion? = nil
 //     ) -> Request? {
 //         let request: URLRequest
-        
+
 //         do {
 //             request = try .init(
 //                 url: url,
@@ -79,7 +79,7 @@
 //             }
 //             return nil
 //         }
-        
+
 //         return self.request(
 //             request,
 //             validators: validators,
@@ -88,7 +88,7 @@
 //             completion: completion
 //         )
 //     }
-    
+
 //     /// Creates and sends a request which fetches raw data from an endpoint.
 //     /// - Parameter url: The URL for the request. Accepts a URL or a String.
 //     /// - Parameter method: The HTTP method for the request. Defaults to `GET`.
@@ -125,9 +125,9 @@
 //             completion: completion
 //         )
 //     }
-    
+
 //     // MARK: Decodable Object Response
-    
+
 //     /// Creates and sends a request which fetches raw data from an endpoint and decodes it.
 //     /// - Parameter request: An object defining properties to make the request with.
 //     /// - Parameter validators: An array of validators that will be applied to the response. Defaults to ensuring a JSON mime type on the response.
@@ -146,7 +146,7 @@
 //         completion: DecodableTaskCompletion<T>? = nil
 //     ) -> Request? {
 //         var convertedRequest: URLRequest
-        
+
 //         do {
 //             convertedRequest = try request.asURLRequest()
 //         } catch {
@@ -155,7 +155,7 @@
 //             }
 //             return nil
 //         }
-        
+
 //         return self.request(
 //             convertedRequest,
 //             validators: validators,
@@ -165,7 +165,7 @@
 //             completion: completion
 //         )
 //     }
-    
+
 //     /// Creates and sends a request which fetches raw data from an endpoint and decodes it.
 //     /// - Parameter url: The URL for the request. Accepts a URL or a String.
 //     /// - Parameter method: The HTTP method for the request. Defaults to `GET`.
@@ -192,7 +192,7 @@
 //         completion: DecodableTaskCompletion<T>? = nil
 //     ) -> Request? {
 //         let request: URLRequest
-        
+
 //         do {
 //             request = try .init(
 //                 url: url,
@@ -207,7 +207,7 @@
 //             }
 //             return nil
 //         }
-        
+
 //         return self.request(
 //             request,
 //             validators: validators,
@@ -217,7 +217,7 @@
 //             completion: completion
 //         )
 //     }
-    
+
 //     /// Creates and sends a request which fetches raw data from an endpoint and decodes it.
 //     /// - Parameter url: The URL for the request. Accepts a URL or a String.
 //     /// - Parameter method: The HTTP method for the request. Defaults to `GET`.

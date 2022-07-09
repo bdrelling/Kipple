@@ -24,6 +24,9 @@ let package = Package(
 //        .package(url: "https://github.com/kean/Pulse", .upToNextMinor(from: "0.18.0")),
 //        .package(url: "https://github.com/getsentry/sentry-cocoa", .upToNextMajor(from: "7.4.2")),
         .package(url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.8.1")),
+        // Development
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.49.11"),
+        .package(url: "https://github.com/Realm/SwiftLint", from: "0.47.1"),
     ],
     targets: [
         // Product Targets
@@ -58,6 +61,19 @@ let package = Package(
         .target(
             name: "SafeNavigationKit",
             dependencies: []
+        ),
+        // Plugins
+        .plugin(
+            name: "Reformat",
+            capability: .command(
+                intent: .sourceCodeFormatting(),
+                permissions: [
+                    .writeToPackageDirectory(reason: "Format source code in Swift files"),
+                ]
+            ),
+            dependencies: [
+                .product(name: "swiftformat", package: "SwiftFormat"),
+            ]
         ),
     ]
 )

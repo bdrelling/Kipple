@@ -4,14 +4,14 @@ import SwiftUI
 
 #if os(macOS)
 
-public typealias SafeNavigationView = MacOSNavigationView
+    public typealias SafeNavigationView = MacOSNavigationView
 
     // TODO: @Environment and @EnvironmentObject is not yet supported.
     //       Workaround: Move Environment explicitly to the Destination, instead of the Button.
-public struct MacOSNavigationView<Content>: View where Content: View {
+    public struct MacOSNavigationView<Content>: View where Content: View {
         @StateObject private var navigator: Navigator
 
-    public var body: some View {
+        public var body: some View {
             VStack {
                 if self.navigator.isAnimating {
                     self.navigator.previousView
@@ -30,7 +30,7 @@ public struct MacOSNavigationView<Content>: View where Content: View {
                     // Without this, the min/max/close buttons "jump" into position
                     // after the first element in this group appears.
                     Text("").hidden()
-                    
+
                     if self.navigator.shouldShowBackButton {
                         Button(action: { self.navigator.navigateBack() }) {
                             Image(systemName: "chevron.backward")
@@ -42,7 +42,7 @@ public struct MacOSNavigationView<Content>: View where Content: View {
             .environmentObject(self.navigator)
         }
 
-    public init(@ViewBuilder content: @escaping () -> Content) {
+        public init(@ViewBuilder content: @escaping () -> Content) {
             let navigator = Navigator(AnyView(content()))
             self._navigator = .init(wrappedValue: navigator)
         }
@@ -50,6 +50,6 @@ public struct MacOSNavigationView<Content>: View where Content: View {
 
 #else
 
-public typealias SafeNavigationView = NavigationView
+    public typealias SafeNavigationView = NavigationView
 
 #endif

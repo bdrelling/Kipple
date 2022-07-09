@@ -10,13 +10,13 @@ public protocol URLRequestConvertible {
 
 extension URLRequest: URLRequestConvertible {
     public func asURLRequest() throws -> URLRequest {
-        return self
+        self
     }
 }
 
 extension URL: URLRequestConvertible {
     public func asURLRequest() throws -> URLRequest {
-        return URLRequest(url: self)
+        URLRequest(url: self)
     }
 }
 

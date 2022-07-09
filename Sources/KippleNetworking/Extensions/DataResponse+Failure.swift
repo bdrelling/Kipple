@@ -5,9 +5,9 @@ extension DataResponse {
     /// and a failure result containing the given error.
     /// - Parameter error: The error to return in the result of the response.
     static func failure<T>(_ error: Error) -> DataResponse<T, Error> {
-        return DataResponse<T, Error>(request: nil,
-                                      response: nil,
-                                      data: nil,
-                                      result: .failure(error))
+        DataResponse<T, Error>(request: nil,
+                               response: nil,
+                               data: nil,
+                               result: .failure(error))
     }
 }

@@ -10,7 +10,7 @@ public protocol URLConvertible {
 
 extension URL: URLConvertible {
     public func asURL() throws -> URL {
-        return self
+        self
     }
 }
 

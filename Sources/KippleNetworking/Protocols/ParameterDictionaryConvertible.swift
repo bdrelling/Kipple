@@ -6,12 +6,12 @@ public protocol ParameterDictionaryConvertible {
 
 public extension ParameterDictionaryConvertible where Self: Encodable {
     func asParameterDictionary() -> [String: Any]? {
-        return try? self.asDictionary()
+        try? self.asDictionary()
     }
 }
 
 extension Dictionary: ParameterDictionaryConvertible where Key == String, Value == Any {
     public func asParameterDictionary() -> [String: Any]? {
-        return self
+        self
     }
 }

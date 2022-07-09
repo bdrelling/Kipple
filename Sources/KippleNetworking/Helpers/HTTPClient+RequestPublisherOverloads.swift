@@ -1,6 +1,8 @@
+// Copyright © 2022 Brian Drelling. All rights reserved.
+
 //// Copyright © 2022 Brian Drelling. All rights reserved.
 //
-//#if canImport(Combine)
+// #if canImport(Combine)
 //    import Combine
 //    import Foundation
 //
@@ -230,4 +232,4 @@
 //        }
 //    }
 //
-//#endif
+// #endif

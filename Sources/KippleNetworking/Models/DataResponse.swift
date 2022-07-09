@@ -18,12 +18,12 @@ public struct DataResponse<Success, Failure: Error> {
 
     /// The success value of the serialized result.
     public var value: Success? {
-        return self.result.success
+        self.result.success
     }
 
     /// The error value of the serialized result.
     public var error: Failure? {
-        return self.result.failure
+        self.result.failure
     }
 
     /// Creates an `HTTPResult` object composed of the result of an HTTP request.
@@ -47,11 +47,11 @@ public struct DataResponse<Success, Failure: Error> {
 public extension DataResponse {
     /// The status code returned by the request.
     var status: HTTPStatusCode? {
-        return self.response?.status
+        self.response?.status
     }
 
     /// The raw status code returned by the request.
     var statusCode: Int? {
-        return self.response?.statusCode
+        self.response?.statusCode
     }
 }
