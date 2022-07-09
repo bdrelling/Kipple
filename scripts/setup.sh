@@ -12,13 +12,6 @@ command -v brew >/dev/null 2>&1 || {
     exit 1
 }
 
-# ensure that mint is installed
-# TODO: Add check for version of mint
-command -v mint >/dev/null 2>&1 || {
-    echo >&2 "Mint is not installed."
-    exit 1
-}
-
 # 2 - Install Git Hooks
 
 # if there are any scripts in the scripts/git-hooks folder,
