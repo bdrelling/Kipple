@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Kipple",
+    name: "KippleCore",
     platforms: [
         .iOS(.v15),
         .macOS(.v12),
@@ -11,7 +11,6 @@ let package = Package(
         .watchOS(.v8),
     ],
     products: [
-        .library(name: "Kipple", targets: ["KippleCore", "KippleUI"]),
         .library(name: "KippleCore", targets: ["KippleCore"]),
         .library(name: "KippleDevice", targets: ["KippleDevice"]),
 //        .library(name: "KippleDiagnostics", targets: ["KippleDiagnostics"]),
@@ -26,7 +25,7 @@ let package = Package(
 //        .package(url: "https://github.com/getsentry/sentry-cocoa", .upToNextMajor(from: "7.4.2")),
         .package(url: "https://github.com/Nirma/UIDeviceComplete", .upToNextMajor(from: "2.8.1")),
         // Development
-        .package(url: "https://github.com/bdrelling/KipplePlugins", from: "0.1.1"),
+        .package(url: "https://github.com/swift-kipple/Plugins", from: "0.2.0"),
     ],
     targets: [
         // Product Targets
