@@ -12,4 +12,14 @@ public enum Kipple {
             false
         #endif
     }()
+
+    /// Whether or not the application is running via TestFlight.
+    ///
+    /// Source: [StackOverflow](https://stackoverflow.com/a/38984554)
+    static let isRunningOnTestFlight: Bool = Bundle.main.appStoreReceiptURL?.path.contains("sandboxReceipt") ?? false
+
+    /// Whether or not the application is running on the simulator.
+    ///
+    /// Source: [StackOverflow](https://stackoverflow.com/a/38984554)
+    static let isRunningOnSimulator: Bool = Bundle.main.appStoreReceiptURL?.path.contains("CoreSimulator") ?? false
 }
