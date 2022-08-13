@@ -4,13 +4,21 @@ import Foundation
 
 // TODO: Explore rewriting this with a CurrentValueSubject in mind, and debounce the saving (and maybe fetching?)
 @propertyWrapper
-public struct LocalStorage<Value: Codable> {
+public struct LocalStorage<Value> where Value: Codable, Value: Equatable {
     private let key: String
     private let defaultValue: Value
 
+    /// Dictates whether or not the key should be removed from `UserDefaults` if the new value matches the default value.
+    private let shouldClearOnDefault: Bool
+
     private let userDefaults: UserDefaults = .standard
+    private let jsonEncoder = JSONEncoder()
+    private let jsonDecoder = JSONDecoder()
 
     public var wrappedValue: Value {
+        willSet {
+            self.previousValue = self.wrappedValue
+        }
         didSet {
             self.storedValue = self.wrappedValue
         }
@@ -18,26 +26,31 @@ public struct LocalStorage<Value: Codable> {
 
     public var storedValue: Value {
         get {
-            Self.fetch(key: self.key, defaultValue: self.defaultValue)
+            self.fetch(key: self.key, defaultValue: self.defaultValue)
         }
         set {
-            Self.store(key: self.key, newValue: newValue)
+            self.store(key: self.key, newValue: newValue)
         }
     }
 
-    public init<Key>(_ key: Key.Type) where Key: LocalStorageKey, Key.Value == Value {
+    private var previousValue: Value?
+
+    public init<Key>(_ key: Key.Type, clearOnDefault: Bool = false) where Key: LocalStorageKey, Key.Value == Value {
         self.key = Key.name
         self.defaultValue = Key.defaultValue
+        self.shouldClearOnDefault = clearOnDefault
 
-        self.wrappedValue = Self.fetch(key: Key.name, defaultValue: Key.defaultValue)
+        // Temporarily set the wrapped value to the default value
+        self.wrappedValue = Key.defaultValue
+        self.wrappedValue = self.fetch(key: Key.name, defaultValue: Key.defaultValue)
     }
 
-    public init<Key>(_ key: Key) where Key: LocalStorageKey, Key.Value == Value {
-        self.init(Key.self)
+    public init<Key>(_ key: Key, clearOnDefault: Bool = false) where Key: LocalStorageKey, Key.Value == Value {
+        self.init(Key.self, clearOnDefault: clearOnDefault)
     }
 
-    public init<Key>(_ keyPath: KeyPath<LocalStorageKeys, Key>) where Key: LocalStorageKey, Key.Value == Value {
-        self.init(Key.self)
+    public init<Key>(_ keyPath: KeyPath<LocalStorageKeys, Key>, clearOnDefault: Bool = false) where Key: LocalStorageKey, Key.Value == Value {
+        self.init(Key.self, clearOnDefault: clearOnDefault)
     }
 
     public mutating func resetToDefault() {
@@ -48,7 +61,7 @@ public struct LocalStorage<Value: Codable> {
         Self.remove(key: self.key)
     }
 
-    private static func fetch<Value>(key: String, defaultValue: Value, userDefaults: UserDefaults = .standard) -> Value where Value: Decodable {
+    private func fetch(key: String, defaultValue: Value, userDefaults: UserDefaults = .standard) -> Value {
         // Read value from UserDefaults.
         guard let data = userDefaults.object(forKey: key) as? Data else {
             // Return defaultValue when no data in UserDefaults.
@@ -56,19 +69,28 @@ public struct LocalStorage<Value: Codable> {
         }
 
         // Convert data to the desire data type.
-        let value = try? JSONDecoder().decode(Value.self, from: data)
+        let value = try? self.jsonDecoder.decode(Value.self, from: data)
 
         return value ?? defaultValue
     }
 
-    private static func store<Value>(key: String, newValue: Value, userDefaults: UserDefaults = .standard) where Value: Encodable {
-        // TODO: Add option for comparing newValue to defaultValue and clear the key if it matches.
+    private func store(key: String, newValue: Value, userDefaults: UserDefaults = .standard) {
+        // Only continues if the new value does not match the previous value.
+        guard newValue != self.previousValue else {
+            return
+        }
 
-        // Convert newValue to data.
-        let data = try? JSONEncoder().encode(newValue)
+        // If the shouldClearOnDefault setting is enabled, evaluate the new value to the default value.
+        // If they match, remove the object from UserDefaults entirely, since the default value may not need to be stored.
+        if self.shouldClearOnDefault, newValue == self.defaultValue {
+            userDefaults.removeObject(forKey: key)
+        } else {
+            // Convert newValue to data.
+            let data = try? self.jsonEncoder.encode(newValue)
 
-        // Set value to UserDefaults.
-        userDefaults.set(data, forKey: key)
+            // Set value to UserDefaults.
+            userDefaults.set(data, forKey: key)
+        }
     }
 
     private static func remove(key: String, userDefaults: UserDefaults = .standard) {
@@ -85,3 +107,11 @@ public protocol LocalStorageKey {
 }
 
 public struct LocalStorageKeys {}
+
+// MARK: - Extensions
+
+extension LocalStorage: CustomStringConvertible {
+    public var description: String {
+        String(describing: self.wrappedValue)
+    }
+}
