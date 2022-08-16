@@ -62,34 +62,42 @@ public struct LocalStorage<Value> where Value: Codable, Value: Equatable {
     }
 
     private func fetch(key: String, defaultValue: Value, userDefaults: UserDefaults = .standard) -> Value {
-        // Read value from UserDefaults.
-        guard let data = userDefaults.object(forKey: key) as? Data else {
-            // Return defaultValue when no data in UserDefaults.
+        do {
+            // Read value from UserDefaults.
+            guard let data = userDefaults.object(forKey: key) as? Data else {
+                // Return defaultValue when no data is in UserDefaults.
+                return defaultValue
+            }
+
+            // Convert data to the desire data type.
+            let value = try self.jsonDecoder.decode(Value.self, from: data)
+
+            return value
+        } catch {
             return defaultValue
         }
-
-        // Convert data to the desire data type.
-        let value = try? self.jsonDecoder.decode(Value.self, from: data)
-
-        return value ?? defaultValue
     }
 
     private func store(key: String, newValue: Value, userDefaults: UserDefaults = .standard) {
-        // Only continues if the new value does not match the previous value.
-        guard newValue != self.previousValue else {
-            return
-        }
+        do {
+            // Only continues if the new value does not match the previous value.
+            guard newValue != self.previousValue else {
+                return
+            }
 
-        // If the shouldClearOnDefault setting is enabled, evaluate the new value to the default value.
-        // If they match, remove the object from UserDefaults entirely, since the default value may not need to be stored.
-        if self.shouldClearOnDefault, newValue == self.defaultValue {
-            userDefaults.removeObject(forKey: key)
-        } else {
-            // Convert newValue to data.
-            let data = try? self.jsonEncoder.encode(newValue)
+            // If the shouldClearOnDefault setting is enabled, evaluate the new value to the default value.
+            // If they match, remove the object from UserDefaults entirely, since the default value may not need to be stored.
+            if self.shouldClearOnDefault, newValue == self.defaultValue {
+                userDefaults.removeObject(forKey: key)
+            } else {
+                // Convert newValue to data.
+                let data = try self.jsonEncoder.encode(newValue)
 
-            // Set value to UserDefaults.
-            userDefaults.set(data, forKey: key)
+                // Set value to UserDefaults.
+                userDefaults.set(data, forKey: key)
+            }
+        } catch {
+            // do nothing
         }
     }
 
@@ -115,3 +123,18 @@ extension LocalStorage: CustomStringConvertible {
         String(describing: self.wrappedValue)
     }
 }
+
+// TODO: Add convenence initializers for AppStorage?
+
+// #if canImport(SwiftUI)
+//
+// import SwiftUI
+//
+// @available(iOS 14.0, *)
+// extension AppStorage {
+//    public init<Key>(_ key: Key, store: UserDefaults? = nil) where Key: LocalStorageKey, Value == Bool? {
+//        self.init(Key.name, store: store)
+//    }
+// }
+//
+// #endif
