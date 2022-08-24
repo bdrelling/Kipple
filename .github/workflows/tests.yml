@@ -31,13 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run Tests
-        run: sh ./scripts/swift_test.sh
-      - name: Upload Step Output
-        uses: actions/upload-artifact@v1
-        with:
-          name: Output (Ubuntu)
-          path: ${{ env.DEPLOY_DIRECTORY }}
+      - name: Swift Build
+        run: swift build
   swift_test_macos:
     name: swift test (macOS)
     # Available Runners: https://github.com/actions/virtual-environments
@@ -46,10 +41,5 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run Tests
-        run: sh ./scripts/swift_test.sh
-      - name: Upload Step Output
-        uses: actions/upload-artifact@v1
-        with:
-          name: Output (macOS)
-          path: ${{ env.DEPLOY_DIRECTORY }}
+      - name: Swift Build
+        run: swift build
