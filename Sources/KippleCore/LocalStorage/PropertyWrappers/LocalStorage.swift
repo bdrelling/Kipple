@@ -1,5 +1,7 @@
 // Copyright © 2022 Brian Drelling. All rights reserved.
 
+#if canImport(Combine)
+
 import Combine
 import Foundation
 import SwiftUI
@@ -61,3 +63,5 @@ extension LocalStorage: CustomStringConvertible {
         String(describing: self.wrappedValue)
     }
 }
+
+#endif
