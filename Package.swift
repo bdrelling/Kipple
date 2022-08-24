@@ -1,4 +1,4 @@
-// swift-tools-version:5.6
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -13,10 +13,6 @@ let package = Package(
     products: [
         .library(name: "KippleCore", targets: ["KippleCore"]),
     ],
-    dependencies: [
-        // Development
-        .package(url: "https://github.com/swift-kipple/Tools", from: "0.2.1"),
-    ],
     targets: [
         // Product Targets
         .target(
@@ -25,3 +21,10 @@ let package = Package(
         ),
     ]
 )
+
+#if swift(>=5.5)
+// Add Kipple Tools if possible.
+package.dependencies.append(
+    .package(url: "https://github.com/swift-kipple/Tools", from: "0.2.5")
+)
+#endif
