@@ -7,9 +7,9 @@ public enum Kipple {
     /// Whether or not this code is running within Xcode SwiftUI Previews, which has limited functionality.
     public static let isRunningInXcodePreview: Bool = {
         #if DEBUG
-        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+        return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
         #else
-        false
+        return false
         #endif
     }()
 

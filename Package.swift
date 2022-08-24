@@ -14,7 +14,6 @@ let package = Package(
         .library(name: "KippleCore", targets: ["KippleCore"]),
     ],
     targets: [
-        // Product Targets
         .target(
             name: "KippleCore",
             dependencies: []
