@@ -21,7 +21,7 @@ jobs:
         uses: styfle/cancel-workflow-action@0.10.0
         with:
           access_token: ${{ github.token }}
-  swift_test_linux:
+  swift_build_linux:
     name: swift test (Ubuntu)
     # Available Runners: https://github.com/actions/virtual-environments
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Swift Build
         run: swift build
-  swift_test_macos:
+  swift_build_macos:
     name: swift test (macOS)
     # Available Runners: https://github.com/actions/virtual-environments
     runs-on: macos-12
