@@ -13,3 +13,5 @@ jobs:
     with:
       scheme: KippleCore
       subcommand: build
+    secrets:
+      DISCORD_CI_WEBHOOK: ${{ secrets.DISCORD_CI_WEBHOOK }}
