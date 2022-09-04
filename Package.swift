@@ -18,12 +18,6 @@ let package = Package(
             name: "KippleCore",
             dependencies: []
         ),
-        .testTarget(
-            name: "KippleCoreTests",
-            dependencies: [
-                .target(name: "KippleCore"),
-            ]
-        )
     ]
 )
 
