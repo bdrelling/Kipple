@@ -4,7 +4,7 @@ import Foundation
 
 public extension Bundle {
     // MARK: Enums
-    
+
     enum Key: String {
         // Apple
         case buildNumber = "CFBundleVersion"
@@ -14,22 +14,22 @@ public extension Bundle {
         // Custom
         case sentryDSN = "SentryPublicDSN"
     }
-    
+
     // MARK: Constants
 
     private static let errorVersionString = "vERR"
     private static let errorBuildNumber = 0
-    
+
     // MARK: Properties
-    
+
     var bundleName: String? {
         self.infoString(for: .name)
     }
-    
+
     var bundleDisplayName: String? {
         self.infoString(for: .displayName)
     }
-    
+
     var bundleBuildNumber: Int {
         guard let buildNumberString = self.infoString(for: .buildNumber) else {
             return Self.errorBuildNumber
@@ -61,9 +61,9 @@ public extension Bundle {
     var isLocal: Bool {
         self.bundleBuildNumber == 0
     }
-    
+
     // MARK: Methods
-    
+
     private func infoValue<T>(for key: String, in bundle: Bundle = .main) -> T? {
         bundle.infoDictionary?[key] as? T
     }
