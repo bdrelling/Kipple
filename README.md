@@ -1,4 +1,4 @@
-# KippleCore
+# Kipple
 
 [![CI Status](https://github.com/swift-kipple/Core/actions/workflows/tests.yml/badge.svg)](https://github.com/swift-kipple/Core/actions/workflows/tests.yml)
 [![Latest Release](https://img.shields.io/github/v/tag/swift-kipple/Core?color=blue&label=)](https://github.com/swift-kipple/Core/tags)
@@ -15,5 +15,16 @@ A collection of common Swift utilities.
 
 ## Directory
 
-- [Kipple](/Sources/Kipple) -- An umbrella module that implicitly imports all other modules.
-- [KippleCodable](/KippleCodable) -- Codable support. TBD 
+- [Kipple](/Sources/Kipple) — An umbrella module that implicitly imports all other modules.
+- [KippleCodable](/KippleCodable) — Provides convenience functionality based around the `Codable` protocol.
+- [KippleCollections](/KippleCollections) — Provides convenience extensions for `Collections`. Additionally, it imports the `OrderedCollections` module of `swift-collections`.
+- [KippleCombine](/KippleCombine) — TBD
+- [KippleCore](/KippleCore) — TBD
+- [KippleDevice](/KippleDevice) — TBD
+- [KippleKeychain](/KippleKeychain) — TBD
+- [KippleLocalStorage](/KippleLocalStorage) — TBD
+- [KippleLogging](/KippleLogging) — TBD
+
+## Dependencies
+
+TBD -- list out all dependencies and why they are selected?

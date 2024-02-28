@@ -1,5 +1,7 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+
 import Foundation
 import KeychainAccess
 
@@ -127,3 +129,5 @@ public extension Keychain {
         try self.contains(key.rawValue, withoutAuthenticationUI: withoutAuthenticationUI)
     }
 }
+
+#endif

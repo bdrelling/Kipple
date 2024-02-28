@@ -70,7 +70,7 @@ let package = Package(
             name: "KippleKeychain",
             dependencies: [
                 .target(name: "KippleCore"),
-                .product(name: "KeychainAccess", package: "KeychainAccess"),
+                .product(name: "KeychainAccess", package: "KeychainAccess", condition: .when(platforms: [.iOS, .macOS, .tvOS, .watchOS])),
             ]
         ),
         .target(

@@ -1,9 +1,10 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+
 import KeychainAccess
 import KippleCore
 
-// TODO: Write tests
 public extension Keychain {
     /// Creates a default `Keychain` for an application represented by an `AppInfo` object.
     func `default`(for appInfo: AppInfo) -> Keychain {
@@ -11,3 +12,5 @@ public extension Keychain {
             .synchronizable(true)
     }
 }
+
+#endif
