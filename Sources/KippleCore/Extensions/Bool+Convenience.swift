@@ -1,4 +1,4 @@
-// Copyright © 2023 Brian Drelling. All rights reserved.
+// Copyright © 2024 Brian Drelling. All rights reserved.
 
 import Foundation
 
@@ -42,8 +42,8 @@ public extension Bool {
     /// Source: [StackOverflow](https://stackoverflow.com/a/38984554)
     static let isRunningOnTestFlight: Bool = Bundle.main.appStoreReceiptURL?.path.contains("sandboxReceipt") ?? false
 
-    /// Whether or not the currently running build is an internal build for developers, employees, and/or beta-testers.
-    static let isRunningInternalBuild: Bool = .isDebugging || .isRunningOnSimulator || .isRunningOnTestFlight
+    /// Whether or not the currently running build is a private build intended for personal use, development, and/or beta testing.
+    static let isRunningPrivateBuild: Bool = .isDebugging || .isRunningOnSimulator || .isRunningOnTestFlight
 
     /// Whether or not the app is running UI tests.
     ///

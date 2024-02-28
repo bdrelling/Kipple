@@ -1,11 +1,14 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
-public struct SemanticVersion: Codable {
-    // MARK: Properties]
+// TODO: Add SemanticVersion comparability
+public struct SemanticVersion: Equatable, Hashable, Codable {
+    // MARK: Properties
 
     public let major: Int
     public let minor: Int
     public let patch: Int
+
+    // MARK: Initializers
 
     public init(major: Int, minor: Int, patch: Int) {
         self.major = major
@@ -16,9 +19,13 @@ public struct SemanticVersion: Codable {
 
 // MARK: - Extensions
 
-extension SemanticVersion: ExpressibleByStringLiteral {
-    public init(stringLiteral: String) {
-        let versionParts = stringLiteral.split(separator: ".")
+extension SemanticVersion: RawRepresentable {
+    public var rawValue: String {
+        "\(self.major).\(self.minor).\(self.patch)"
+    }
+
+    public init(rawValue: String) {
+        let versionParts = rawValue.split(separator: ".")
 
         switch versionParts.count {
         case 3:
@@ -45,6 +52,12 @@ extension SemanticVersion: ExpressibleByStringLiteral {
         default:
             self = .zero
         }
+    }
+}
+
+extension SemanticVersion: ExpressibleByStringLiteral {
+    public init(stringLiteral value: String) {
+        self.init(rawValue: value)
     }
 }
 

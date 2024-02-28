@@ -3,22 +3,9 @@
 import Foundation
 
 public extension Bundle {
-    // MARK: Enums
-
-    enum Key: String {
-        // Apple
-        case buildNumber = "CFBundleVersion"
-        case displayName = "CFBundleDisplayName"
-        case name = "CFBundleName"
-        case version = "CFBundleShortVersionString"
-        // Custom
-        case sentryDSN = "SentryPublicDSN"
-    }
-
     // MARK: Constants
 
-    private static let errorVersionString = "vERR"
-    private static let errorBuildNumber = 0
+    private static let errorBuildNumber = 34404
 
     // MARK: Properties
 
@@ -31,11 +18,14 @@ public extension Bundle {
     }
 
     var bundleBuildNumber: Int {
-        guard let buildNumberString = self.infoString(for: .buildNumber) else {
+        guard
+            let buildNumberString = self.infoString(for: .buildNumber),
+            let buildNumber = Int(buildNumberString)
+        else {
             return Self.errorBuildNumber
         }
 
-        return Int(buildNumberString) ?? Self.errorBuildNumber
+        return buildNumber
     }
 
     var bundleVersion: SemanticVersion {
@@ -47,9 +37,7 @@ public extension Bundle {
     }
 
     var bundleFullVersion: String {
-        guard let version = self.infoString(for: .version) else {
-            return Self.errorVersionString
-        }
+        let version = self.bundleVersion.rawValue
 
         if self.isLocal {
             return "v\(version)L" // indicates a local build
@@ -73,10 +61,41 @@ public extension Bundle {
     }
 
     private func infoString(for key: String, in bundle: Bundle = .main) -> String? {
-        bundle.infoDictionary?[key] as? String
+        self.infoValue(for: key, in: bundle)
     }
 
     private func infoString(for key: Key, in bundle: Bundle = .main) -> String? {
         self.infoString(for: key.rawValue, in: bundle)
     }
+}
+
+// MARK: - Supporting Types
+
+/// Enables lookup of this file's `Bundle` with `Bundle(for: TestPlaceholder.self)` when importing this module as `@testable`.
+/// Navigate to `KippleCoreTests/BundleExtensionTests` to see it in action.
+public final class TestPlaceholder {}
+
+public extension Bundle {
+    struct Key: RawRepresentable {
+        public let rawValue: String
+
+        public init(rawValue: String) {
+            self.rawValue = rawValue
+        }
+    }
+}
+
+extension Bundle.Key: ExpressibleByStringLiteral {
+    public init(stringLiteral value: StringLiteralType) {
+        self.init(rawValue: value)
+    }
+}
+
+// MARK: - Convenience
+
+public extension Bundle.Key {
+    static let buildNumber: Self = "CFBundleVersion"
+    static let displayName: Self = "CFBundleDisplayName"
+    static let name: Self = "CFBundleName"
+    static let version: Self = "CFBundleShortVersionString"
 }
