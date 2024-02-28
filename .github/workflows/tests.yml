@@ -15,5 +15,5 @@ jobs:
     with:
       scheme: KippleCore
       subcommand: build
-      platforms: iOS macOS tvOS watchOS visionOS Linux
+      platforms: iOS macOS tvOS watchOS Linux
       # swift-versions: default
