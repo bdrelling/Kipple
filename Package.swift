@@ -11,17 +11,29 @@ let package = Package(
         .watchOS(.v9),
     ],
     products: [
+        .library(name: "KippleCodable", targets: ["KippleCodable"]),
+        .library(name: "KippleCollections", targets: ["KippleCollections"]),
         .library(name: "KippleCombine", targets: ["KippleCombine"]),
         .library(name: "KippleCore", targets: ["KippleCore"]),
         .library(name: "KippleDevice", targets: ["KippleDevice"]),
         .library(name: "KippleStorage", targets: ["KippleStorage"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.0.4")),
         .package(url: "https://github.com/devicekit/DeviceKit", from: "5.2.2"),
         .package(url: "https://github.com/swift-kipple/Tools", .upToNextMinor(from: "0.5.0")),
     ],
     targets: [
         // Product Targets
+        .target(
+            name: "KippleCodable"
+        ),
+        .target(
+            name: "KippleCollections",
+            dependencies: [
+                .product(name: "OrderedCollections", package: "swift-collections"),
+            ]
+        ),
         .target(
             name: "KippleCombine"
         ),
@@ -39,6 +51,18 @@ let package = Package(
             name: "KippleStorage"
         ),
         // Test Targets
+        .testTarget(
+            name: "KippleCodableTests",
+            dependencies: [
+                .target(name: "KippleCore"),
+            ]
+        ),
+        .testTarget(
+            name: "KippleCollectionsTests",
+            dependencies: [
+                .target(name: "KippleCollections"),
+            ]
+        ),
         .testTarget(
             name: "KippleCombineTests",
             dependencies: [

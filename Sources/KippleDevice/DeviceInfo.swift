@@ -3,14 +3,16 @@
 import Foundation
 import KippleCore
 
+#if canImport(UIKit) && canImport(DeviceKit)
+
+@_implementationOnly import DeviceKit
+import UIKit
+
+#endif
+
+/// A contextualized representation of a device such as an iPhone, Mac, Apple Watch, and so on.
 public struct DeviceInfo: Equatable, Hashable, Codable {
     // MARK: Properties
-
-    /// The version of `Bundle.main` running on the device.
-    public let bundleVersion: SemanticVersion
-
-    /// The build number of `Bundle.main` running on the device.
-    public let bundleBuildNumber: Int
 
     /// The family of the device (eg. "iPhone", "Apple TV").
     public let deviceFamily: DeviceFamily
@@ -27,15 +29,11 @@ public struct DeviceInfo: Equatable, Hashable, Codable {
     // MARK: Initializers
 
     public init(
-        bundleVersion: SemanticVersion,
-        bundleBuildNumber: Int,
         deviceFamily: DeviceFamily,
         deviceModel: String,
         systemName: String,
         systemVersion: SemanticVersion
     ) {
-        self.bundleVersion = bundleVersion
-        self.bundleBuildNumber = bundleBuildNumber
         self.deviceFamily = deviceFamily
         self.deviceModel = deviceModel
         self.systemName = systemName
@@ -45,19 +43,9 @@ public struct DeviceInfo: Equatable, Hashable, Codable {
 
 // MARK: - Convenience
 
-#if canImport(UIKit) && canImport(DeviceKit)
-
-@_implementationOnly import DeviceKit
-import UIKit
-
-#endif
-
-/// Information for a particular device (eg. iPhone, Apple TV).
 public extension DeviceInfo {
     /// Information for the currently running device.
     static let current: Self = .init(
-        bundleVersion: Bundle.main.bundleVersion,
-        bundleBuildNumber: Bundle.main.bundleBuildNumber,
         deviceFamily: Self.currentDeviceFamily,
         deviceModel: Self.currentDeviceModel,
         systemName: Self.currentSystemName,
@@ -123,7 +111,9 @@ public extension DeviceInfo {
     }
 }
 
-extension OperatingSystemVersion {
+// MARK: - Extensions
+
+private extension OperatingSystemVersion {
     var semanticVersion: SemanticVersion {
         .init(
             major: self.majorVersion,

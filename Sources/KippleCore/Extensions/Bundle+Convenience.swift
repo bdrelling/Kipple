@@ -5,21 +5,39 @@ import Foundation
 public extension Bundle {
     // MARK: Constants
 
-    private static let errorBuildNumber = 34404
+    /// A build number that cannot be published or deployed to the App Store or TestFlight,
+    /// which can safely signal that an error has occurred when attempting to read information
+    /// from the `Bundle`.
+    private static let errorBuildNumber = -1
 
     // MARK: Properties
 
-    /// The value for key `CFBundleName` stored in the `Info.plist`.
+    /// The name of the bundle, defined by the `CFBundleName` key in the bundle's `Info.plist`.
+    ///
+    /// If the key is not defined, the value `"Unknown"` is returned. This is because a `Bundle`
+    /// being accessed this way will very rarely _not_ have a `CFBundleName`, so this allows us
+    /// to use a non-optional `String` as the value type for ease of use.
     var bundleName: String? {
         self.infoDictionaryString(for: .name)
     }
-
-    /// The value for key `CFBundleDisplayName` stored in the `Info.plist`.
+    
+    /// The display name of the bundle, defined by the `CFBundleDisplayName` key in the bundle's `Info.plist`.
+    ///
+    /// This is the value that is typically displayed below an iOS application's icon.
     var bundleDisplayName: String? {
         self.infoDictionaryString(for: .displayName)
     }
 
-    /// The value for key `CFBundleVersion` stored in the `Info.plist`.
+    /// The version of the bundle, defined by the `CFBundleShortVersionString` key in the bundle's `Info.plist`.
+    var bundleVersion: SemanticVersion {
+        guard let version = self.infoDictionaryString(for: .version) else {
+            return .zero
+        }
+
+        return .from(version)
+    }
+    
+    /// The build number of the bundle, defined by the `CFBundleVersion` key in the bundle's `Info.plist`.
     var bundleBuildNumber: Int {
         guard
             let buildNumberString = self.infoDictionaryString(for: .buildNumber),
@@ -29,15 +47,6 @@ public extension Bundle {
         }
 
         return buildNumber
-    }
-
-    /// The value for key `CFBundleShortVersionString` stored in the `Info.plist`.
-    var bundleVersion: SemanticVersion {
-        guard let version = self.infoDictionaryString(for: .version) else {
-            return .zero
-        }
-
-        return .from(version)
     }
 
     /// A custom string representation of the bundle's version and build number.
@@ -67,50 +76,13 @@ public extension Bundle {
 
     // MARK: Methods
 
-    private func infoDictionaryValue<T>(for key: String, in bundle: Bundle = .main) -> T? {
+    /// Returns a generic value from this `Bundle`'s `Info.plist`.
+    func infoDictionaryValue<T>(for key: String, in bundle: Bundle = .main) -> T? {
         bundle.infoDictionary?[key] as? T
     }
 
-    private func infoDictionaryValue<T>(for key: Key, in bundle: Bundle = .main) -> T? {
-        self.infoDictionaryValue(for: key.rawValue, in: bundle)
-    }
-
-    private func infoDictionaryString(for key: String, in bundle: Bundle = .main) -> String? {
+    /// Returns a `String` value from this `Bundle`'s `Info.plist`.
+    func infoDictionaryString(for key: String, in bundle: Bundle = .main) -> String? {
         self.infoDictionaryValue(for: key, in: bundle)
     }
-
-    private func infoDictionaryString(for key: Key, in bundle: Bundle = .main) -> String? {
-        self.infoDictionaryValue(for: key, in: bundle)
-    }
-}
-
-// MARK: - Supporting Types
-
-/// Enables lookup of this file's `Bundle` with `Bundle(for: TestPlaceholder.self)` when importing this module as `@testable`.
-/// Navigate to `KippleCoreTests/BundleExtensionTests` to see it in action.
-public final class TestPlaceholder {}
-
-public extension Bundle {
-    struct Key: RawRepresentable {
-        public let rawValue: String
-
-        public init(rawValue: String) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension Bundle.Key: ExpressibleByStringLiteral {
-    public init(stringLiteral value: StringLiteralType) {
-        self.init(rawValue: value)
-    }
-}
-
-// MARK: - Convenience
-
-public extension Bundle.Key {
-    static let buildNumber: Self = "CFBundleVersion"
-    static let displayName: Self = "CFBundleDisplayName"
-    static let name: Self = "CFBundleName"
-    static let version: Self = "CFBundleShortVersionString"
 }

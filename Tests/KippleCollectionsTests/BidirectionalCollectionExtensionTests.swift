@@ -1,6 +1,6 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
-import KippleCore
+import KippleCollections
 import XCTest
 
 final class BidirectionalCollectionExtensionTests: XCTestCase {

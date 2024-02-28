@@ -7,10 +7,6 @@ final class DeviceInfoTests: XCTestCase {
     func testCurrentDeviceInfo() throws {
         let device: DeviceInfo = .current
 
-        // Ensure our bundle version and build number are not zero, which would indicate a failure to initialize.
-        XCTAssertNotEqual(device.bundleVersion, .zero)
-        XCTAssertNotEqual(device.bundleBuildNumber, .zero)
-
         // Ensure our system version is not zero, which would indicate a failure to initialize.
         XCTAssertNotEqual(device.systemVersion, .zero)
 

@@ -4,6 +4,7 @@ import Foundation
 
 public extension UserDefaults {
     /// A wrapper around a `String` that allows strongly typed `UserDefaults` keys with an extensible `enum`-like syntax.
+    /// This value can then be extended by consumers that wish to fetch values out of `UserDefaults`. 
     ///
     /// Example:
     ///
