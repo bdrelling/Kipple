@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "KippleCore", targets: ["KippleCore"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-kipple/Tools", revision: "4bc0d4cee521e5a7389d832b8fac45cdf4a867f2"),
+        .package(url: "https://github.com/swift-kipple/Tools", .upToNextMinor(from: "0.5.0")),
     ],
     targets: [
         // Product Targets
