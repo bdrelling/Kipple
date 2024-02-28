@@ -1,3 +1,5 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
+
 // TODO: Write tests
 public extension UInt64 {
     /// Safely converts a `UInt64` into an `Int64`, truncating the value if necessary.

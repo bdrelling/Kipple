@@ -1,3 +1,5 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
+
 // TODO: Write tests
 public extension Int64 {
     /// Safely converts an `Int64` into an `Int32`, truncating the value if necessary.
