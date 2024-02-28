@@ -12,3 +12,8 @@ A collection of common Swift utilities.
 > The code in this library has been made public as-is solely for the purposes of reference, education, discovery, and personal use. As such, stability for production applications **CANNOT** be guaranteed; however, if you're interested in leveraging code within this library in your own projects, feel free to do so at your own risk.
 >
 > Please open GitHub issues for any problems you encounter or requests you have and we will do my best to provide support.
+
+## Directory
+
+- [Kipple](/Sources/Kipple) -- An umbrella module that implicitly imports all other modules.
+- [KippleCodable](/KippleCodable) -- Codable support. TBD 
