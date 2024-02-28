@@ -1,8 +1,10 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
+
 import Foundation
 
 // TODO: Write tests
 /// A representation of information typically required by an application.
-/// 
+///
 /// Unlike `BundleInfo` and `DeviceInfo`, this `struct` is entirely custom and has no "`current`" representation,
 /// meaning a consumer should implement their own extension of it like so:
 ///
@@ -16,27 +18,27 @@ import Foundation
 /// ```
 public struct AppInfo {
     // MARK: Properties
-    
+
     /// The unique identifier for the app.
     ///
     /// For Apple applications, this should typically match the value defined by the `CFBundleIdentifier` key in the bundle's `Info.plist`.
     public let identifier: String
-    
+
     /// The display name of the app.
     ///
     /// For Apple applications, this should typically match the value defined by the `CFBundleDisplayName` key in the bundle's `Info.plist`.
     public let name: String
-    
+
     /// The identifier of the App Store Team that builds and distributes this application.
     ///
     /// For help finding your App Store Team ID, see [here](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/).
     public let appStoreTeamID: String
-    
+
     /// The version of the app.
     ///
     /// For Apple applications, this should typically match the value defined by the `CFBundleShortVersionString` key in the bundle's `Info.plist`.
     public let version: SemanticVersion
-    
+
     /// The build numer of the app.
     ///
     /// For Apple applications, this should typically match the value defined by the `CFBundleVersion` key in the bundle's `Info.plist`.
@@ -46,9 +48,9 @@ public struct AppInfo {
     public var defaultKeychainAccessGroup: String {
         "\(self.appStoreTeamID).\(self.identifier)"
     }
-    
+
     // MARK: Initializers
-    
+
     public init(
         identifier: String,
         name: String,
@@ -62,7 +64,7 @@ public struct AppInfo {
         self.buildNumber = buildNumber
         self.appStoreTeamID = appStoreTeamID
     }
-    
+
     public init(
         bundle: Bundle = .main,
         appStoreTeamID: String

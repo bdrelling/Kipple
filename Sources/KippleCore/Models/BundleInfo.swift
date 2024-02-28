@@ -1,3 +1,5 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
+
 import Foundation
 
 // TODO: Write tests
@@ -7,31 +9,31 @@ import Foundation
 /// For more `Bundle` information, access the `Bundle.infoDictionary` property directly.
 public struct BundleInfo {
     // MARK: Properties
-    
+
     /// The identifier of the bundle, defined by the `CFBundleIdentifier` key in the bundle's `Info.plist`.
     public let identifier: String
-    
+
     /// The name of the bundle, defined by the `CFBundleName` key in the bundle's `Info.plist`.
     public let name: String?
-    
+
     /// The display name of the bundle, defined by the `CFBundleDisplayName` key in the bundle's `Info.plist`.
     public let displayName: String?
-    
+
     /// The version of the bundle, defined by the `CFBundleShortVersionString` key in the bundle's `Info.plist`.
     public let version: SemanticVersion
-    
+
     /// The build number of the bundle, defined by the `CFBundleVersion` key in the bundle's `Info.plist`.
     public let buildNumber: Int
-    
+
     /// A custom string representation of the bundle's version and build number.
     ///
     /// Examples:
     ///   - `"v1.0.0L"` indicating a local build (if the project's build number is set to `0`),
-    ///   - `"v1.2.3b100"` indicating version `1.2.3` with build number `100`.   
+    ///   - `"v1.2.3b100"` indicating version `1.2.3` with build number `100`.
     public var fullVersion: String
-    
+
     // MARK: Initializers
-    
+
     init(
         identifier: String,
         name: String,
@@ -47,7 +49,7 @@ public struct BundleInfo {
         self.buildNumber = buildNumber
         self.fullVersion = fullVersion ?? "v\(version)b\(buildNumber)"
     }
-    
+
     init(bundle: Bundle) {
         self.init(
             identifier: bundle.bundleIdentifier ?? "Unknown",

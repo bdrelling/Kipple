@@ -1,4 +1,4 @@
-// Copyright © 2023 Brian Drelling. All rights reserved.
+// Copyright © 2024 Brian Drelling. All rights reserved.
 
 // TODO: Write tests
 /// A modulo function for Swift that accounts for negative numbers, which allows for a negative remainder.

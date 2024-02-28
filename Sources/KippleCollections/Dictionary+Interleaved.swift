@@ -1,3 +1,5 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
+
 // TODO: Write tests
 // TODO: Make more efficient?
 public extension Dictionary where Key: Comparable, Value: Collection {

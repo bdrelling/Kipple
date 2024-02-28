@@ -20,7 +20,7 @@ public extension Bundle {
     var bundleName: String? {
         self.infoDictionaryString(for: .name)
     }
-    
+
     /// The display name of the bundle, defined by the `CFBundleDisplayName` key in the bundle's `Info.plist`.
     ///
     /// This is the value that is typically displayed below an iOS application's icon.
@@ -36,7 +36,7 @@ public extension Bundle {
 
         return .from(version)
     }
-    
+
     /// The build number of the bundle, defined by the `CFBundleVersion` key in the bundle's `Info.plist`.
     var bundleBuildNumber: Int {
         guard
