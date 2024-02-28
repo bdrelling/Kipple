@@ -1,6 +1,6 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
-@testable import KippleStorage
+@testable import KippleLocalStorage
 import XCTest
 
 final class UserDefaultsExtensionsTests: XCTestCase {
