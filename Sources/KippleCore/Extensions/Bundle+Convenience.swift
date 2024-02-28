@@ -9,17 +9,20 @@ public extension Bundle {
 
     // MARK: Properties
 
+    /// The value for key `CFBundleName` stored in the `Info.plist`.
     var bundleName: String? {
-        self.infoString(for: .name)
+        self.infoDictionaryString(for: .name)
     }
 
+    /// The value for key `CFBundleDisplayName` stored in the `Info.plist`.
     var bundleDisplayName: String? {
-        self.infoString(for: .displayName)
+        self.infoDictionaryString(for: .displayName)
     }
 
+    /// The value for key `CFBundleVersion` stored in the `Info.plist`.
     var bundleBuildNumber: Int {
         guard
-            let buildNumberString = self.infoString(for: .buildNumber),
+            let buildNumberString = self.infoDictionaryString(for: .buildNumber),
             let buildNumber = Int(buildNumberString)
         else {
             return Self.errorBuildNumber
@@ -28,14 +31,20 @@ public extension Bundle {
         return buildNumber
     }
 
+    /// The value for key `CFBundleShortVersionString` stored in the `Info.plist`.
     var bundleVersion: SemanticVersion {
-        guard let version = self.infoString(for: .version) else {
+        guard let version = self.infoDictionaryString(for: .version) else {
             return .zero
         }
 
         return .from(version)
     }
 
+    /// A custom string representation of the bundle's version and build number.
+    ///
+    /// Examples:
+    ///   - `"v1.0.0L"` indicating a local build (if the project's build number is set to `0`),
+    ///   - `"v1.2.3b100"` indicating version `1.2.3` with build number `100`.
     var bundleFullVersion: String {
         let version = self.bundleVersion.rawValue
 
@@ -46,26 +55,32 @@ public extension Bundle {
         }
     }
 
+    /// Whether or not the `Bundle` is built locally. More specifically, whether or not it has a build number of `0`.
+    ///
+    /// Since we will never deploy a `Bundle` with a build number of `0`, and we will always want to rely on CI
+    /// to build and deploy our apps, we can use a build number of `0` to indicate a local build.
+    ///
+    /// **Note: Tthis is merely a recommended convention and is not provided by the system in any way.**
     var isLocal: Bool {
         self.bundleBuildNumber == 0
     }
 
     // MARK: Methods
 
-    private func infoValue<T>(for key: String, in bundle: Bundle = .main) -> T? {
+    private func infoDictionaryValue<T>(for key: String, in bundle: Bundle = .main) -> T? {
         bundle.infoDictionary?[key] as? T
     }
 
-    private func infoValue<T>(for key: Key, in bundle: Bundle = .main) -> T? {
-        self.infoValue(for: key.rawValue, in: bundle)
+    private func infoDictionaryValue<T>(for key: Key, in bundle: Bundle = .main) -> T? {
+        self.infoDictionaryValue(for: key.rawValue, in: bundle)
     }
 
-    private func infoString(for key: String, in bundle: Bundle = .main) -> String? {
-        self.infoValue(for: key, in: bundle)
+    private func infoDictionaryString(for key: String, in bundle: Bundle = .main) -> String? {
+        self.infoDictionaryValue(for: key, in: bundle)
     }
 
-    private func infoString(for key: Key, in bundle: Bundle = .main) -> String? {
-        self.infoString(for: key.rawValue, in: bundle)
+    private func infoDictionaryString(for key: Key, in bundle: Bundle = .main) -> String? {
+        self.infoDictionaryValue(for: key, in: bundle)
     }
 }
 
