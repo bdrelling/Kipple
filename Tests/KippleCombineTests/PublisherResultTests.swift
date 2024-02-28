@@ -4,7 +4,7 @@ import Combine
 import KippleCombine
 import XCTest
 
-final class PublisherExtensionTests: XCTestCase {
+final class PublisherResultTests: XCTestCase {
     private var cancellables: Set<AnyCancellable> = []
 
     func testSinkResultSuccess() {
