@@ -17,5 +17,4 @@ jobs:
       scheme: Kipple-Package
       subcommand: test
       platforms: iOS macOS tvOS watchOS Linux
-      # swift-versions: default
       code-coverage: true
