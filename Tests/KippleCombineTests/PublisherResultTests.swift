@@ -1,5 +1,7 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
+#if canImport(Combine)
+
 import Combine
 import KippleCombine
 import XCTest
@@ -46,3 +48,5 @@ final class PublisherResultTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 }
+
+#endif
