@@ -17,6 +17,7 @@ jobs:
       subcommand: build
       platforms: macOS # iOS macOS tvOS watchOS Linux
       # swift-versions: default
+      args: --codecov true
       
   upload_coverage:
     name: Upload Coverage Report
