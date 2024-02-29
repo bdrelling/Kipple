@@ -28,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: swift_test
     steps:
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
       - name: Download swift_test Output
         uses: actions/download-artifact@v4
         with:
@@ -40,3 +42,4 @@ jobs:
           slug: bdrelling/Kipple
           handle_no_reports_found: false
           directory: ${{ env.COVERAGE_REPORT_DIRECTORY }}
+          verbose: true
