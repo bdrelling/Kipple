@@ -32,13 +32,13 @@
 
 - [Kipple](/Sources/Kipple) — An umbrella module that implicitly imports all other modules.
 - [KippleCodable](/Sources/KippleCodable) — Convenience functionality for `Codable`.
-- [KippleCollections](/Sources/KippleCollections) — Convenience functionality for `Collections`. Imports the `OrderedCollections` module of `swift-collections`.
+- [KippleCollections](/Sources/KippleCollections) — Convenience functionality for `Collections`. Imports `OrderedCollections`.
 - [KippleCombine](/Sources/KippleCombine) — Convenience functionality for `Combine`.
 - [KippleCore](/Sources/KippleCore) — Convenience functionality for `Foundation`.
-- [KippleDevice](/Sources/KippleDevice) — TBD
-- [KippleKeychain](/Sources/KippleKeychain) — Convenience functionality for [Apple Keychain Services](https://developer.apple.com/documentation/security/keychain_services/).
+- [KippleDevice](/Sources/KippleDevice) — Convenience functionality around `UIDevice`. Imports `DeviceKit` on iOS, tvOS, and watchOS, but returns hardcode values on macOS.
+- [KippleKeychain](/Sources/KippleKeychain) — Convenience functionality for [Apple Keychain Services](https://developer.apple.com/documentation/security/keychain_services/). Imports `KeychainAccess`.
 - [KippleLocalStorage](/Sources/KippleLocalStorage) — Convenience Functionality for `UserDefaults`.
-- [KippleLogging](/Sources/KippleLogging) — Convenience Functionality for `OSLog` on Apple platforms, and `swift-log` on other platforms.
+- [KippleLogging](/Sources/KippleLogging) — Convenience functionality for all things logging. Imports `swift-log` on Linux, but uses `OSLog` on Apple platforms.
 
 ### Dependencies
 
