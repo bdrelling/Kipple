@@ -16,9 +16,9 @@
 ## Table of Contents
 
 - [Documentation](#documentation)
-- [Communication](#communication)
+  - [Modules](#modules)
+  - [Dependencies](#dependencies)
 - [Installation](#installation)
-- [External Dependencies](#external-dependencies)
 - [Component Libraries](#component-libraries)
 - [Maintenance](#maintenance)
 - [Compatibility](#compatibility)
@@ -29,17 +29,21 @@
 
 ## Documentation
 
-TODO: Update this section
+### Modules
 
 - [Kipple](/Sources/Kipple) — An umbrella module that implicitly imports all other modules.
-- [KippleCodable](/KippleCodable) — Provides convenience functionality based around the `Codable` protocol.
-- [KippleCollections](/KippleCollections) — Provides convenience extensions for `Collections`. Additionally, it imports the `OrderedCollections` module of `swift-collections`.
-- [KippleCombine](/KippleCombine) — TBD
-- [KippleCore](/KippleCore) — TBD
+- [KippleCodable](/KippleCodable) — Convenience functionality for `Codable`.
+- [KippleCollections](/KippleCollections) — Convenience functionality for `Collections`. Imports the `OrderedCollections` module of `swift-collections`.
+- [KippleCombine](/KippleCombine) — Convenience functionality for `Combine`.
+- [KippleCore](/KippleCore) — Convenience functionality for `Foundation`.
 - [KippleDevice](/KippleDevice) — TBD
-- [KippleKeychain](/KippleKeychain) — TBD
-- [KippleLocalStorage](/KippleLocalStorage) — TBD
-- [KippleLogging](/KippleLogging) — TBD
+- [KippleKeychain](/KippleKeychain) — Convenience functionality for [Apple Keychain Services](https://developer.apple.com/documentation/security/keychain_services/).
+- [KippleLocalStorage](/KippleLocalStorage) — Convenience Functionality for `UserDefaults`.
+- [KippleLogging](/KippleLogging) — Convenience Functionality for `OSLog` on Apple platforms, and `swift-log` on other platforms.
+
+### Dependencies
+
+TODO: Update this section
 
 ## Installation
 
@@ -56,15 +60,11 @@ Swift Package Manager is included in Swift 3.0 and above.
 
 Alternatively, feel free to copy any module, file, or line of code into your own Swift project!
 
-**Kipple** is released under the MIT license. See [LICENSE](LICENSE) for details.
-
-## External Dependencies
-
-TODO: Update this section
+All **Kipple** libraries are released under the MIT license. See [LICENSE](LICENSE) for details.
 
 ## Component Libraries
 
-To keep **Kipple** focused on core functionality, there are additional components that live in external packages. Each package provides functionality around a more complex topic, such as Networking or UI, which most applications don't need.
+To keep **Kipple** focused on core functionality, there are additional components that live in external packages. Each package provides functionality around a more complex topic, such as Networking or UI, which some applications won't need.
 
 Each package essentially does what it says on the tin — check out their respective READMEs for more information!
 
@@ -122,4 +122,4 @@ With every new project, developers write a lot of the same boilerplate code agai
 
 ## License
 
-**Kipple** is released under the MIT license. See [LICENSE](LICENSE) for details.
+All **Kipple** libraries are released under the MIT license. See [LICENSE](LICENSE) for details.
