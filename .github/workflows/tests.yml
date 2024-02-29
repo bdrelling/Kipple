@@ -15,5 +15,18 @@ jobs:
     with:
       scheme: KippleCore
       subcommand: build
-      platforms: iOS macOS tvOS watchOS Linux
+      platforms: iOS # macOS tvOS watchOS Linux
       # swift-versions: default
+      
+  upload_coverage:
+    name: Upload Coverage Report
+    runs-on: ubuntu-latest
+    needs: swift_test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: bdrelling/Kipple
