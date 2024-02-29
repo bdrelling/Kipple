@@ -45,7 +45,10 @@ let package = Package(
         // It should primarily be used in the prototyping stage, before reducing only to the necessary modules.
         .target(
             name: "Kipple",
-            dependencies: allModulesAsDependencies
+            dependencies: allModulesAsDependencies,
+            exclude: [
+                "README.md",
+            ]
         ),
         // Product Targets (without Dependencies)
         .target(name: .kippleCodable),
