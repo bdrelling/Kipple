@@ -6,6 +6,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    
+env:
+  COVERAGE_REPORT_DIRECTORY: "coverage"
 
 jobs:
   swift_test:
@@ -25,10 +28,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: swift_test
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Download swift_test Output
+        uses: actions/download-artifact@v4
+        with:
+          name: Output (swift test (macos, swift 5.9))
+          path: ${{ env.COVERAGE_REPORT_DIRECTORY }}
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: bdrelling/Kipple
+          handle_no_reports_found: false
+          directory: ${{ env.COVERAGE_REPORT_DIRECTORY }}
