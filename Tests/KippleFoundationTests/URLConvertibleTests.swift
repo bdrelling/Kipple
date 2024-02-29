@@ -18,6 +18,7 @@ final class URLConvertibleTests: XCTestCase {
     }
     
     /// Tests that attempting to convert an empty string `""` successfully throws an error.
+    @available(iOS 17, macOS 14, tvOS 14, watchOS 10, *)
     func testURLConvertibleWithWhitespacedURLString() {
         // Given
         let whitespacedURLString = "not a valid url"
