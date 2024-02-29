@@ -3,7 +3,7 @@
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 
 import KeychainAccess
-import KippleCore
+import KippleFoundation
 
 public extension Keychain {
     /// Creates a default `Keychain` for an application represented by an `AppInfo` object.

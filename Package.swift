@@ -8,7 +8,7 @@ let allModules: [String] = [
     .kippleCodable,
     .kippleCollections,
     .kippleCombine,
-    .kippleCore,
+    .kippleFoundation,
     .kippleDevice,
     .kippleKeychain,
     .kippleLocalStorage,
@@ -50,7 +50,7 @@ let package = Package(
         // Product Targets (without Dependencies)
         .target(name: .kippleCodable),
         .target(name: .kippleCombine),
-        .target(name: .kippleCore),
+        .target(name: .kippleFoundation),
         .target(name: .kippleLocalStorage),
         // Product Targets (with Dependencies)
         .target(
@@ -62,14 +62,14 @@ let package = Package(
         .target(
             name: "KippleDevice",
             dependencies: [
-                .target(name: "KippleCore"),
+                .target(name: "KippleFoundation"),
                 .product(name: "DeviceKit", package: "DeviceKit", condition: .when(platforms: [.iOS, .tvOS, .watchOS])),
             ]
         ),
         .target(
             name: "KippleKeychain",
             dependencies: [
-                .target(name: "KippleCore"),
+                .target(name: "KippleFoundation"),
                 .product(name: "KeychainAccess", package: "KeychainAccess", condition: .when(platforms: [.iOS, .macOS, .tvOS, .watchOS])),
             ]
         ),
@@ -83,7 +83,7 @@ let package = Package(
         .kippleTestTarget(name: .kippleCodable),
         .kippleTestTarget(name: .kippleCollections),
         .kippleTestTarget(name: .kippleCombine),
-        .kippleTestTarget(name: .kippleCore),
+        .kippleTestTarget(name: .kippleFoundation),
         .kippleTestTarget(name: .kippleDevice),
         .kippleTestTarget(name: .kippleLocalStorage),
         .kippleTestTarget(name: .kippleLogging),
@@ -110,7 +110,7 @@ extension String {
     static let kippleCodable = "KippleCodable"
     static let kippleCollections = "KippleCollections"
     static let kippleCombine = "KippleCombine"
-    static let kippleCore = "KippleCore"
+    static let kippleFoundation = "KippleFoundation"
     static let kippleDevice = "KippleDevice"
     static let kippleKeychain = "KippleKeychain"
     static let kippleLocalStorage = "KippleLocalStorage"

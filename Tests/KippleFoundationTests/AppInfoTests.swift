@@ -1,5 +1,5 @@
 
-import KippleCore
+import KippleFoundation
 import XCTest
 
 final class AppInfoTests: XCTestCase {

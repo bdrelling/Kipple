@@ -1,4 +1,4 @@
-import KippleCore
+import KippleFoundation
 import XCTest
 
 final class ResultExtensionTests: XCTestCase {

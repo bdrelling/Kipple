@@ -1,7 +1,7 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
 import Foundation
-import KippleCore
+import KippleFoundation
 
 #if canImport(UIKit) && canImport(DeviceKit)
 

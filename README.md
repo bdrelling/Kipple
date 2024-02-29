@@ -34,7 +34,7 @@
 - [KippleCodable](/Sources/KippleCodable) — Convenience functionality for `Codable`.
 - [KippleCollections](/Sources/KippleCollections) — Convenience functionality for `Collections`. Imports `OrderedCollections`.
 - [KippleCombine](/Sources/KippleCombine) — Convenience functionality for `Combine`.
-- [KippleCore](/Sources/KippleCore) — Convenience functionality for `Foundation`.
+- [KippleFoundation](/Sources/KippleFoundation) — Convenience functionality for `Foundation`.
 - [KippleDevice](/Sources/KippleDevice) — Convenience functionality around `UIDevice`. Imports `DeviceKit` on iOS, tvOS, and watchOS, but returns hardcode values on macOS.
 - [KippleKeychain](/Sources/KippleKeychain) — Convenience functionality for [Apple Keychain Services](https://developer.apple.com/documentation/security/keychain_services/). Imports `KeychainAccess`.
 - [KippleLocalStorage](/Sources/KippleLocalStorage) — Convenience Functionality for `UserDefaults`.
@@ -45,7 +45,7 @@
 - [apple/swift-collections](https://github.com/apple/swift-collections) — Commonly used data structures for Swift.
 - [apple/swift-log](https://github.com/apple/swift-log) — A cross-platform Logging API for Swift.
 - [devicekit/DeviceKit](https://github.com/devicekit/DeviceKit) — A value-type replacement of UIDevice.
-- [kishikawakatsumi/KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess) — Simple Swift wrapper for Keychain that works on iOS, watchOS, tvOS and macOS.
+- [kishikawakatsumi/KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess) — Simple Swift wrapper for Keychain that works on iOS, macOS, tvOS and watchOS.
 
 > [!NOTE]  
 > This package also utilizes [KippleTools](https://github.com/bdrelling/KippleTools) as a development dependency, which handles linting, formatting, and other core scripting needs for [Kipple](https://github.com/bdrelling/Kipple) projects.
