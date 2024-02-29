@@ -25,7 +25,7 @@ jobs:
       
   upload_coverage:
     name: Upload Coverage Report
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     needs: swift_test
     steps:
       - name: Setup Xcode
