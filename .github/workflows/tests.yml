@@ -22,6 +22,7 @@ jobs:
       platforms: macOS # iOS macOS tvOS watchOS Linux
       swift-versions: 5.9
       # swift-versions: default
+      code-coverage: true
       args: --codecov true
       
   # upload_coverage:
