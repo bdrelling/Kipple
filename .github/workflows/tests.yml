@@ -13,7 +13,7 @@ jobs:
     secrets:
       DISCORD_CI_WEBHOOK: ${{ secrets.DISCORD_CI_WEBHOOK }}
     with:
-      scheme: KippleCore
+      scheme: KippleFoundation
       subcommand: build
       platforms: iOS # macOS tvOS watchOS Linux
       # swift-versions: default

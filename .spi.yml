@@ -5,7 +5,7 @@ builder:
       - KippleCodable
       - KippleCollections
       - KippleCombine
-      - KippleCore
+      - KippleFoundation
       - KippleDevice
       - KippleKeychain
       - KippleLocalStorage
