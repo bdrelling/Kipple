@@ -15,7 +15,7 @@ jobs:
     with:
       scheme: KippleFoundation
       subcommand: build
-      platforms: iOS # macOS tvOS watchOS Linux
+      platforms: macOS # iOS macOS tvOS watchOS Linux
       # swift-versions: default
       
   upload_coverage:
