@@ -10,8 +10,7 @@ final class EncodablePrettyPrintedTests: XCTestCase {
 
         // When
         let prettyPrintedString = try person.prettyPrinted()
-        print(prettyPrintedString)
-
+        
         // Then
         XCTAssertEqual(prettyPrintedString, """
         {

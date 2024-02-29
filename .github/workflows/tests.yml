@@ -19,28 +19,6 @@ jobs:
     with:
       scheme: Kipple-Package
       subcommand: test
-      platforms: macOS # iOS macOS tvOS watchOS Linux
-      swift-versions: 5.9
+      platforms: iOS macOS tvOS watchOS Linux
       # swift-versions: default
       code-coverage: true
-      
-  # upload_coverage:
-  #   name: Upload Coverage Report
-  #   runs-on: macos-14
-  #   needs: swift_test
-  #   steps:
-  #     - name: Setup Xcode
-  #       uses: maxim-lobanov/setup-xcode@v1
-  #     - name: Download swift_test Output
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: Output (swift test (macos, swift 5.9))
-  #         path: ${{ env.COVERAGE_REPORT_DIRECTORY }}
-  #     - name: Upload to Codecov
-  #       uses: codecov/codecov-action@v4
-  #       with:
-  #         token: ${{ secrets.CODECOV_TOKEN }}
-  #         slug: bdrelling/Kipple
-  #         handle_no_reports_found: false
-  #         directory: ${{ env.COVERAGE_REPORT_DIRECTORY }}
-  #         verbose: true
