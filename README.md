@@ -18,9 +18,8 @@
 - [Documentation](#documentation)
   - [Modules](#modules)
   - [Dependencies](#dependencies)
-- [Installation](#installation)
 - [Component Libraries](#component-libraries)
-- [Maintenance](#maintenance)
+- [Installation](#installation)
 - [Compatibility](#compatibility)
 - [Stability](#stability)
 - [Contributing](#contributing)
@@ -32,35 +31,25 @@
 ### Modules
 
 - [Kipple](/Sources/Kipple) — An umbrella module that implicitly imports all other modules.
-- [KippleCodable](/KippleCodable) — Convenience functionality for `Codable`.
-- [KippleCollections](/KippleCollections) — Convenience functionality for `Collections`. Imports the `OrderedCollections` module of `swift-collections`.
-- [KippleCombine](/KippleCombine) — Convenience functionality for `Combine`.
-- [KippleCore](/KippleCore) — Convenience functionality for `Foundation`.
-- [KippleDevice](/KippleDevice) — TBD
-- [KippleKeychain](/KippleKeychain) — Convenience functionality for [Apple Keychain Services](https://developer.apple.com/documentation/security/keychain_services/).
-- [KippleLocalStorage](/KippleLocalStorage) — Convenience Functionality for `UserDefaults`.
-- [KippleLogging](/KippleLogging) — Convenience Functionality for `OSLog` on Apple platforms, and `swift-log` on other platforms.
+- [KippleCodable](/Sources/KippleCodable) — Convenience functionality for `Codable`.
+- [KippleCollections](/Sources/KippleCollections) — Convenience functionality for `Collections`. Imports the `OrderedCollections` module of `swift-collections`.
+- [KippleCombine](/Sources/KippleCombine) — Convenience functionality for `Combine`.
+- [KippleCore](/Sources/KippleCore) — Convenience functionality for `Foundation`.
+- [KippleDevice](/Sources/KippleDevice) — TBD
+- [KippleKeychain](/Sources/KippleKeychain) — Convenience functionality for [Apple Keychain Services](https://developer.apple.com/documentation/security/keychain_services/).
+- [KippleLocalStorage](/Sources/KippleLocalStorage) — Convenience Functionality for `UserDefaults`.
+- [KippleLogging](/Sources/KippleLogging) — Convenience Functionality for `OSLog` on Apple platforms, and `swift-log` on other platforms.
 
 ### Dependencies
 
-TODO: Update this section
+- [apple/swift-collections](https://github.com/apple/swift-collections) — Commonly used data structures for Swift.
+- [apple/swift-log](https://github.com/apple/swift-log) — A cross-platform Logging API for Swift.
+- [devicekit/DeviceKit](https://github.com/devicekit/DeviceKit) — A value-type replacement of UIDevice.
+- [kishikawakatsumi/KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess) — Simple Swift wrapper for Keychain that works on iOS, watchOS, tvOS and macOS.
 
-## Installation
-
-### Swift Package Manager (SPM)
-
-> [!WARNING]
-> Please read the [Stability](#stability) section before considering this installation method.
-
-[Swift Package Manager (SPM)](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
-
-Swift Package Manager is included in Swift 3.0 and above.
-
-### Manual
-
-Alternatively, feel free to copy any module, file, or line of code into your own Swift project!
-
-All **Kipple** libraries are released under the MIT license. See [LICENSE](LICENSE) for details.
+> [!NOTE]  
+> This package also utilizes [KippleTools](https://github.com/bdrelling/KippleTools) as a development dependency, which handles linting, formatting, and other core scripting needs for [Kipple](https://github.com/bdrelling/Kipple) projects.
+> This dependency is not pulled into your project in any way, as it is not referenced directly by any product of this package.
 
 ## Component Libraries
 
@@ -75,13 +64,43 @@ Each package essentially does what it says on the tin — check out their respec
 | [KippleTools](https://github.com/bdrelling/KippleTools) | [![](https://img.shields.io/github/actions/workflow/status/bdrelling/KippleTools/tests.yml?branch=main&label=)](https://github.com/bdrelling/KippleTools/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/KippleTools?color=blue&label=)](https://github.com/bdrelling/KippleTools/tags) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKippleTools%2Fbadge%3Ftype%3Dswift-versions&label=)](https://swiftpackageindex.com/bdrelling/KippleTools) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKippleTools%2Fbadge%3Ftype%3Dplatforms&label=)](https://swiftpackageindex.com/bdrelling/KippleTools) |
 | [KippleUI](https://github.com/bdrelling/KippleUI) | [![](https://img.shields.io/github/actions/workflow/status/bdrelling/KippleUI/tests.yml?branch=main&label=)](https://github.com/bdrelling/KippleUI/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/KippleUI?color=blue&label=)](https://github.com/bdrelling/KippleUI/tags) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKippleUI%2Fbadge%3Ftype%3Dswift-versions&label=)](https://swiftpackageindex.com/bdrelling/KippleUI) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKippleUI%2Fbadge%3Ftype%3Dplatforms&label=)](https://swiftpackageindex.com/bdrelling/KippleUI) |
 
-## Maintenance
+## Installation
 
-Kipple is **inactively maintained**, meaning that updates are made to the packages above as needed, whether to squash bugs, remove outdated content, update Swift and platform compatibilities, or include new content for educational purposes.
+### Swift Package Manager (SPM)
 
-Additionally, I will make an effort to address any and all Issues and Pull Requests that are opened into my repository as thanks for your help in improving the stability for these packages and therefore my own (and others') applications. **If you don't receive a timely response from me on an Issue or Pull Request**, please don't hesitate to ping me again.
+> [!WARNING]
+> Please read the [Stability](#stability) section before considering this installation method.
+
+[Swift Package Manager (SPM)](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+You can add **Kipple** to your Swift project like so:
+
+```swift
+let package = Package(
+    ...
+    dependencies: [
+        // Use .upToNextMinor to ensure you avoid breaking changes as much as possible.
+        .package(url: "https://github.com/bdrelling/Kipple", .upToNextMinor(from: "0.x.0")),
+        
+        // Better yet, link to an explicit git commit to ensure stability.
+        .package(url: "https://github.com/bdrelling/Kipple", revision: "abcd123"),
+    ],
+    ...
+)
+```
+
+Swift Package Manager is included in Swift 3.0 and above.
+
+### Manual
+
+Alternatively, feel free to copy any module, file, or line of code into your own Swift project!
+
+All **Kipple** libraries are released under the MIT license. See [LICENSE](LICENSE) for details.
 
 ## Compatibility
+
+[![Swift Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKipple%2Fbadge%3Ftype%3Dswift-versions&label=)](https://swiftpackageindex.com/bdrelling/Kipple)
+[![Platform Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKipple%2Fbadge%3Ftype%3Dplatforms&label=)](https://swiftpackageindex.com/bdrelling/Kipple)
 
 **Swift Versions**: Packages will always support a minimum of all versions of Swift bundled with the two most recent major versions of Xcode. (Example: At time of writing, Xcode 15.2 is currently out, so Kipple supports Xcode 14.0 and up, which means that Swift 5.7 is the minimum version for all packages.) See [swiftversion.net](https://swiftversion.net/) for a reference of Swift and Xcode versions.
 
@@ -93,16 +112,20 @@ Additionally, I will make an effort to address any and all Issues and Pull Reque
 
 ## Stability
 
-Every repository in this organization includes the following disclaimer:
+Kipple is **inactively maintained**, meaning that updates are made to the packages above as needed, whether to squash bugs, remove outdated content, update Swift and platform compatibilities, or include new content for educational purposes.
+
+As such, every repository in this organization includes the following disclaimer:
 
 > [!WARNING]
 > The code in this library has been made public as-is solely for the purposes of reference, education, discovery, and personal use. As such, stability for production applications **CANNOT** be guaranteed; however, if you're interested in leveraging code within this library in your own projects, feel free to do so at your own risk.
 >
 > Please open GitHub issues for any problems you encounter or requests you have and we will do my best to provide support.
 
-An important note to package maintainers: **Please do not include these packages as a dependency of your own packages!** Doing so can introduce transitive risk to your consumers, who may not have opted into using unstable packages such as these.
-
 That said, I use all of these repositories in numerous applications and projects myself, many of them in production. I also leverage two CI reports (GitHub Actions and Swift Package Index) and try my best to cover core functionality with tests as much as possible.
+
+I will make an effort to address any and all Issues and Pull Requests that are opened into my repository as thanks for your help in improving the stability for these packages and therefore my own (and others') applications. **If you don't receive a timely response from me on an Issue or Pull Request**, please don't hesitate to ping me again.
+
+An important note to package maintainers: **Please do not include these packages as a dependency of your own packages!** Doing so can introduce transitive risk to your consumers, who may not have opted into using unstable packages such as these.
 
 ## Contributing
 
@@ -119,6 +142,12 @@ The concept of "**Kipple**" comes from the [Philip K. Dick](https://en.wikipedia
 > No one can win against kipple, except temporarily and maybe in one spot,[...] It's a universal principle operating throughout the universe; the entire universe is moving toward a final state of total, absolute kippleization.
 
 With every new project, developers write a lot of the same boilerplate code again and again, which piles up quickly. It's not _useless_ code, per se, but it's usually fairly trivial solutions repeated over and over per-project that never _quite_ warrant pulling in bloated third-party dependencies, but can be a burden to recreate time and time again.
+
+### Why do these libraries use a major version of zero (0.y.z)?
+
+> Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable. — [SemVer Spec #4](https://semver.org/spec/v2.0.0.html#spec-item-4).
+
+**Kipple** uses a major version of zero to indicate that [volatile nature](#stability) of the project.
 
 ## License
 
