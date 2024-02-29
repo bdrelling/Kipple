@@ -16,6 +16,7 @@ jobs:
       scheme: KippleFoundation
       subcommand: build
       platforms: macOS # iOS macOS tvOS watchOS Linux
+      swift-versions: 5.9
       # swift-versions: default
       args: --codecov true
       
