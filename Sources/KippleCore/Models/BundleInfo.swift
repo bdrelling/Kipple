@@ -2,7 +2,6 @@
 
 import Foundation
 
-// TODO: Write tests
 /// A representation of common information typically found within a `Bundle`.
 ///
 /// The information included in this `struct` is _not_ exhaustive, only the most commonly referenced keys are included.
@@ -34,7 +33,7 @@ public struct BundleInfo {
 
     // MARK: Initializers
 
-    init(
+    public init(
         identifier: String,
         name: String,
         displayName: String?,
@@ -50,7 +49,7 @@ public struct BundleInfo {
         self.fullVersion = fullVersion ?? "v\(version)b\(buildNumber)"
     }
 
-    init(bundle: Bundle) {
+    public init(bundle: Bundle) {
         self.init(
             identifier: bundle.bundleIdentifier ?? "Unknown",
             name: bundle.bundleName ?? "Unknown",

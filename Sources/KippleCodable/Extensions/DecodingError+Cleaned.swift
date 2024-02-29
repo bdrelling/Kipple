@@ -3,6 +3,7 @@
 import Foundation
 
 public extension DecodingError {
+    /// A cleaned description for a decoding error that provides additional context about mismatching type, the JSON path, and so on.
     var cleanedDescription: String {
         switch self {
         case let .typeMismatch(type, context):
@@ -27,6 +28,7 @@ public extension DecodingError {
 // MARK: - Extensions
 
 private extension Array where Element == CodingKey {
+    /// The JSON path notation for the given key.
     var jsonPath: String {
         var path = ""
 

@@ -2,7 +2,7 @@
 
 import Foundation
 
-extension Result {
+public extension Result {
     /// Returns the associated value if the result is a success, or nil if it is a failure.
     var success: Success? {
         guard case let .success(value) = self else {

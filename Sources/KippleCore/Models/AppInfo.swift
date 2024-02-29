@@ -2,7 +2,6 @@
 
 import Foundation
 
-// TODO: Write tests
 /// A representation of information typically required by an application.
 ///
 /// Unlike `BundleInfo` and `DeviceInfo`, this `struct` is entirely custom and has no "`current`" representation,
@@ -71,7 +70,7 @@ public struct AppInfo {
     ) {
         self.init(
             identifier: bundle.bundleIdentifier ?? "Unknown",
-            name: bundle.bundleDisplayName ?? "Unknown",
+            name: bundle.bundleDisplayName ?? bundle.bundleName ?? "Unknown",
             version: bundle.bundleVersion,
             buildNumber: bundle.bundleBuildNumber,
             appStoreTeamID: appStoreTeamID

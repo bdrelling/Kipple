@@ -5,7 +5,6 @@
 import Foundation
 import KeychainAccess
 
-// TODO: Write tests
 public extension Keychain {
     /// A wrapper around a `String` that allows strongly typed `Keychain` keys with an extensible `enum`-like syntax.
     /// This value can then be extended by consumers that wish to fetch values out of `Keychain`.

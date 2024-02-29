@@ -3,11 +3,11 @@
 import Foundation
 
 public extension Encodable {
-    // TODO: Order the keys in the dictionaries.
+    /// Produces a pretty-printed string representation of the encoded data.
     func prettyPrinted(mode: PrettyPrintMode = .json) throws -> String {
         switch mode {
         case .json:
-            let encoder = PrettyPrintConstants.encoder
+            let encoder: JSONEncoder = .prettyPrinter
             let prettyPrintedData = try encoder.encode(self)
 
             guard let prettyPrintedString = String(data: prettyPrintedData, encoding: .utf8) else {
@@ -32,8 +32,8 @@ public enum PrettyPrintMode {
 }
 
 /// A supporting type to avoid recreating JSONEncoder for every call to `PrettyPrintable.prettyPrinted(mode:)`.
-private enum PrettyPrintConstants {
-    static let encoder: JSONEncoder = {
+private extension JSONEncoder {
+    static let prettyPrinter: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         return encoder

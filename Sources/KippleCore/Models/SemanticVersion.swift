@@ -1,6 +1,5 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
-// TODO: Add SemanticVersion comparability
 public struct SemanticVersion: Equatable, Hashable, Codable {
     // MARK: Properties
 

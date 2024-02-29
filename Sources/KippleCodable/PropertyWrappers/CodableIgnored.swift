@@ -1,7 +1,9 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
-// TODO: Write tests
-// Source: https://stackoverflow.com/a/71087703
+/// A property wrapper that allows for ignoring Codable encoding and decoding.
+///
+/// References:
+///   - https://stackoverflow.com/a/71087703
 @propertyWrapper
 public struct CodableIgnored<T>: Codable {
     public var wrappedValue: T?
