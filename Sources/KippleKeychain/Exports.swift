@@ -4,4 +4,8 @@
 //
 // NOTE: APIs with the _ prefix are considered to be unfinalized, so the signature of the attribute is subject to change.
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+
 @_exported import KeychainAccess
+
+#endif
