@@ -1,4 +1,6 @@
 
+#if !os(Linux)
+
 import KippleFoundation
 import XCTest
 
@@ -29,3 +31,5 @@ final class AppInfoTests: XCTestCase {
         XCTAssertEqual(appInfo.defaultKeychainAccessGroup, "AB12CD34EF.com.apple.dt.xctest.tool")
     }
 }
+
+#endif

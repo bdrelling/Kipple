@@ -1,5 +1,7 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
+#if !os(Linux)
+
 import KippleDevice
 import XCTest
 
@@ -14,9 +16,13 @@ final class DeviceInfoTests: XCTestCase {
         XCTAssertFalse(device.deviceModel.isEmpty)
         XCTAssertFalse(device.systemName.isEmpty)
 
-        #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS) || os(watchOS)
+        #if !os(Linux)
         // Our tests should never run on an unknown Apple device.
         XCTAssertNotEqual(device.deviceFamily, .unknown)
         #endif
+        
+        print(ProcessInfo.processInfo.environment)
     }
 }
+
+#endif

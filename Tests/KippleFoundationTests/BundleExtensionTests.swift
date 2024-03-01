@@ -1,14 +1,12 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
+#if !os(Linux)
+
 import KippleFoundation
 import XCTest
 
 final class BundleExtensionTests: XCTestCase {
     func testBundleProperties() throws {
-        print("HERE:")
-        print(Bundle.allBundles)
-        print("===")
-        
         let bundle: Bundle = .main
 
         // Ensure none of our Strings are empty or nil.
@@ -24,3 +22,5 @@ final class BundleExtensionTests: XCTestCase {
         XCTAssertNotEqual(bundle.bundleBuildNumber, 34404)
     }
 }
+
+#endif
