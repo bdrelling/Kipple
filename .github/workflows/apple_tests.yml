@@ -15,5 +15,5 @@ jobs:
       DISCORD_CI_WEBHOOK: ${{ secrets.DISCORD_CI_WEBHOOK }}
     with:
       scheme: Kipple-Package
-      platforms: iOS macOS tvOS watchOS Linux
+      platforms: iOS macOS tvOS watchOS
       code-coverage: true
