@@ -1,0 +1,10 @@
+{
+  "image": "latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "sswg.swift-lang"
+      ]
+    }
+  }
+}

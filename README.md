@@ -49,6 +49,12 @@
 
 ### Dependencies
 
+**Kipple** aims to keep third-party dependencies very light. That said, there are some that have become absolutely critical to everyday functionality, which **Kipple** depends upon as needed.
+
+Thankfully, the Swift compiler is efficient and dependent modules are _only_ compiled if your project references them. For example, `swift-log` will only be compiled if you depend upon `KippleLogging`, but if you only depend upon `KippleFoundation`, then `swift-log` is not compiled.
+
+Please note that Swift Package Manager will still check out all dependencies (except for those only depended upon by the test targets of other packages), but these should all be light enough to checkout and resolve extremely quickly.
+
 - [apple/swift-collections](https://github.com/apple/swift-collections) — Commonly used data structures for Swift.
 - [apple/swift-log](https://github.com/apple/swift-log) — A cross-platform Logging API for Swift.
 - [devicekit/DeviceKit](https://github.com/devicekit/DeviceKit) — A value-type replacement of UIDevice.
