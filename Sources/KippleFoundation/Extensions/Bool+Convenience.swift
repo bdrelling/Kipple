@@ -14,11 +14,7 @@ public extension Bool {
 
     /// Whether or not the app is running unit tests.
     static let isRunningUnitTests: Bool = NSClassFromString("XCTestCase") != nil
-}
-
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
-
-public extension Bool {
+    
     /// Whether or not this code is running within Xcode SwiftUI Previews, which has limited functionality.
     static let isRunningInXcodePreview: Bool = {
         #if DEBUG
@@ -60,14 +56,3 @@ public extension Bool {
     /// This is used primarily for testing and Xcode Previews in order to improve performance.
     static let shouldMockExternalServices: Bool = .isRunningTests || .isRunningInXcodePreview
 }
-
-#else
-
-public extension Bool {
-    /// Whether or not the app is running unit tests.
-    ///
-    /// On non-Apple environments, this property is simply an alias for `isRunningUnitTests`.
-    static let isRunningTests: Bool = .isRunningUnitTests
-}
-
-#endif
