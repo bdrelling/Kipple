@@ -34,9 +34,9 @@ final class BoolExtensionTests: XCTestCase {
         XCTAssertFalse(.isRunningOnTestFlight)
     }
     
-    func testBoolTestingExtensions() {
+    func testBoolTestingExtensions() throws {
         #if os(Linux)
-        try XCTSkip("Bool convenience extensions for detecting Unit and UI testing do not work on Linux and always return false.")
+        throw XCTSkip("Bool convenience extensions for detecting Unit and UI testing do not work on Linux and always return false.")
         #endif
         
         // Always true when we're running tests.
