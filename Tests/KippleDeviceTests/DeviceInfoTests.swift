@@ -14,7 +14,9 @@ final class DeviceInfoTests: XCTestCase {
         XCTAssertFalse(device.deviceModel.isEmpty)
         XCTAssertFalse(device.systemName.isEmpty)
 
-        // Our tests should never run on an unknown device.
+        #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS) || os(watchOS)
+        // Our tests should never run on an unknown Apple device.
         XCTAssertNotEqual(device.deviceFamily, .unknown)
+        #endif
     }
 }
