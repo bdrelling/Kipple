@@ -5,6 +5,10 @@ import XCTest
 
 final class BundleExtensionTests: XCTestCase {
     func testBundleProperties() throws {
+        print("HERE:")
+        print(Bundle.allBundles)
+        print("===")
+        
         let bundle: Bundle = .main
 
         // Ensure none of our Strings are empty or nil.
