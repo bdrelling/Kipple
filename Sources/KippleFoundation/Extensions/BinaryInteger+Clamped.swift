@@ -5,7 +5,7 @@ public extension BinaryInteger {
     func clampedInt64() -> Int64 {
         .init(clamping: self)
     }
-    
+
     /// Safely converts an `Int64` into an `Int32`, truncating the value if necessary.
     func clampedInt32() -> Int32 {
         .init(clamping: self)

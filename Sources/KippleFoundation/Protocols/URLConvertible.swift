@@ -16,7 +16,15 @@ extension URL: URLConvertible {
 
 extension String: URLConvertible {
     public func asURL() throws -> URL {
-        if let url = URL(string: self) {
+        let urlString: String
+        
+        #if swift(>=5.9) && !os(Linux)
+        urlString = self
+        #else
+        urlString = self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
+        #endif
+        
+        if let url = URL(string: urlString) {
             return url
         } else {
             throw "Invalid URL string '\(self)'."

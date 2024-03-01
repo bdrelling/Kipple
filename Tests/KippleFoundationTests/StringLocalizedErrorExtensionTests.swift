@@ -6,7 +6,7 @@ import XCTest
 final class StringLocalizedErrorExtensionTests: XCTestCase {
     func testErrorDescription() {
         let message = "An error occurred"
-        
+
         do {
             throw message
         } catch {
@@ -15,4 +15,3 @@ final class StringLocalizedErrorExtensionTests: XCTestCase {
         }
     }
 }
-

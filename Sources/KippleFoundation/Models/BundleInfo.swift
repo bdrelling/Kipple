@@ -1,5 +1,7 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
+#if !os(Linux)
+
 import Foundation
 
 /// A representation of common information typically found within a `Bundle`.
@@ -67,3 +69,5 @@ public extension BundleInfo {
     /// Information for the currently running `Bundle` (eg. `Bundle.main`).
     static let current: Self = .init(bundle: .main)
 }
+
+#endif

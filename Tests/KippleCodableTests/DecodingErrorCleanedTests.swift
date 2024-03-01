@@ -1,3 +1,4 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
 
 import Foundation
 import KippleCodable
@@ -11,9 +12,9 @@ final class DecodingErrorCleanedTests: XCTestCase {
             "name": 123
         }
         """.data(using: .utf8)!
-        
+
         let decoder = JSONDecoder()
-        
+
         do {
             // When
             let _ = try decoder.decode(Person.self, from: data)
@@ -23,7 +24,7 @@ final class DecodingErrorCleanedTests: XCTestCase {
             XCTAssertEqual(error.cleanedDescription, "Type mismatch for key 'name'. Expected type 'String'.")
         }
     }
-    
+
     func testTypeMismatchForNestedType() throws {
         // Given
         let data = """
@@ -34,19 +35,24 @@ final class DecodingErrorCleanedTests: XCTestCase {
             ]
         }
         """.data(using: .utf8)!
-        
+
         let decoder = JSONDecoder()
-        
+
         do {
             // When
             let _ = try decoder.decode(Person.self, from: data)
             XCTFail("DecodingError should be thrown.")
         } catch let error as DecodingError {
             // Then
+            #if os(Linux)
+            // Linux JSONDecoder uses "JSONValue" rather than "Any".
+            XCTAssertEqual(error.cleanedDescription, "Type mismatch for key 'pets[0]'. Expected type 'Dictionary<String, JSONValue>'.")
+            #else
             XCTAssertEqual(error.cleanedDescription, "Type mismatch for key 'pets[0]'. Expected type 'Dictionary<String, Any>'.")
+            #endif
         }
     }
-    
+
     func testKeyNotFound() throws {
         // Given
         let data = """
@@ -54,9 +60,9 @@ final class DecodingErrorCleanedTests: XCTestCase {
             "age": "29"
         }
         """.data(using: .utf8)!
-        
+
         let decoder = JSONDecoder()
-        
+
         do {
             // When
             let _ = try decoder.decode(Person.self, from: data)
@@ -66,7 +72,7 @@ final class DecodingErrorCleanedTests: XCTestCase {
             XCTAssertEqual(error.cleanedDescription, "Key 'name' not found.")
         }
     }
-    
+
     func testKeyNotFoundForNestedType() throws {
         // Given
         let data = """
@@ -77,9 +83,9 @@ final class DecodingErrorCleanedTests: XCTestCase {
             ]
         }
         """.data(using: .utf8)!
-        
+
         let decoder = JSONDecoder()
-        
+
         do {
             // When
             let _ = try decoder.decode(Person.self, from: data)
@@ -89,7 +95,7 @@ final class DecodingErrorCleanedTests: XCTestCase {
             XCTAssertEqual(error.cleanedDescription, "Key 'pets[0].legs' not found.")
         }
     }
-    
+
     func testDataCorruptedEmpty() throws {
         // Given
         let data = """
@@ -97,9 +103,9 @@ final class DecodingErrorCleanedTests: XCTestCase {
             "name":
         }
         """.data(using: .utf8)!
-        
+
         let decoder = JSONDecoder()
-        
+
         do {
             // When
             let _ = try decoder.decode(Person.self, from: data)

@@ -7,7 +7,7 @@
 @_exported import KippleCodable
 @_exported import KippleCollections
 @_exported import KippleCombine
-@_exported import KippleFoundation
 @_exported import KippleDevice
+@_exported import KippleFoundation
 @_exported import KippleLocalStorage
 @_exported import KippleLogging

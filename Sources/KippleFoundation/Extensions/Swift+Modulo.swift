@@ -10,11 +10,11 @@
 ///   - [Swift mod operator (%) -- Sarunw](https://sarunw.com/posts/swift-mod/)
 public func modulo<T: BinaryInteger>(_ dividend: T, _ divisor: T) -> T {
     // Check for division by zero
-       guard divisor != 0 else {
-           // Return zero if divisor is zero
-           return 0
-       }
-    
+    guard divisor != 0 else {
+        // Return zero if divisor is zero
+        return 0
+    }
+
     let remainder = dividend % divisor
     return remainder >= 0 ? remainder : remainder + divisor
 }

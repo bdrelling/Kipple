@@ -9,34 +9,34 @@ final class CodableIgnoredTests: XCTestCase {
         encoder.outputFormatting = .sortedKeys
         return encoder
     }()
-    
+
     private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         return decoder
     }()
-    
+
     /// Verify that the property wrapped with `CodableIgnored` is not encoded.
     func testEncodingSucceeds() throws {
         // Given
         let example = Example(control: 1, ignoredValue: "test")
-        
+
         // When
         let data = try encoder.encode(example)
-        
+
         // Then
-        let decodedDictionary = try XCTUnwrap(try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])
+        let decodedDictionary = try XCTUnwrap(JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])
         XCTAssertNil(decodedDictionary["ignoredValue"])
     }
-    
+
     /// Verify that the property wrapped with `CodableIgnored` is not decoded.
     func testDecodingSucceeds() throws {
         // Given
         let json = #"{"control":1,"ignoredValue":"test"}"#
         let decodeData = try XCTUnwrap(json.data(using: .utf8))
-        
+
         // When
         let example = try decoder.decode(Example.self, from: decodeData)
-        
+
         // Then
         XCTAssertEqual(example.control, 1)
         XCTAssertNil(example.ignoredValue)

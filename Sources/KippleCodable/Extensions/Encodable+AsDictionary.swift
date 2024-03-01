@@ -11,7 +11,7 @@ public extension Encodable {
     func asDictionary(encoder: JSONEncoder) throws -> [String: Any]? {
         // Encode the object into JSON data using the provided encoder.
         let data = try encoder.encode(self)
-        
+
         // Convert the JSON data into a dictionary.
         return try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
     }

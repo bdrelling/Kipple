@@ -1,3 +1,6 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
+
+#if !os(Linux)
 
 import KippleFoundation
 import XCTest
@@ -9,10 +12,12 @@ final class BundleInfoTests: XCTestCase {
         // and check Bundle,allBundles.compactMap(\.bundleIdentifier)
         // to see what the right Bundle is to use for this test.
         let bundleInfo: BundleInfo = .current
-        
+
         XCTAssertEqual(bundleInfo.identifier, "com.apple.dt.xctest.tool")
         XCTAssertEqual(bundleInfo.name, "xctest")
         XCTAssertNil(bundleInfo.displayName)
         XCTAssertNotEqual(bundleInfo.version, .zero)
     }
 }
+
+#endif

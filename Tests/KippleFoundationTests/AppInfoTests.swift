@@ -1,3 +1,4 @@
+// Copyright © 2024 Brian Drelling. All rights reserved.
 
 #if !os(Linux)
 
@@ -12,10 +13,10 @@ final class AppInfoTests: XCTestCase {
         let xctestIdentifier = "com.apple.dt.xctest.tool"
         let bundle: Bundle = try XCTUnwrap(.init(identifier: xctestIdentifier))
         let appInfo = AppInfo(bundle: bundle, appStoreTeamID: "AB12CD34EF")
-        
+
         XCTAssertEqual(appInfo.identifier, xctestIdentifier)
         XCTAssertEqual(appInfo.name, "xctest")
-        
+
         // Ensure our app version is not zero, which would indicate a failure to initialize.
         XCTAssertNotEqual(appInfo.version, .zero)
     }
@@ -26,7 +27,7 @@ final class AppInfoTests: XCTestCase {
         // and check Bundle,allBundles.compactMap(\.bundleIdentifier)
         // to see what the right Bundle is to use for this test.
         let bundle: Bundle = try XCTUnwrap(.init(identifier: "com.apple.dt.xctest.tool"))
-        
+
         let appInfo = AppInfo(bundle: bundle, appStoreTeamID: "AB12CD34EF")
         XCTAssertEqual(appInfo.defaultKeychainAccessGroup, "AB12CD34EF.com.apple.dt.xctest.tool")
     }

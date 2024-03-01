@@ -1,4 +1,4 @@
-name: Tests
+name: Linux Tests
 
 on:
   workflow_dispatch:
@@ -16,5 +16,5 @@ jobs:
     with:
       scheme: Kipple-Package
       subcommand: test
-      platforms: Linux # iOS macOS tvOS watchOS Linux
+      platforms: Linux
       code-coverage: true
