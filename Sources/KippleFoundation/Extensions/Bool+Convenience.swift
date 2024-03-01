@@ -13,7 +13,13 @@ public extension Bool {
     }()
 
     /// Whether or not the app is running unit tests.
-    static let isRunningUnitTests: Bool = NSClassFromString("XCTestCase") != nil
+    static let isRunningUnitTests: Bool = {
+        // Previously we used "NSClassFromString("XCTestCase") != nil",
+        // but that didn't work on Linux, so updated to rely on XCTestConfigurationFilePath.
+        
+        // source: https://stackoverflow.com/a/29991529
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }()
     
     /// Whether or not this code is running within Xcode SwiftUI Previews, which has limited functionality.
     static let isRunningInXcodePreview: Bool = {
