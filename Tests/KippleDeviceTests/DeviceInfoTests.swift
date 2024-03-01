@@ -20,8 +20,6 @@ final class DeviceInfoTests: XCTestCase {
         // Our tests should never run on an unknown Apple device.
         XCTAssertNotEqual(device.deviceFamily, .unknown)
         #endif
-
-        print(ProcessInfo.processInfo.environment)
     }
 }
 

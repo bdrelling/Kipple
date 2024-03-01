@@ -15,6 +15,5 @@ jobs:
       DISCORD_CI_WEBHOOK: ${{ secrets.DISCORD_CI_WEBHOOK }}
     with:
       scheme: Kipple-Package
-      subcommand: test
       platforms: Linux
       code-coverage: true
