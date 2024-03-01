@@ -7,7 +7,7 @@ This is an umbrella module, meant simply for implicitly exporting all modules wi
 > indicates properties that are used internally by compiler and standard library developers.
 >
 > That said, the biggest risk for `@_exported` is that you'll need to update the syntax and/or
-> manually import some modules in the event of a Swift version bump that impacts the signature or behavior of the attribute. 
+> manually import some modules in the event of a Swift version bump that impacts the signature or behavior of the attribute.
 
 ## How It Works
 
