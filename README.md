@@ -125,6 +125,10 @@ All **Kipple** libraries are released under the MIT license. See [LICENSE](LICEN
 
 ## Stability
 
+[![Apple CI Status](https://github.com/bdrelling/Kipple/actions/workflows/apple_tests.yml/badge.svg)](https://github.com/bdrelling/Kipple/actions/workflows/apple_tests.yml)
+[![Linux CI Status](https://github.com/bdrelling/Kipple/actions/workflows/linux_tests.yml/badge.svg)](https://github.com/bdrelling/Kipple/actions/workflows/linux_tests.yml)
+[![Code Coverage](https://img.shields.io/codecov/c/github/bdrelling/Kipple)](https://codecov.io/gh/bdrelling/Kipple)
+
 Kipple is **inactively maintained**, meaning that updates are made to the packages above as needed, whether to squash bugs, remove outdated content, update Swift and platform compatibilities, or include new content for educational purposes.
 
 As such, every repository in this organization includes the following disclaimer:
