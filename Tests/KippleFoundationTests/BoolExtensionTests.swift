@@ -25,6 +25,20 @@ final class BoolExtensionTests: XCTestCase {
         // which should almost always be true unless any of the exceptions above take place.
         XCTAssertEqual(.isRunningPrivateBuild, .isDebugging || .isRunningOnSimulator)
 
+        
+
+        // Always false as tests don't run inside of Xcode Previews.
+        XCTAssertFalse(.isRunningInXcodePreview)
+
+        // Always false as tests don't (and can't) run on TestFlight builds.
+        XCTAssertFalse(.isRunningOnTestFlight)
+    }
+    
+    func testBoolTestingExtensions() {
+        #if os(Linux)
+        try XCTSkip("Bool convenience extensions for detecting Unit and UI testing do not work on Linux and always return false.")
+        #endif
+        
         // Always true when we're running tests.
         XCTAssertTrue(.isRunningTests)
         XCTAssertTrue(.isRunningUnitTests)
@@ -32,11 +46,5 @@ final class BoolExtensionTests: XCTestCase {
 
         // Always false as we're currently running unit tests, not UI tests.
         XCTAssertFalse(.isRunningUITests)
-
-        // Always false as tests don't run inside of Xcode Previews.
-        XCTAssertFalse(.isRunningInXcodePreview)
-
-        // Always false as tests don't (and can't) run on TestFlight builds.
-        XCTAssertFalse(.isRunningOnTestFlight)
     }
 }
