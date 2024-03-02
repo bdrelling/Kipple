@@ -29,7 +29,7 @@ let package = Package(
         .watchOS(.v9),
     ],
     // Our products will always be an umbrella module ("Kipple") as well as a product for every module.
-    products: [.library(name: "Kipple", targets: ["Kipple"])] + allModulesAsProducts,
+    products: [.library(name: .kipple, targets: [.kipple])] + allModulesAsProducts,
     // Dependencies listed here should always be extremely lightweight.
     // Additionally, almost every dependency here provides a solution
     dependencies: [
@@ -44,7 +44,7 @@ let package = Package(
         // This target simply implicitly exports all modules contained within this package.
         // It should primarily be used in the prototyping stage, before reducing only to the necessary modules.
         .target(
-            name: "Kipple",
+            name: .kipple,
             dependencies: allModulesAsDependencies,
             exclude: [
                 "README.md",
@@ -110,6 +110,7 @@ extension Target {
 
 /// Defined `String` constants representing each of our modules
 extension String {
+    static let kipple = "Kipple"
     static let kippleCodable = "KippleCodable"
     static let kippleCollections = "KippleCollections"
     static let kippleCombine = "KippleCombine"
