@@ -115,7 +115,10 @@ All **Kipple** libraries are released under the MIT license. See [LICENSE](LICEN
 [![Swift Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKipple%2Fbadge%3Ftype%3Dswift-versions&label=)](https://swiftpackageindex.com/bdrelling/Kipple)
 [![Platform Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FKipple%2Fbadge%3Ftype%3Dplatforms&label=)](https://swiftpackageindex.com/bdrelling/Kipple)
 
-**Swift Versions**: Packages will always support a minimum of all versions of Swift bundled with the two most recent major versions of Xcode. (Example: At time of writing, Xcode 15.2 is currently out, so Kipple supports Xcode 14.0 and up, which means that Swift 5.7 is the minimum version for all packages.) See [swiftversion.net](https://swiftversion.net/) for a reference of Swift and Xcode versions.
+**Swift Versions**: Packages will aim to support a minimum of all versions of Swift bundled with the two most recent major versions of Xcode. (Example: At time of writing, Xcode 15.2 is currently out, so Kipple supports Xcode 14.0 and up, which means that Swift 5.7 is the minimum version for all packages.) See [swiftversion.net](https://swiftversion.net/) for a reference of Swift and Xcode versions.
+
+> [!Note]
+> Because of SwiftUI's major leap forward with `@Observable` in iOS 17 / Swift 5.9, `KippleUI`'s minimum version is 5.9 instead of 5.7.
 
 **Platforms**: All packages are meant to be platform-agnostic and run everywhere that Swift can run, with few exceptions such as a package like [KippleUI](https://github.com/bdrelling/KippleUI) which is closely tied to Apple platform SDKs (SwiftUI, UIKit, AppKit, etc.), so there is no consideration for Linux, Windows, or Android and the packages will fail to build on those platforms. For new and emerging platforms (such as visionOS with Xcode 15), Kipple packages may not be supported until the following Xcode major version release.
 
