@@ -33,11 +33,11 @@ let package = Package(
     // Dependencies listed here should always be extremely lightweight.
     // Additionally, almost every dependency here provides a solution
     dependencies: [
-        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.0.4")),
+        .package(url: "https://github.com/apple/swift-collections", from: "1.1.0"),
         .package(url: "https://github.com/apple/swift-log", from: "1.5.4"),
-        .package(url: "https://github.com/bdrelling/KippleTools", .upToNextMinor(from: "0.5.0")),
-        .package(url: "https://github.com/devicekit/DeviceKit", .upToNextMajor(from: "5.2.2")),
-        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", .upToNextMajor(from: "4.2.2")),
+        .package(url: "https://github.com/bdrelling/KippleTools", .upToNextMinor(from: "0.5.3")),
+        .package(url: "https://github.com/devicekit/DeviceKit", from: "5.2.3"),
+        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
     ],
     targets: [
         // Umbrella Target
