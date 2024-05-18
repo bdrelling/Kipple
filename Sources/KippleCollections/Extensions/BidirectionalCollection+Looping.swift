@@ -1,35 +1,89 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
-public extension BidirectionalCollection where Iterator.Element: Equatable {
-    /// Returns the element before the provided value.
-    ///
-    /// If the provided value is the first index, this function returns `nil` unless `loop` is `true`,
-    /// in which case the value at the last index is returned.
-    func before(_ item: Element, loop: Bool = false) -> Element? {
-        guard let itemIndex = firstIndex(of: item) else { return nil }
-        if itemIndex != startIndex {
-            return self[index(before: itemIndex)]
-        } else if loop {
-            return last
-        } else {
+public extension BidirectionalCollection {
+    func previousIndex(looping: Bool = false, before predicate: (Element) throws -> Bool) rethrows -> Index? {
+        guard let currentIndex = try self.firstIndex(where: predicate) else {
             return nil
+        }
+
+        // Get the index for the next element in the array
+        let index = self.index(before: currentIndex)
+
+        // If the index exceeds the element count, we need to loop back to the first element
+        if index < self.startIndex {
+            return looping ? self.index(before: endIndex) : nil
+        } else {
+            return index
         }
     }
 
-    /// Returns the element after the provided value.
-    ///
-    /// If the provided value is the last index, this function returns `nil` unless `loop` is `true`,
-    /// in which case the value at the first index is returned.
-    func after(_ item: Element, loop: Bool = false) -> Element? {
-        guard let itemIndex = firstIndex(of: item) else { return nil }
-        let nextIndex = index(after: itemIndex)
-
-        if nextIndex != endIndex {
-            return self[nextIndex]
-        } else if loop {
-            return first
-        } else {
+    func previous(looping: Bool = false, before predicate: (Element) throws -> Bool) rethrows -> Element? {
+        // Get the index for the next element in the array
+        guard let index = try self.previousIndex(looping: looping, before: predicate) else {
             return nil
         }
+
+        return self[index]
+    }
+
+    func nextIndex(looping: Bool = false, after predicate: (Element) throws -> Bool) rethrows -> Index? {
+        guard let currentIndex = try self.firstIndex(where: predicate) else {
+            return nil
+        }
+
+        // Get the index for the next element in the array
+        let index = self.index(after: currentIndex)
+
+        // If the index exceeds the element count, we need to loop back to the first element
+        if index >= self.endIndex {
+            return looping ? self.startIndex : nil
+        } else {
+            return index
+        }
+    }
+
+    func next(looping: Bool = false, after predicate: (Element) throws -> Bool) rethrows -> Element? {
+        // Get the index for the next element in the array
+        guard let index = try self.nextIndex(looping: looping, after: predicate) else {
+            return nil
+        }
+
+        return self[index]
+    }
+}
+
+public extension Array where Element: Equatable {
+    func previousIndex(looping: Bool = false, before element: Element) -> Index? {
+        self.previousIndex(looping: looping) { $0 == element }
+    }
+
+    func previous(looping: Bool = false, before element: Element) -> Element? {
+        self.previous(looping: looping) { $0 == element }
+    }
+
+    func nextIndex(looping: Bool = false, after element: Element) -> Index? {
+        self.nextIndex(looping: looping) { $0 == element }
+    }
+
+    func next(looping: Bool = false, after element: Element) -> Element? {
+        self.next(looping: looping) { $0 == element }
+    }
+}
+
+public extension Array where Element: Identifiable {
+    func previousIndex(looping: Bool = false, before id: Element.ID) -> Index? {
+        self.previousIndex(looping: looping) { $0.id == id }
+    }
+
+    func previous(looping: Bool = false, before id: Element.ID) -> Element? {
+        self.previous(looping: looping) { $0.id == id }
+    }
+
+    func nextIndex(looping: Bool = false, after id: Element.ID) -> Index? {
+        self.nextIndex(looping: looping) { $0.id == id }
+    }
+
+    func next(looping: Bool = false, after id: Element.ID) -> Element? {
+        self.next(looping: looping) { $0.id == id }
     }
 }
