@@ -1,6 +1,6 @@
 // Copyright © 2024 Brian Drelling. All rights reserved.
 
-public struct SemanticVersion: Equatable, Hashable, Codable {
+public struct SemanticVersion: Codable, Sendable, Equatable, Hashable {
     // MARK: Properties
 
     public let major: Int
@@ -50,6 +50,18 @@ extension SemanticVersion: RawRepresentable {
             self.patch = 0
         default:
             self = .zero
+        }
+    }
+}
+
+extension SemanticVersion: Comparable {
+    public static func < (lhs: SemanticVersion, rhs: SemanticVersion) -> Bool {
+        if lhs.major != rhs.major {
+            lhs.major < rhs.major
+        } else if lhs.minor != rhs.minor {
+            lhs.minor < rhs.minor
+        } else {
+            lhs.patch < rhs.patch
         }
     }
 }

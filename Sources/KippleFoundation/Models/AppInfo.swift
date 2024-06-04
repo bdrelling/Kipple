@@ -15,7 +15,7 @@ import Foundation
 ///     )
 /// }
 /// ```
-public struct AppInfo {
+public struct AppInfo: Codable, Sendable, Equatable, Hashable {
     // MARK: Properties
 
     /// The unique identifier for the app.

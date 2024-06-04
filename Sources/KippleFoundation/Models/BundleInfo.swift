@@ -8,7 +8,7 @@ import Foundation
 ///
 /// The information included in this `struct` is _not_ exhaustive, only the most commonly referenced keys are included.
 /// For more `Bundle` information, access the `Bundle.infoDictionary` property directly.
-public struct BundleInfo {
+public struct BundleInfo: Codable, Sendable, Equatable, Hashable {
     // MARK: Properties
 
     /// The identifier of the bundle, defined by the `CFBundleIdentifier` key in the bundle's `Info.plist`.

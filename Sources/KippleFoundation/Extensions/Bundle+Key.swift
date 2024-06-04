@@ -13,7 +13,7 @@ public extension Bundle {
     ///     static let name: Self = "CFBundleName"
     /// }
     /// ```
-    struct Key: RawRepresentable {
+    struct Key: RawRepresentable, Codable, Sendable, Equatable, Hashable {
         public let rawValue: String
 
         public init(rawValue: String) {

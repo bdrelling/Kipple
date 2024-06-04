@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
@@ -33,6 +33,7 @@ let package = Package(
     // Dependencies listed here should always be extremely lightweight.
     // Additionally, almost every dependency here provides a solution
     dependencies: [
+        .package(url: "https://github.com/apple/swift-algorithms", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-collections", from: "1.1.0"),
         .package(url: "https://github.com/apple/swift-log", from: "1.5.4"),
         .package(url: "https://github.com/bdrelling/KippleTools", .upToNextMinor(from: "0.5.3")),
@@ -51,33 +52,34 @@ let package = Package(
             ]
         ),
         // Product Targets (without Dependencies)
-        .target(name: .kippleCodable),
-        .target(name: .kippleCombine),
-        .target(name: .kippleFoundation),
-        .target(name: .kippleLocalStorage),
+        .kippleTarget(name: .kippleCodable),
+        .kippleTarget(name: .kippleCombine),
+        .kippleTarget(name: .kippleFoundation),
+        .kippleTarget(name: .kippleLocalStorage),
         // Product Targets (with Dependencies)
-        .target(
-            name: "KippleCollections",
+        .kippleTarget(
+            name: .kippleCollections,
             dependencies: [
+                .product(name: "Algorithms", package: "swift-algorithms"),
                 .product(name: "OrderedCollections", package: "swift-collections"),
             ]
         ),
-        .target(
-            name: "KippleDevice",
+        .kippleTarget(
+            name: .kippleDevice,
             dependencies: [
-                .target(name: "KippleFoundation"),
+                .target(name: .kippleFoundation),
                 .product(name: "DeviceKit", package: "DeviceKit", condition: .when(platforms: [.iOS, .tvOS, .watchOS])),
             ]
         ),
-        .target(
-            name: "KippleKeychain",
+        .kippleTarget(
+            name: .kippleKeychain,
             dependencies: [
-                .target(name: "KippleFoundation"),
+                .target(name: .kippleFoundation),
                 .product(name: "KeychainAccess", package: "KeychainAccess", condition: .when(platforms: [.iOS, .macOS, .tvOS, .watchOS])),
             ]
         ),
-        .target(
-            name: "KippleLogging",
+        .kippleTarget(
+            name: .kippleLogging,
             dependencies: [
                 .product(name: "Logging", package: "swift-log", condition: .when(platforms: [.linux])),
             ]
@@ -96,6 +98,17 @@ let package = Package(
 // MARK: - Extensions
 
 extension Target {
+    static func kippleTarget(name: String, dependencies: [Target.Dependency] = [], resources: [Resource]? = nil) -> Target {
+        .target(
+            name: name,
+            dependencies: dependencies,
+            resources: resources,
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency"),
+            ]
+        )
+    }
+    
     static func kippleTestTarget(name: String) -> Target {
         .testTarget(
             name: "\(name)Tests",

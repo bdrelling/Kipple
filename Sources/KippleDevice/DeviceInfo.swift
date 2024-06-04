@@ -11,7 +11,7 @@ import UIKit
 #endif
 
 /// A contextualized representation of a device such as an iPhone, Mac, Apple Watch, and so on.
-public struct DeviceInfo: Equatable, Hashable, Codable {
+public struct DeviceInfo: Codable, Sendable, Equatable, Hashable {
     // MARK: Properties
 
     /// The family of the device (eg. "iPhone", "Apple TV").
